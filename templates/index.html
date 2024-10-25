@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+
+
+{% block content %}
+{% set stories = load_data(path="data/stories.json") %}
+<div class="container">
+        <div class="magazine-layout">
+            <div class="magazine-column">
+                {% for story in stories | slice(start=0, end=2) %}
+                    {{ macros_article::article(story=story) }}
+                {% endfor %}
+            </div>
+            <div class="magazine-column">
+                {% for story in stories | slice(start=2, end=3) %}
+                    {{ macros_article::article(story=story) }}
+                {% endfor %}
+            </div>
+            <div class="magazine-column">
+                {% for story in stories | slice(start=3, end=5) %}
+                    {{ macros_article::article(story=story, size="small") }}
+                {% endfor %}
+            </div>
+            <div class="magazine-column">
+                {% for story in stories | slice(start=5, end=7) %}
+                    {{ macros_article::article(story=story, size="small") }}
+                {% endfor %}
+            </div>
+        </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% import "macros/article.html" as macros_article -%}
+<!DOCTYPE html>
+<html lang="{{ config.extra.language_code | default(value="en-US") }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}The Carolina Razor{% endblock title %}</title>
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/magazine.css">
+    <link rel="stylesheet" href="/base.css">
+    <link rel="stylesheet" href="/article.css">
+</head>
+<body class="layout">
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="site-title">
+                <h1>The Carolina Razor</h1>
+            </a>
+            <nav class="main-nav">
+                {% set nav_items = load_data(path="data/nav.json") %}
+                {% for item in nav_items %}
+                    <a href="{{ item.href }}" class="nav-item">{{ item.label }}</a>
+                {% endfor %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-content">
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <p>The Carolina Razor is a student-run news magazine at UNC Chapel Hill.</p>
+                <p>Read <a href="/about" class="footer-link">our manifesto</a>.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

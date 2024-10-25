@@ -1,0 +1,119 @@
+.article-main {
+    max-width: 640px;
+    margin: auto;
+}
+
+.drop-cap {
+    float: left;
+    font-size: 4rem;
+    line-height: 1;
+    margin-right: 0.5rem;
+    // font-family: "Source Serif 4", serif;
+    font-weight: 600;
+    color: #000;
+}
+
+
+/* Article Components */
+.article-title {
+    font-family: "Source Serif 4", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+
+
+@media (min-width: 768px) {
+    .article-title {
+        font-size: 2rem;
+    }
+}
+
+.article-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+}
+
+.article-authors {
+    margin-right: 1rem;
+}
+
+.article-image-container {
+    margin-bottom: 1.5rem;
+}
+
+.article-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Article Body Typography */
+.article-body {
+    font-family: Georgia;
+    color: black;
+    max-width: none;
+}
+
+.article-body p {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+    .article-body p {
+        font-size: 1.125rem;
+        line-height: 1.6em;
+    }
+}
+
+.article-body h1,
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Additional typography styles for article body */
+.article-body a {
+    color: #007FAE;
+    text-decoration: underline;
+}
+
+.article-body blockquote {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+}
+
+.article-body ul,
+.article-body ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.article-body li {
+    margin: 0.5rem 0;
+}
+
+.article-body pre,
+.article-body code {
+    background-color: #f3f4f6;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+}
+
+.article-body pre {
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+}

@@ -1,0 +1,20 @@
+{% macro article(story, size="medium") %}
+<article class="article article--{{ size }}">
+    <a href="{{ story.link | default(value="") }}">
+        {% if story.image %}
+        <figure class="article-img">
+            <img src="{{ story.image }}" />
+        </figure>
+        {% endif %}
+        <div class="article-format text-[#0a5e66]">
+            <p>{{ story.format }}</p>
+        </div>
+        <h2 class="article-title article-title--{{ size }}">
+            {{ story.title }}
+        </h2>
+        <div class="article-excerpt">
+            <p>{{ story.firstLine | safe }}</p>
+        </div>
+    </a>
+</article>
+{% endmacro %}
