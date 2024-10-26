@@ -1,16 +1,6 @@
 .article-main {
-    max-width: 640px;
+    max-width: 630px;
     margin: auto;
-}
-
-.drop-cap {
-    float: left;
-    font-size: 4rem;
-    line-height: 1;
-    margin-right: 0.5rem;
-    // font-family: "Source Serif 4", serif;
-    font-weight: 600;
-    color: #000;
 }
 
 
@@ -21,6 +11,62 @@
     font-weight: 700;
     margin-bottom: 1rem;
 }
+
+/* Article Body Typography */
+.article-body {
+    // font-size: 1.5rem;
+    color: black;
+    max-width: none;
+    font-family: "Crimson Text";
+}
+
+.article-body p {
+    font-size: 23.4146px;
+    line-height: 35px;
+    // font-size: 1.3rem;
+    // line-height: 1.8;
+    //  2.25rem;
+    margin: 1rem 0;
+}
+
+.article-body h1,
+h2,
+h3 {
+    font-family: 'Source Serif 4';
+    text-wrap: stable;
+}
+
+// .drop-cap {
+//     float: left;
+//     font-size: 4rem;
+//     line-height: 1;
+//     margin-right: 0.5rem;
+//     font-family: "Georgia", serif;
+//     font-weight: 600;
+//     color: #000;
+// }
+
+.drop-cap {
+    float: left;
+    margin-top: 2px;
+    margin-bottom: -2px;
+    font-size: 74px;
+    line-height: 70px;
+    font-weight: bold;
+    margin-right: 0.6rem;
+  }
+  
+// .drop-cap::before {
+// content: "";
+// margin-bottom: -0.0791em;
+// display: table;
+// }
+
+// .drop-cap::after {
+// content: "";
+// margin-top: -0.1211em;
+// display: table;
+// }
 
 
 
@@ -52,18 +98,6 @@
     object-fit: cover;
 }
 
-/* Article Body Typography */
-.article-body {
-    font-family: Georgia;
-    color: black;
-    max-width: none;
-}
-
-.article-body p {
-    font-size: 1.25rem;
-    line-height: 2rem;
-    margin: 1rem 0;
-}
 
 @media (max-width: 768px) {
     .article-body p {

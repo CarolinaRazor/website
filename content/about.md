@@ -15,7 +15,7 @@ For us, very word counts. Our editors are involved in stories from their incepti
 
 Our writing will be rigorously fact-checked and use the best studies, statistics, and other evidence. Our website will be fast, beautiful, and respectful.
 
-It is easy to announce lofty goals like we have in this manifesto. But the past is littered with ambitious publications that have failed to go the distance.
+<span class="drop-cap">I</span>t is easy to announce lofty goals like we have in this manifesto. But the past is littered with ambitious publications that have failed to go the distance.
 
 Ultimately, our success will depend on you, our readers and writers. We must find the people who write and edit with these principles running through every bone in their body, and nurture, organize, and challenge them. We must find the readers who will support them, and delight and inspire them every single day.
 

@@ -50,6 +50,7 @@ Jason Worrell, the emergency coordinator for Caudill Labs, was in another buildi
 
 ![Troopers](/unc-images/troopers.webp)
 
+<!-- Training should be regular and mandatory -->
 ## Instead of optional, infrequent training, it should be required, coordinators say
 
 After the lockdown, many coordinators requested active shooter training from UNC Police, including Bernhardt, Deveraux and those from two professional schools. But attendance is typically not mandatory for staff.

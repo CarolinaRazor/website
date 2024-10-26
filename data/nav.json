@@ -1,15 +1,7 @@
 [
     {
         "href": "#",
-        "label": "National"
-    },
-    {
-        "href": "#",
-        "label": "Campus"
-    },
-    {
-        "href": "#",
-        "label": "State & Local"
+        "label": "News"
     },
     {
         "href": "#",
@@ -17,7 +9,7 @@
     },
     {
         "href": "#",
-        "label": "Video"
+        "label": "Longform"
     },
     {
         "href": "/about",
