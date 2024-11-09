@@ -1,6 +1,7 @@
 {% macro article(story, size="medium") %}
 <article class="article article--{{ size }}">
-    <a href="{{ story.link | default(value="") }}">
+    <a href="/longform/blue">
+        {# {{ story.link | default(value="") }} #}
         {% if story.image %}
         <figure class="article-img">
             <img src="{{ story.image }}" />
