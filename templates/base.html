@@ -11,25 +11,31 @@
     <link rel="stylesheet" href="/magazine.css">
     <link rel="stylesheet" href="/base.css">
     <link rel="stylesheet" href="/article.css">
+    <link rel="stylesheet" href="/section.css">
 </head>
 <body class="layout">
-    <header class="site-header">
-        <div class="header-container">
-            <a href="/" class="site-title">
-                <h1>The Carolina Razor</h1>
-            </a>
-            <nav class="main-nav">
-                {% set nav_items = load_data(path="data/nav.json") %}
-                {% for item in nav_items %}
-                    <a href="{{ item.href }}" class="nav-item">{{ item.label }}</a>
-                {% endfor %}
-            </nav>
-        </div>
-    </header>
+<!--div for wrapping the header, content, and footer-->
+<div style="min-height:100vh; display: flex; flex-direction:column; justify-content:space-between;">
+<!--wraps everything except for the header-->
+    <div>
+        <header class="site-header">
+            <div class="header-container">
+                <a href="/" class="site-title">
+                    <h1>The Carolina Razor</h1>
+                </a>
+                <nav class="main-nav">
+                    {% set nav_items = load_data(path="data/nav.json") %}
+                    {% for item in nav_items %}
+                        <a href="{{ item.href }}" class="nav-item">{{ item.label }}</a>
+                    {% endfor %}
+                </nav>
+            </div>
+        </header>
 
-    <main class="site-content">
-        {% block content %}{% endblock content %}
-    </main>
+        <main class="site-content">
+            {% block content %}{% endblock content %}
+        </main>
+    </div>
 
     <footer class="site-footer">
         <div class="footer-container">
@@ -39,5 +45,6 @@
             </div>
         </div>
     </footer>
+</div>
 </body>
 </html>

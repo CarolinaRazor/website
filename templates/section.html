@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    {{ section.title }}
+</h1>
+<ul id="article-list">
+    <!-- If you are using pagination, section.pages will be empty.
+         You need to use the paginator object -->
+    {% for page in section.pages %}
+    <li><a class="story-link" href="{{ page.permalink | safe }}">
+        <img src="{{ page.extra.image }}">
+        <span class="story-title">{{ page.title }}</span><br>
+        <span class="story-authors">By {{ page.authors | join(sep=", ") }}</span>
+        <span class="story-date">{{ page.date | date(format="%B %d, %Y") }}</span>
+    </a></li>
+    {% endfor %}
+</ul>
+{% endblock content %}
