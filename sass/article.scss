@@ -6,7 +6,7 @@
 
 /* Article Components */
 .article-title {
-    font-family: "Source Serif 4", serif;
+    font-family: var(--article-title-font);
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
