@@ -1,5 +1,7 @@
 ---
-title: "Campus Unorganizing: the NC Democrats' ambitious, hasty plan get 569,000 college students to vote"
+title: "Campus Unorganizing"
+extra:
+    subtitle: "The NC Democrats' ambitious, hasty plan get 569,000 college students to vote"
 authors:
  - Alex Kreidler
 date: 2024-10-17
