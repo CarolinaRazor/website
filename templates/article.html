@@ -7,12 +7,12 @@
     <meta property="og:image" content="/{{ page.extra.image }}">
     <meta name="twitter:image" content="/{{ page.extra.image }}">
 {% endif %}
-    <meta name="twitter:title" content="The Carolina Razor">
-    <meta property="og:title" content="The Carolina Razor" />
+    <meta name="twitter:title" content="{{ page.title | safe }}">
+    <meta property="og:title" content="{{ page.title | safe }}" />
 
-    <meta name="description" content="{{ page.title | safe }}" />
-    <meta name="twitter:description" content="{{ page.title | safe }}">
-    <meta property="og:description" content="{{ page.title | safe }}" />
+<!--    <meta name="description" content="{{ page.title | safe }}" />-->
+<!--    <meta name="twitter:description" content="{{ page.title | safe }}">-->
+<!--    <meta property="og:description" content="{{ page.title | safe }}" />-->
 {% endblock meta_content %}
 
 {% block content %}
