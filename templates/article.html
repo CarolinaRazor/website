@@ -2,6 +2,19 @@
 
 {% block title %}{{ page.title }} - The Carolina Razor{% endblock title %}
 
+{% block meta_content %}
+{% if not page.title %}
+    <meta property="og:image" content="/{{ page.extra.image }}">
+    <meta name="twitter:image" content="/{{ page.extra.image }}">
+{% endif %}
+    <meta name="twitter:title" content="The Carolina Razor">
+    <meta property="og:title" content="The Carolina Razor" />
+
+    <meta name="description" content="{{ page.title | safe }}" />
+    <meta name="twitter:description" content="{{ page.title | safe }}">
+    <meta property="og:description" content="{{ page.title | safe }}" />
+{% endblock meta_content %}
+
 {% block content %}
 <div class="article-main">
     <article class="article-content">

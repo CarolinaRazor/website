@@ -1,5 +1,5 @@
 {% import "macros/article.html" as macros_article -%}
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
 <html lang="{{ config.extra.language_code | default(value="en-US") }}">
 <head>
     <meta charset="utf-8">
@@ -17,6 +17,29 @@
     <link rel="stylesheet" href="/section.css">
     <link rel="stylesheet" href="/colors.css">
     <link rel="stylesheet" href="/magazine.css">
+
+    <meta name="twitter:card" content="summary">
+<!--    <meta name="twitter:site" content="@username">--> <!-- Ex: @NPR -->
+<!--    <meta name="twitter:creator" content="@username">--> <!-- Ex: @ArticleAuthor -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{config.base_url | safe}}/{{current_path | safe}}" />
+    <meta property="og:site_name" content="The Carolina Razor" />
+
+    {% block meta_content %}
+    <meta property="og:image" content="/unc-images/bell-tower.webp">
+    <meta name="twitter:image" content="/unc-images/bell-tower.webp">
+
+    <meta name="twitter:title" content="The Carolina Razor">
+    <meta property="og:title" content="The Carolina Razor" />
+
+    <meta name="description" content="The student-led paper." />
+    <meta name="twitter:description" content="The student-led paper.">
+    <meta property="og:description" content="The student-led paper." />
+    {% endblock meta_content %}
+
+
+
+
 </head>
 <body class="layout">
 <!--div for wrapping the header, content, and footer-->
