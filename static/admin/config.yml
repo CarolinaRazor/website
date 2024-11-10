@@ -15,12 +15,13 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string" }
+      - { label: "Format", name: "format", widget: "string", required: "false" }
       - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string" }
+      - { label: "Source", name: "source", widget: "string", required: "false" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Body", name: "body", widget: "markdown" }
+
   - name: "opinion" # Used in routes, e.g., /admin/collections/blog
     label: "Opinion" # Used in the UI
     folder: "content/opinion" # The path to the folder where the documents are stored
@@ -30,12 +31,13 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string" }
+      - { label: "Format", name: "format", widget: "string", required: "false" }
       - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string" }
+      - { label: "Source", name: "source", widget: "string", required: "false" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Body", name: "body", widget: "markdown" }
+
   - name: "longform" # Used in routes, e.g., /admin/collections/blog
     label: "Longform" # Used in the UI
     folder: "content/longform" # The path to the folder where the documents are stored
@@ -45,9 +47,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string" }
+      - { label: "Format", name: "format", widget: "string", required: "false" }
       - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string" }
+      - { label: "Source", name: "source", widget: "string", required: "false" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Body", name: "body", widget: "markdown" }
