@@ -13,10 +13,10 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Author", name: "authors", widget: "list" }
+      - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
       - { label: "Format", name: "format", widget: "string" }
-      - { label: "Topics", name: "topics", widget: "list" }
+      - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
       - { label: "Source", name: "source", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
@@ -28,10 +28,10 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Author", name: "authors", widget: "list" }
+      - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
       - { label: "Format", name: "format", widget: "string" }
-      - { label: "Topics", name: "topics", widget: "list" }
+      - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
       - { label: "Source", name: "source", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
@@ -43,10 +43,10 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Author", name: "authors", widget: "list" }
+      - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
       - { label: "Format", name: "format", widget: "string" }
-      - { label: "Topics", name: "topics", widget: "list" }
+      - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
       - { label: "Source", name: "source", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
