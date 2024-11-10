@@ -7,8 +7,7 @@ format: news-feature
 topics:
   - Campus
 source: Copy of Campus preparedness story - Alex Kreidler
-extra:
-  image: unc-images/bell-tower.webp
+image: unc-images/bell-tower.webp
 template: article.html
 ---
 Hi!
