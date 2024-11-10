@@ -20,6 +20,7 @@ collections:
       - { label: "Source", name: "source", widget: "string", required: false }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
+      - { label: "Visible", name: "visible", widget: "hidden", default: true }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "opinion" # Used in routes, e.g., /admin/collections/blog
@@ -36,6 +37,7 @@ collections:
       - { label: "Source", name: "source", widget: "string", required: false }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
+      - { label: "Visible", name: "visible", widget: "hidden", default: true }
       - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "longform" # Used in routes, e.g., /admin/collections/blog
@@ -52,4 +54,5 @@ collections:
       - { label: "Source", name: "source", widget: "string", required: false }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
+      - { label: "Visible", name: "visible", widget: "hidden", default: true }
       - { label: "Body", name: "body", widget: "markdown" }

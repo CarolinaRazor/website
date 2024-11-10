@@ -9,5 +9,6 @@ topics:
 source: Copy of Campus preparedness story - Alex Kreidler
 image: unc-images/bell-tower.webp
 template: article.html
+visible: true
 ---
 Hi!

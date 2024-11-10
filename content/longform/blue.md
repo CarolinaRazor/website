@@ -4,6 +4,7 @@ authors:
  - Alex Kreidler
 date: 2024-10-17
 template: article.html
+visible: true
 ---
 
 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis, necessitatibus. Quibusdam, harum. Officiis, asperiores repellendus distinctio neque mollitia repudiandae quae porro sunt, veniam inventore, molestias quisquam laudantium non voluptas corporis!
