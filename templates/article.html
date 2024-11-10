@@ -3,9 +3,12 @@
 {% block title %}{{ page.title }} - The Carolina Razor{% endblock title %}
 
 {% block meta_content %}
-{% if not page.title %}
+{% if page.extra.image %}
     <meta property="og:image" content="/{{ page.extra.image }}">
     <meta name="twitter:image" content="/{{ page.extra.image }}">
+{% else %}
+    <meta property="og:image" content="/unc-images/bell-tower.webp">
+    <meta name="twitter:image" content="/unc-images/bell-tower.webp">
 {% endif %}
     <meta name="twitter:title" content="{{ page.title | safe }}">
     <meta property="og:title" content="{{ page.title | safe }}" />
