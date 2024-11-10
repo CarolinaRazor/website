@@ -1,0 +1,93 @@
+.navbar {
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  text-align: center; /* Centers the other links */
+}
+
+.navbar a {
+  display: inline-block;
+  color: #000000;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.navzwsp {
+  display: none;
+}
+
+.navbar .icon {
+  display: none;
+}
+
+.navbar .submenu {
+  display: none; /* Hide submenu initially */
+  position: relative; /* Position relative to the navbar */
+  background-color: #ffffff;
+  z-index: 999; /* Keep it above other content */
+  width: 100%; /* Make sure it spans the full width */
+}
+
+.navbar .submenu a {
+  display: block;
+  padding: 10px;
+  text-align: left; /* Align text to the left */
+}
+
+/* Screen less than 600px, hide links */
+@media screen and (max-width: 600px) {
+  .navbar {
+    position: sticky; /* Sticky behavior on mobile */
+  }
+
+  .navbar a {
+    display: none;
+  }
+
+  .navbar a.icon {
+    float: left;
+    display: block;
+  }
+
+  /* Ensure the left and right floated links do not float in mobile view */
+  .navbar.responsive a.left,
+  .navbar.responsive a.right {
+    float: none;
+    display: block;
+    text-align: left; /* Align text to the left if needed */
+  }
+
+  .navbar.responsive .submenu {
+    display: block; /* Show submenu when the menu is toggled */
+    position: relative; /* Keep it below the sticky navbar */
+  }
+}
+
+/* Responsive class, used when opening the menu */
+@media screen and (max-width: 600px) {
+  .navzwsp {
+    display: block;
+  }
+
+  .navbar.responsive {
+    position: sticky;
+    top: 0;
+  }
+
+  .navbar.responsive a.icon {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  .navbar.responsive a {
+    display: block;
+    text-align: left;
+  }
+}
