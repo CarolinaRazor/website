@@ -15,9 +15,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string", required: "false" }
+      - { label: "Format", name: "format", widget: "string", required: false }
       - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string", required: "false" }
+      - { label: "Source", name: "source", widget: "string", required: false }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -31,9 +31,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string", required: "false" }
+      - { label: "Format", name: "format", widget: "string", required: false }
       - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string", required: "false" }
+      - { label: "Source", name: "source", widget: "string", required: false }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -47,9 +47,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string", required: "false" }
+      - { label: "Format", name: "format", widget: "string", required: false }
       - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string", required: "false" }
+      - { label: "Source", name: "source", widget: "string", required: false }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Body", name: "body", widget: "markdown" }
