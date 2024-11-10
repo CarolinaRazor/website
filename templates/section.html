@@ -9,8 +9,8 @@
          You need to use the paginator object -->
     {% for page in section.pages %}
     <li><a class="story-link" href="{{ page.permalink | safe }}">
-        {% if page.extra.image %}
-        <img src="{{ page.extra.image }}">
+        {% if page.image %}
+        <img src="{{ page.image }}">
         {% endif %}
         <span class="story-title">{{ page.title }}</span><br>
         <span class="story-authors">By {{ page.authors | join(sep=", ") }}</span>

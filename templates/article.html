@@ -3,9 +3,9 @@
 {% block title %}{{ page.title }} - The Carolina Razor{% endblock title %}
 
 {% block meta_content %}
-{% if page.extra.image %}
-    <meta property="og:image" content="/{{ page.extra.image }}">
-    <meta name="twitter:image" content="/{{ page.extra.image }}">
+{% if page.image %}
+    <meta property="og:image" content="/{{ page.image }}">
+    <meta name="twitter:image" content="/{{ page.image }}">
 {% else %}
     <meta property="og:image" content="/unc-images/bell-tower.webp">
     <meta name="twitter:image" content="/unc-images/bell-tower.webp">
@@ -28,9 +28,9 @@
             <span class="article-date">{{ page.date | date(format="%B %d, %Y") }}</span>
         </div>
 
-        {% if page.extra.image %}
+        {% if page.image %}
         <div class="article-image-container">
-            <img src="/{{ page.extra.image }}" alt="{{ page.extra.image_alt | default(value=" Article featured image")
+            <img src="/{{ page.image }}" alt="{{ page.image_alt | default(value=" Article featured image")
                 }}" class="article-image" />
         </div>
         {% endif %}
