@@ -16,4 +16,4 @@ highlight_code = false
 
 [extra]
 # Put all your custom variables here
-generate_rss = true
+generate_feeds = true
