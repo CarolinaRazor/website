@@ -75,7 +75,7 @@
 }
 
 /* Styles for screens less than 900px */
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
   /* Center content for smaller screens */
   .header-container {
     text-align: center;
@@ -125,7 +125,9 @@
   /* Increase font size and margin for entries on smaller screens */
   .entry {
     font-size: 16px;  /* Increase font size by 2px */
-    margin-right: 23px;  /* Increase margin between entries by 3px */
+    //margin-right: 23px;  /* Increase margin between entries by 3px */
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .entry:hover {
