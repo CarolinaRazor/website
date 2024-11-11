@@ -1,4 +1,4 @@
-/* Main container for the navigation bar */
+// Main style for the header
 .header-container {
   overflow: hidden;
   border-bottom: 2px solid #56A0D3;
@@ -8,58 +8,59 @@
   z-index: 1000;
   background-color: white;
   text-align: center;
-  padding: 3px 0;  /* Reduced padding for smaller height */
+  padding: 3px 0;
 }
 
-/* Style for the logo link */
+// Style for the Carolina Razor text
 .header-container .logo {
   font-weight: bold;
   font-size: 20px;
   color: #000000;
   text-decoration: none;
-  margin-right: 18%; /* Add margin on the right */
+  margin-right: 18%; // Margin to the right of the logo
   display: inline-block;
   vertical-align: middle;
-  padding: 5px 0;  /* Reduced padding to decrease height */
+  padding: 5px 0;
 }
 
-/* Regular navbar links */
+// Header link style
 .header-container a {
-  display: inline-flex;  /* Use inline-flex to allow for alignment */
-  align-items: center;   /* Vertically align the items within the link */
+  display: inline-flex;
+  align-items: center;
   color: #000000;
-  padding: 5px 20px;  /* Padding to create space between entries */
+  padding: 5px 20px; // space between entries
   text-decoration: none;
-  margin-right: 20px; /* Space between each entry */
-  justify-content: center;  /* Ensures the text is centered within the link */
-  width: auto;  /* Let the link take only as much width as needed */
+  margin-right: 20px;
+  justify-content: center;
+  width: auto;
 }
 
-/* Specific styles for the navbar links to control font size, weight, and spacing */
+// Header style for nav menu entries
 .entry {
-  font-size: 14px;   /* Set font-size to 15px */
-  font-weight: 600;  /* Set font-weight to 600 */
-  letter-spacing: 1px; /* Set letter-spacing to 1px */
-  font-family: 'Onest', sans-serif; /* Set font-family to 'Onest' */
-  margin-right: 20px; /* Add space between each entry */
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: 'Onest', sans-serif;
+  margin-right: 20px;
 }
 
+// Set to unc blue on hover
 .entry:hover {
-  color: #56A0D3;  /* UNC blue color */
+  color: #56A0D3;
 }
 
 
-/* Style for the mobile menu icon (hidden by default) */
+// Hide the mobile menu icon
 .header-container .icon {
   display: none;
 }
 
-/* Hidden zero-width space elements */
+// Hide the ZWSP on desktop
 .navzwsp {
   display: none;
 }
 
-/* Dropdown submenu (hidden by default) */
+// Style for the submenu, hide it
 .header-container .submenu {
   display: none;
   position: relative;
@@ -74,107 +75,42 @@
   text-align: left;
 }
 
-/* Styles for screens less than 900px */
 @media screen and (max-width: 1050px) {
-  /* Center content for smaller screens */
-  .header-container {
+    .header-container {
     text-align: center;
-    padding: 0;  /* Reduce padding at the top and bottom to make the navbar less tall */
+    padding: 0;
   }
 
-  /* Center the logo and move it down 3px */
   .header-container .logo {
     display: inline-block;
     margin: 0 auto;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%) translateY(5px);  /* Move the logo down by 3px */
-    font-size: 23px;  /* Optional: Adjust font size if needed */
+    transform: translateX(-50%) translateY(7px);  // Center and move down a little bit
+    font-size: 23px;
+    padding: 0;
   }
 
-  /* Hide all links initially */
+  // Hide links on mobile
   .header-container a {
     display: none;
   }
 
-  /* Display the menu icon on smaller screens */
-  .header-container a.icon {
-    float: left;
-    display: block;
-    padding: 14px 16px;
-  }
-
-  /* Show submenu when the menu is toggled */
-  .header-container.responsive .submenu {
-    display: block;
-  }
-
-  /* Display all links when the navbar is toggled open */
-  .header-container.responsive a {
-    display: block;
-    text-align: left;
-  }
-
-  .navzwsp {
-    display: block;
-  }
-
-  /* Keep the responsive navbar at the top */
-  .header-container.responsive {
-    top: 0;
-  }
-
-  /* Increase font size and margin for entries on smaller screens */
-  .entry {
-    font-size: 16px;  /* Increase font size by 2px */
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  .entry:hover {
-    color: #56A0D3;  /* UNC blue color */
-  }
-}
-
-/* Styles for screens less than 1050px */
-@media screen and (max-width: 1050px) {
-  /* Make the main container's padding smaller to reduce navbar height */
-  .header-container {
-    text-align: center;
-    padding: 0;  /* Remove padding to save vertical space */
-  }
-
-  /* Center the logo and reduce its size */
-  .header-container .logo {
-    display: inline-block;
-    margin: 0 auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) translateY(7px);  /* Adjust the vertical position to center */
-    font-size: 23px;  /* Reduce font size to save space */
-    padding: 0;  /* Remove padding to reduce height */
-  }
-
-  /* Hide all links initially (for mobile view) */
-  .header-container a {
-    display: none;
-  }
-
-  /* Show the menu icon (hamburger menu) on mobile */
+  // Show menu icon on mobile
   .header-container a.icon {
     display: block;
-    padding: 12px 14px;  /* Reduce padding to make the icon more compact */
+    padding: 12px 14px;
     position: absolute;
     left: 0;
     top: 0;
   }
 
-  /* Show submenu when the menu is toggled */
+  // Show submenu when button is clicked
   .header-container.responsive .submenu {
     display: block;
   }
 
-  /* Display all links when the navbar is toggled open */
+  // Display all links
   .header-container.responsive a {
     display: block;
     text-align: left;
@@ -184,31 +120,27 @@
     display: block;
   }
 
-  /* Make sure the responsive navbar stays at the top */
   .header-container.responsive {
     top: 0;
   }
 
-  /* Adjust font size and margins for entries */
+  // Font stuff for entries
   .entry {
-    font-size: 18px;  /* Smaller font size */
-    margin-top: 8px;  /* Reduce margin for items */
-    margin-bottom: 8px;  /* Reduce margin for items */
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    //border-bottom: 2px solid #56A0D3;
   }
 
-  /* Change hover color */
   .entry:hover {
     color: #56A0D3;  /* UNC blue color */
   }
 }
 
-
-
-/* Style for the active page link */
 .entry.active {
-  color: #56A0D3;  /* UNC blue color */
+  color: #56A0D3;
 }
-
 
 .site-content {
   padding-top: 70px;
