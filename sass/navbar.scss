@@ -79,7 +79,7 @@
   /* Center content for smaller screens */
   .header-container {
     text-align: center;
-    padding: 0 0 3px;  /* Reduce padding at the top and bottom to make the navbar less tall */
+    padding: 0;  /* Reduce padding at the top and bottom to make the navbar less tall */
   }
 
   /* Center the logo and move it down 3px */
@@ -88,8 +88,8 @@
     margin: 0 auto;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%) translateY(6px);  /* Move the logo down by 3px */
-    font-size: 20px;  /* Optional: Adjust font size if needed */
+    transform: translateX(-50%) translateY(5px);  /* Move the logo down by 3px */
+    font-size: 23px;  /* Optional: Adjust font size if needed */
   }
 
   /* Hide all links initially */
@@ -135,6 +135,73 @@
     color: #56A0D3;  /* UNC blue color */
   }
 }
+
+/* Styles for screens less than 1050px */
+@media screen and (max-width: 1050px) {
+  /* Make the main container's padding smaller to reduce navbar height */
+  .header-container {
+    text-align: center;
+    padding: 0;  /* Remove padding to save vertical space */
+  }
+
+  /* Center the logo and reduce its size */
+  .header-container .logo {
+    display: inline-block;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(7px);  /* Adjust the vertical position to center */
+    font-size: 23px;  /* Reduce font size to save space */
+    padding: 0;  /* Remove padding to reduce height */
+  }
+
+  /* Hide all links initially (for mobile view) */
+  .header-container a {
+    display: none;
+  }
+
+  /* Show the menu icon (hamburger menu) on mobile */
+  .header-container a.icon {
+    display: block;
+    padding: 12px 14px;  /* Reduce padding to make the icon more compact */
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  /* Show submenu when the menu is toggled */
+  .header-container.responsive .submenu {
+    display: block;
+  }
+
+  /* Display all links when the navbar is toggled open */
+  .header-container.responsive a {
+    display: block;
+    text-align: left;
+  }
+
+  .navzwsp {
+    display: block;
+  }
+
+  /* Make sure the responsive navbar stays at the top */
+  .header-container.responsive {
+    top: 0;
+  }
+
+  /* Adjust font size and margins for entries */
+  .entry {
+    font-size: 18px;  /* Smaller font size */
+    margin-top: 8px;  /* Reduce margin for items */
+    margin-bottom: 8px;  /* Reduce margin for items */
+  }
+
+  /* Change hover color */
+  .entry:hover {
+    color: #56A0D3;  /* UNC blue color */
+  }
+}
+
 
 
 /* Style for the active page link */
