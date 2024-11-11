@@ -79,15 +79,17 @@
   /* Center content for smaller screens */
   .header-container {
     text-align: center;
+    padding: 0 0 3px;  /* Reduce padding at the top and bottom to make the navbar less tall */
   }
 
-  /* Center the logo and keep it from shifting */
+  /* Center the logo and move it down 3px */
   .header-container .logo {
     display: inline-block;
     margin: 0 auto;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(6px);  /* Move the logo down by 3px */
+    font-size: 20px;  /* Optional: Adjust font size if needed */
   }
 
   /* Hide all links initially */
@@ -125,7 +127,6 @@
   /* Increase font size and margin for entries on smaller screens */
   .entry {
     font-size: 16px;  /* Increase font size by 2px */
-    //margin-right: 23px;  /* Increase margin between entries by 3px */
     margin-top: 10px;
     margin-bottom: 10px;
   }
@@ -133,6 +134,12 @@
   .entry:hover {
     color: #56A0D3;  /* UNC blue color */
   }
+}
+
+
+/* Style for the active page link */
+.entry.active {
+  color: #56A0D3;  /* UNC blue color */
 }
 
 

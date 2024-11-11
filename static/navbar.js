@@ -6,3 +6,9 @@ function navToggle() {
         x.className = "header-container";
     }
 }
+
+document.querySelectorAll('.header-container .entry').forEach(link => {
+    if (link.href === window.location.href) {
+        link.classList.add('active');
+    }
+});
