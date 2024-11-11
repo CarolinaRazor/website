@@ -83,11 +83,12 @@
 
   .header-container .logo {
     display: inline-block;
-    margin: 0 auto;
+    //margin: 0 auto;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%) translateY(7px);  // Center and move down a little bit
+    transform: translateX(-53%) translateY(7px);  // Center and move down a little bit
     font-size: 23px;
+    white-space: nowrap; // kind of a bad solution but meh
     padding: 0;
   }
 
