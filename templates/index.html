@@ -13,28 +13,9 @@
             </div>
 <!--            Featured Article-->
             <div class="magazine-column">
-<!--                {% for story in stories | slice(start=2, end=3) %}-->
-<!--                    {{ macros_article::article(story=story) }}-->
-<!--                {% endfor %}-->
-                {% for section in ["news", "longform", "opinion"] %}
-                    {% for article in sections[section].pages %}
-                        {% if article.featured %}
-                            {% set all_featured_articles = all_featured_articles + [article] %}
-                        {% endif %}
-                    {% endfor %}
+                {% for story in stories | slice(start=2, end=3) %}
+                    {{ macros_article::article(story=story) }}
                 {% endfor %}
-
-                {% set latest_featured_article = all_featured_articles | sort(attribute="date", reverse=true) | first %}
-
-                {% if latest_featured_article %}
-                <section class="featured">
-                    <h2>Featured Article</h2>
-                    <article>
-                        <h3><a href="{{ latest_featured_article.permalink }}">{{ latest_featured_article.title }}</a></h3>
-                        <p>{{ latest_featured_article.excerpt }}</p>
-                    </article>
-                </section>
-                {% endif %}
             </div>
             <div class="magazine-column">
                 {% for story in stories | slice(start=3, end=5) %}

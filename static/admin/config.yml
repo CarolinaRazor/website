@@ -8,24 +8,46 @@ media_folder: "static/uploads" # Media files will be stored in the repo under im
 public_folder: "/uploads" # The src attribute for uploaded media will begin with /images/uploads
 
 collections:
+
+  # ┌───────────────┐
+  # │NEWS COLLECTION│
+  # └───────────────┘
+
   - name: "news" # Used in routes, e.g., /admin/collections/blog
     label: "News" # Used in the UI
     folder: "content/news" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     filter: {field: "visible", value: true}
+    format: "toml-frontmatter"
+    extension: "md"
     fields: # The fields for each document, usually in front matter
+      # Top-level fields
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
-      - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string", required: false }
-      - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string", required: false }
-      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
+      - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
-      - { label: "Visible", name: "visible", widget: "hidden", default: true }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
+
+      # Fields under [extra]
+      - label: "Extra Fields"
+        name: "extra"
+        widget: "object"
+        fields:
+          - { label: "Description", name: "description", widget: "text", required: true }
+          - { label: "Topics", name: "topics", widget: "list", field: { label: "Topic", name: "topic", widget: "string" } }
+          - { label: "Source", name: "source", widget: "string", required: false }
+          - { label: "Featured Image", name: "image", widget: "image", required: false }
+          - { label: "Image Caption", name: "caption", widget: "string", required: false }
+          - { label: "Image Attribution", name: "attribution", widget: "string", required: false }
+          - { label: "Visible", name: "visible", widget: "hidden", default: true }
+          - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
+
+      # Body field at the end
       - { label: "Body", name: "body", widget: "markdown" }
+
+  # ┌──────────────────┐
+  # │OPINION COLLECTION│
+  # └──────────────────┘
 
   - name: "opinion" # Used in routes, e.g., /admin/collections/blog
     label: "Opinion" # Used in the UI
@@ -33,18 +55,35 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     filter: {field: "visible", value: true}
+    format: "toml-frontmatter"
+    extension: "md"
     fields: # The fields for each document, usually in front matter
+      # Top-level fields
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
-      - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string", required: false }
-      - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string", required: false }
-      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
+      - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
-      - { label: "Visible", name: "visible", widget: "hidden", default: true }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
+
+      # Fields under [extra]
+      - label: "Extra Fields"
+        name: "extra"
+        widget: "object"
+        fields:
+          - { label: "Description", name: "description", widget: "text", required: true }
+          - { label: "Topics", name: "topics", widget: "list", field: { label: "Topic", name: "topic", widget: "string" } }
+          - { label: "Source", name: "source", widget: "string", required: false }
+          - { label: "Featured Image", name: "image", widget: "image", required: false }
+          - { label: "Image Caption", name: "caption", widget: "string", required: false }
+          - { label: "Image Attribution", name: "attribution", widget: "string", required: false }
+          - { label: "Visible", name: "visible", widget: "hidden", default: true }
+          - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
+
+      # Body field at the end
       - { label: "Body", name: "body", widget: "markdown" }
+
+  # ┌───────────────────┐
+  # │LONGFORM COLLECTION│
+  # └───────────────────┘
 
   - name: "longform" # Used in routes, e.g., /admin/collections/blog
     label: "Longform" # Used in the UI
@@ -52,15 +91,28 @@ collections:
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     filter: {field: "visible", value: true}
+    format: "toml-frontmatter"
+    extension: "md"
     fields: # The fields for each document, usually in front matter
+      # Top-level fields
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Authors", name: "authors", widget: "list", field: {label: "author", name: "Author", widget: "string"} }
-      - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", date_format: "YYYY-MM-DD", picker_utc: false }
-      - { label: "Format", name: "format", widget: "string", required: false }
-      - { label: "Topics", name: "topics", widget: "list", field: {label: "topic", name: "Topic", widget: "string"} }
-      - { label: "Source", name: "source", widget: "string", required: false }
-      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
+      - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
-      - { label: "Visible", name: "visible", widget: "hidden", default: true }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
+
+      # Fields under [extra]
+      - label: "Extra Fields"
+        name: "extra"
+        widget: "object"
+        fields:
+          - { label: "Description", name: "description", widget: "text", required: true }
+          - { label: "Topics", name: "topics", widget: "list", field: { label: "Topic", name: "topic", widget: "string" } }
+          - { label: "Source", name: "source", widget: "string", required: false }
+          - { label: "Featured Image", name: "image", widget: "image", required: false }
+          - { label: "Image Caption", name: "caption", widget: "string", required: false }
+          - { label: "Image Attribution", name: "attribution", widget: "string", required: false }
+          - { label: "Visible", name: "visible", widget: "hidden", default: true }
+          - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
+
+      # Body field at the end
       - { label: "Body", name: "body", widget: "markdown" }
