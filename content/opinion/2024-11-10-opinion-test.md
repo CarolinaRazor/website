@@ -10,6 +10,7 @@ source: test
 image: /uploads/pexels-tahmetler-17798437.jpg
 layout: article.html
 visible: true
+featured: false
 ---
 This is a test.
 

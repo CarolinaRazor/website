@@ -11,6 +11,7 @@
                     {{ macros_article::article(story=story) }}
                 {% endfor %}
             </div>
+<!--            Featured Article-->
             <div class="magazine-column">
                 {% for story in stories | slice(start=2, end=3) %}
                     {{ macros_article::article(story=story) }}
