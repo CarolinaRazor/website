@@ -27,6 +27,7 @@ collections:
       - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
+      - { label: "Visible", name: "visible", widget: "hidden", default: true }
 
       # Fields under [extra]
       - label: "Extra Fields"
@@ -39,7 +40,6 @@ collections:
           - { label: "Featured Image", name: "image", widget: "image", required: false }
           - { label: "Image Caption", name: "caption", widget: "string", required: false }
           - { label: "Image Attribution", name: "attribution", widget: "string", required: false }
-          - { label: "Visible", name: "visible", widget: "hidden", default: true }
           - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
 
       # Body field at the end
@@ -63,6 +63,7 @@ collections:
       - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
+      - { label: "Visible", name: "visible", widget: "hidden", default: true }
 
       # Fields under [extra]
       - label: "Extra Fields"
@@ -75,7 +76,6 @@ collections:
           - { label: "Featured Image", name: "image", widget: "image", required: false }
           - { label: "Image Caption", name: "caption", widget: "string", required: false }
           - { label: "Image Attribution", name: "attribution", widget: "string", required: false }
-          - { label: "Visible", name: "visible", widget: "hidden", default: true }
           - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
 
       # Body field at the end
@@ -99,6 +99,7 @@ collections:
       - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
       - { label: "Date", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
+      - { label: "Visible", name: "visible", widget: "hidden", default: true }
 
       # Fields under [extra]
       - label: "Extra Fields"
@@ -111,7 +112,6 @@ collections:
           - { label: "Featured Image", name: "image", widget: "image", required: false }
           - { label: "Image Caption", name: "caption", widget: "string", required: false }
           - { label: "Image Attribution", name: "attribution", widget: "string", required: false }
-          - { label: "Visible", name: "visible", widget: "hidden", default: true }
           - { label: "Featured", name: "featured", widget: "boolean", default: false, required: true }
 
       # Body field at the end
