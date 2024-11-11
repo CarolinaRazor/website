@@ -46,25 +46,22 @@
 <div style="min-height:100vh; display: flex; flex-direction:column; justify-content:space-between;">
 <!--wraps everything except for the footer-->
     <div>
-    <header>
-        <div class="navbar" id="topnavbar">
-            <!--Hamburger Menu-->
-            <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                <i class="fa fa-bars"></i>
-            </a>
-            <p class="navzwsp">​</p>
-            <p class="navzwsp">​</p>
-<!--            {% set nav_items = load_data(path="data/nav.json") %}-->
-<!--            {% for item in nav_items %}-->
-<!--            <a href="{{ item.href }}" class="nav-item">{{ item.label }}</a>-->
-<!--            {% endfor %}-->
-            <a href="/news">News</a>
-            <a href="/opinion">Opinion</a>
-            <a href="/longform">Longform</a>
-            <a href="/donate">Donate</a>
-            <a href="/about">About</a>
-        </div>
-    </header>
+        <header>
+            <div class="header-container" id="topnavbar">
+                <a href="javascript:void(0);" class="icon" onclick="navToggle()">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="/" class="logo">The Carolina Razor</a>
+                <p class="navzwsp">​</p>
+                <p class="navzwsp">​</p>
+<!--                <a href="/">Home</a>-->
+                <a class="entry" href="/news">NEWS</a>
+                <a class="entry" href="/opinion">OPINION</a>
+                <a class="entry" href="/longform">LONGFORM</a>
+                <a class="entry" href="/donate">DONATE</a>
+                <a class="entry" href="/about">ABOUT</a>
+            </div>
+        </header>
 
         <main class="site-content">
             {% block content %}{% endblock content %}
@@ -80,7 +77,7 @@
         </div>
     </footer>
 </div>
-<script src="navbar.js"></script>
+<script src="/navbar.js"></script>
 <script>
     if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
