@@ -65,22 +65,31 @@
 <div class="container">
     <div class="magazine-layout">
         <div class="magazine-column">
+            <div class="article-format text-[#0a5e66]">
+                <p>Longform</p>
+            </div>
             {% for article in longform_articles %}
-                {{ macros_article::article(story=longform_articles[loop.index0], size="small") }}
+                {{ macros_article::article(story=longform_articles[loop.index0], size="small", featured=false) }}
             {% endfor %}
         </div>
         <!--            Featured Article-->
         <div class="magazine-column">
-            {{ macros_article::article(story=featured_article, size="small") }}
+            {{ macros_article::article(story=featured_article, size="medium", featured=true) }}
         </div>
         <div class="magazine-column">
+            <div class="article-format text-[#0a5e66]">
+                <p>News</p>
+            </div>
             {% for article in news_articles %}
-                {{ macros_article::article(story=news_articles[loop.index0], size="small") }}
+                {{ macros_article::article(story=news_articles[loop.index0], size="small", featured=false) }}
             {% endfor %}
         </div>
         <div class="magazine-column">
+            <div class="article-format text-[#0a5e66]">
+                <p>Opinion</p>
+            </div>
             {% for article in opinion_articles %}
-                {{ macros_article::article(story=opinion_articles[loop.index0], size="small") }}
+                {{ macros_article::article(story=opinion_articles[loop.index0], size="small", featured=false) }}
             {% endfor %}
         </div>
     </div>
