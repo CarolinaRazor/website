@@ -1,37 +1,47 @@
-
 {% extends "base.html" %}
 
 
 {% block content %}
 {% set stories = load_data(path="data/stories.json") %}
+
+{% set_global all_featured_articles = [] %}
+{% for section in ["news", "longform", "opinion",] %}
+{% set article_section = get_section(path=section ~ "/_index.md") %}
+{% for article in article_section.pages %}
+{% if article.extra.featured %}
+{% set_global all_featured_articles = all_featured_articles | concat(with=article) %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{% set featured_article = all_featured_articles | sort(attribute="date", reverse=true) | first %}
+
 <div class="container">
-        <div class="magazine-layout">
-            <div class="magazine-column">
-                {% for story in stories | slice(start=0, end=2) %}
-                    {{ macros_article::article(story=story) }}
-                {% endfor %}
-            </div>
-<!--            Featured Article-->
-            <div class="magazine-column">
-                {% for story in stories | slice(start=2, end=3) %}
-                    {{ macros_article::article(story=story) }}
-                {% endfor %}
-            </div>
-            <div class="magazine-column">
-                {% for story in stories | slice(start=3, end=5) %}
-                    {{ macros_article::article(story=story, size="small") }}
-                {% endfor %}
-            </div>
-            <div class="magazine-column">
-                {% for story in stories | slice(start=5, end=7) %}
-                    {{ macros_article::article(story=story, size="small") }}
-                {% endfor %}
-            </div>
+    <div class="magazine-layout">
+        <div class="magazine-column">
+            {% for story in stories | slice(start=0, end=2) %}
+            {{ macros_article::article(story=story) }}
+            {% endfor %}
         </div>
-        <section class="call-to-action">
-            <h2>Join our team</h2>
-            <p>If you love telling stories through writing, photography, or filmmaking, we would love to hear from you!</p>
-            <a href="mailto:editors@carolinarazor.com" class="btn">Email us</a>
-        </section>
+        <!--            Featured Article-->
+        <div class="magazine-column">
+            <p>{{ featured_article.title }}</p>
+        </div>
+        <div class="magazine-column">
+            {% for story in stories | slice(start=3, end=5) %}
+            {{ macros_article::article(story=story, size="small") }}
+            {% endfor %}
+        </div>
+        <div class="magazine-column">
+            {% for story in stories | slice(start=5, end=7) %}
+            {{ macros_article::article(story=story, size="small") }}
+            {% endfor %}
+        </div>
+    </div>
+    <section class="call-to-action">
+        <h2>Join our team</h2>
+        <p>If you love telling stories through writing, photography, or filmmaking, we would love to hear from you!</p>
+        <a href="mailto:editors@carolinarazor.com" class="btn">Email us</a>
+    </section>
 </div>
 {% endblock content %}
