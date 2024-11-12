@@ -1,14 +1,30 @@
 // Main style for the header
 .header-container {
   overflow: hidden;
-  border-bottom: 2px solid #56A0D3;
-  position: fixed;
-  top: 0;
+  border-bottom: 2px solid #56a0d3;
   width: 100%;
+  text-align: center;
+
+  // position: fixed;
+  // top: 0;
   z-index: 1000;
   background-color: white;
-  text-align: center;
-  padding: 3px 0;
+  // align width with hompage
+}
+
+.header-content {
+  height: 48px;
+
+  display: flex;
+  flex-direction: row;
+
+  padding: 0 1rem;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.spacer {
+  flex-grow: 1;
 }
 
 // Style for the Carolina Razor text
@@ -30,9 +46,14 @@
   color: #000000;
   padding: 5px 20px; // space between entries
   text-decoration: none;
-  margin-right: 20px;
   justify-content: center;
   width: auto;
+}
+
+.header-container .logo {
+  padding-left: 0;
+  display: inline-flex;
+  justify-content: center;
 }
 
 // Header style for nav menu entries
@@ -40,15 +61,13 @@
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
-  font-family: 'Onest', sans-serif;
-  margin-right: 20px;
+  font-family: "Onest", sans-serif;
 }
 
 // Set to unc blue on hover
 .entry:hover {
-  color: #56A0D3;
+  color: #56a0d3;
 }
-
 
 // Hide the mobile menu icon
 .header-container .icon {
@@ -76,7 +95,7 @@
 }
 
 @media screen and (max-width: 1050px) {
-    .header-container {
+  .header-container {
     text-align: center;
     padding: 0;
   }
@@ -86,7 +105,7 @@
     margin: 0 auto;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%) translateY(7px);  // Center and move down a little bit
+    transform: translateX(-50%) translateY(7px); // Center and move down a little bit
     font-size: 23px;
     padding: 0;
     white-space: nowrap;
@@ -135,14 +154,10 @@
   }
 
   .entry:hover {
-    color: #56A0D3;  /* UNC blue color */
+    color: #56a0d3; /* UNC blue color */
   }
 }
 
 .entry.active {
-  color: #56A0D3;
-}
-
-.site-content {
-  padding-top: 70px;
+  color: #56a0d3;
 }
