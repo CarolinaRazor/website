@@ -9,7 +9,7 @@ visible = true
 topics = ["Campus"]
 source = "Copy of Campus preparedness story - Alex Kreidler"
 image = "unc-images/bell-tower.webp"
-featured = true
+featured = false
 description = "test"
 +++
 Hi!

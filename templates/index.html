@@ -40,7 +40,7 @@
 <!--Get longform section articles-->
 <!--Get opinion section articles-->
 {% set_global opinion_articles = [] %}
-{% set article_section = get_section(path="news/_index.md") %}
+{% set article_section = get_section(path="opinion/_index.md") %}
 {% for article in article_section.pages %}
     {% if article != featured_article %}
         {% set_global opinion_articles = opinion_articles | concat(with=article) %}
@@ -51,36 +51,36 @@
 
 <!--
 ┌─────────────────────────────────────────────────────────┐
-│featured-article  -> article object                      │
-│news-articles     -> array of article objects            │
-│longform-articles -> array of article objects            │
-│opinion-articles  -> array of article objects            │
+│featured_article  -> article object                      │
+│news_articles     -> array of article objects            │
+│longform_articles -> array of article objects            │
+│opinion_articles  -> array of article objects            │
 │                                                         │
 │USAGE:                                                   │
-│featured-article.title, featured-article.extra.image, etc│
-│news-articles[0].title, news-articles[0].extra.image, etc│
+│featured_article.title, featured_article.extra.image, etc│
+│news_articles[0].title, news_articles[0].extra.image, etc│
 └─────────────────────────────────────────────────────────┘
 -->
 
 <div class="container">
     <div class="magazine-layout">
         <div class="magazine-column">
-            {% for story in stories | slice(start=0, end=2) %}
-            {{ macros_article::article(story=story) }}
+            {% for article in longform_articles %}
+                {{ macros_article::article(story=longform_articles[loop.index0], size="small") }}
             {% endfor %}
         </div>
         <!--            Featured Article-->
         <div class="magazine-column">
-            <p>{{ featured_article.title }}</p>
+            {{ macros_article::article(story=featured_article, size="small") }}
         </div>
         <div class="magazine-column">
-            {% for story in stories | slice(start=3, end=5) %}
-            {{ macros_article::article(story=story, size="small") }}
+            {% for article in news_articles %}
+                {{ macros_article::article(story=news_articles[loop.index0], size="small") }}
             {% endfor %}
         </div>
         <div class="magazine-column">
-            {% for story in stories | slice(start=5, end=7) %}
-            {{ macros_article::article(story=story, size="small") }}
+            {% for article in opinion_articles %}
+                {{ macros_article::article(story=opinion_articles[loop.index0], size="small") }}
             {% endfor %}
         </div>
     </div>
