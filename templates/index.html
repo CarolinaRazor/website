@@ -1,37 +1,123 @@
-
 {% extends "base.html" %}
 
 
 {% block content %}
 {% set stories = load_data(path="data/stories.json") %}
+
+<!--Get featured article-->
+{% set_global all_featured_articles = [] %}
+{% for section in ["news", "longform", "opinion",] %}
+    {% set article_section = get_section(path=section ~ "/_index.md") %}
+    {% for article in article_section.pages %}
+        {% if article.extra.featured %}
+            {% set_global all_featured_articles = all_featured_articles | concat(with=article) %}
+            {% break %}
+            {# AFAIK, it should grab the articles in date order so to keep the list short we can break after the first featured article #}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% set featured_article = all_featured_articles | sort(attribute="date") | last %}
+<!--Get featured article-->
+<!--Get news section articles-->
+{% set_global news_articles = [] %}
+{% set article_section = get_section(path="news/_index.md") %}
+{% for article in article_section.pages %}
+    {% if article != featured_article %}
+        {% set_global news_articles = news_articles | concat(with=article) %}
+    {% endif %}
+    {% if news_articles | length == 2 %} {% break %} {% endif %}
+{% endfor %}
+<!--Get news section articles-->
+<!--Get longform section articles-->
+{% set_global longform_articles = [] %}
+{% set article_section = get_section(path="longform/_index.md") %}
+{% for article in article_section.pages %}
+    {% if article != featured_article %}
+        {% set_global longform_articles = longform_articles | concat(with=article) %}
+    {% endif %}
+    {% if longform_articles | length == 2 %} {% break %} {% endif %}
+{% endfor %}
+<!--Get longform section articles-->
+<!--Get opinion section articles-->
+{% set_global opinion_articles = [] %}
+{% set article_section = get_section(path="opinion/_index.md") %}
+{% for article in article_section.pages %}
+    {% if article != featured_article %}
+        {% set_global opinion_articles = opinion_articles | concat(with=article) %}
+    {% endif %}
+    {% if opinion_articles | length == 2 %} {% break %} {% endif %}
+{% endfor %}
+<!--Get opinion section articles-->
+<!--Get 6 non-featured articles-->
+{% set_global all_nf_articles = [] %}
+{% for section in ["news", "longform", "opinion",] %}
+    {% set article_section = get_section(path=section ~ "/_index.md") %}
+    {% for article in article_section.pages %}
+        {% if article != featured_article %}
+            {% set_global all_nf_articles = all_nf_articles | concat(with=article) %}
+            {% if loop.index0 == 5 %}
+                {% break %}
+            {% endif %}
+            {# Grab latest 6 articles from each section, in case ex. latest 6 articles were news #}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% set all_nf_articles = all_nf_articles | sort(attribute="date") | reverse | slice(start=0, end=5) %}
+{% set nf_articles_length = all_nf_articles | length %}
+<!--Get 6 non-featured articles-->
+
+<!--
+┌─────────────────────────────────────────────────────────┐
+│featured_article  -> article object                      │
+│news_articles     -> array of article objects            │
+│longform_articles -> array of article objects            │
+│opinion_articles  -> array of article objects            │
+│all_nf_articles   -> array of article objects            │
+│                                                         │
+│USAGE:                                                   │
+│featured_article.title, featured_article.extra.image, etc│
+│news_articles[0].title, news_articles[0].extra.image, etc│
+└─────────────────────────────────────────────────────────┘
+-->
+
 <div class="container">
-        <div class="magazine-layout">
-            <div class="magazine-column">
-                {% for story in stories | slice(start=0, end=2) %}
-                    {{ macros_article::article(story=story) }}
+    <div class="magazine-layout">
+        <div class="magazine-column">
+            {% if nf_articles_length >=1 %}
+                {% for article in all_nf_articles %}
+                    {% if loop.index0 == 0 or loop.index0 == 1 %}
+                        {{ macros_article::article(story=article, size="small") }}
+                    {% endif %}
                 {% endfor %}
-            </div>
-<!--            Featured Article-->
-            <div class="magazine-column">
-                {% for story in stories | slice(start=2, end=3) %}
-                    {{ macros_article::article(story=story) }}
-                {% endfor %}
-            </div>
-            <div class="magazine-column">
-                {% for story in stories | slice(start=3, end=5) %}
-                    {{ macros_article::article(story=story, size="small") }}
-                {% endfor %}
-            </div>
-            <div class="magazine-column">
-                {% for story in stories | slice(start=5, end=7) %}
-                    {{ macros_article::article(story=story, size="small") }}
-                {% endfor %}
-            </div>
+            {% endif %}
         </div>
-        <section class="call-to-action">
-            <h2>Join our team</h2>
-            <p>If you love telling stories through writing, photography, or filmmaking, we would love to hear from you!</p>
-            <a href="mailto:editors@carolinarazor.com" class="btn">Email us</a>
-        </section>
+        <!--            Featured Article-->
+        <div class="magazine-column">
+            {{ macros_article::article(story=featured_article, size="medium") }}
+        </div>
+        <div class="magazine-column">
+            {% if nf_articles_length >=3 %}
+                {% for article in all_nf_articles %}
+                    {% if loop.index0 == 2 or loop.index0 == 3 %}
+                        {{ macros_article::article(story=article, size="small") }}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="magazine-column">
+            {% if nf_articles_length >=5 %}
+                {% for article in all_nf_articles %}
+                    {% if loop.index0 == 4 or loop.index0 == 5 %}
+                        {{ macros_article::article(story=article, size="small") }}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <section class="call-to-action">
+        <h2>Join our team</h2>
+        <p>If you love telling stories through writing, photography, or filmmaking, we would love to hear from you!</p>
+        <a href="mailto:editors@carolinarazor.com" class="btn">Email us</a>
+    </section>
 </div>
 {% endblock content %}
