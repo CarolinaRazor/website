@@ -154,3 +154,9 @@
 .site-content {
   padding-top: 105px; /* Adjust based on header height */
 }
+
+@media screen and (max-width: 1200px) {
+  .site-content {
+    padding-top: 70px; /* Adjust based on header height */
+  }
+}
