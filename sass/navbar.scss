@@ -20,9 +20,9 @@
 
 /* Style for the Carolina Razor text */
 .header-container .logo {
-  width: 250px;
+  width: 300px;
   text-decoration: none;
-  margin-right: 23%; /* Margin to the right of the logo */
+  margin-right: 20%; /* Margin to the right of the logo */
   display: inline-block;
   vertical-align: middle;
   padding: 5px 0;
@@ -79,7 +79,7 @@
 }
 
 /* Responsive styling for mobile view */
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1200px) {
   .header-container {
     text-align: center;
     padding: 0;
