@@ -22,8 +22,9 @@
 .header-container .logo {
   width: 300px;
   text-decoration: none;
-  margin-right: 20%; /* Margin to the right of the logo */
+  //margin-right: 20%; /* Margin to the right of the logo */
   display: inline-block;
+  //text-align: left;
   vertical-align: middle;
   padding: 5px 0;
 }
@@ -145,11 +146,11 @@
 }
 
 /* Style for active entry */
-.entry.active {
-  color: #56A0D3;
-}
+//.entry.active {
+//  color: #56A0D3;
+//}
 
 /* Site content offset to account for header */
 .site-content {
-  padding-top: 70px; /* Adjust based on header height */
+  padding-top: 105px; /* Adjust based on header height */
 }
