@@ -48,6 +48,23 @@
     {% if opinion_articles | length == 2 %} {% break %} {% endif %}
 {% endfor %}
 <!--Get opinion section articles-->
+<!--Get 6 non-featured articles-->
+{% set_global all_nf_articles = [] %}
+{% for section in ["news", "longform", "opinion",] %}
+    {% set article_section = get_section(path=section ~ "/_index.md") %}
+    {% for article in article_section.pages %}
+        {% if article != featured_article %}
+            {% set_global all_nf_articles = all_nf_articles | concat(with=article) %}
+            {% if loop.index0 == 5 %}
+                {% break %}
+            {% endif %}
+            {# Grab latest 6 articles from each section, in case ex. latest 6 articles were news #}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% set all_nf_articles = all_nf_articles | sort(attribute="date") | reverse | slice(start=0, end=5) %}
+{% set nf_articles_length = all_nf_articles | length %}
+<!--Get 6 non-featured articles-->
 
 <!--
 ┌─────────────────────────────────────────────────────────┐
@@ -55,6 +72,7 @@
 │news_articles     -> array of article objects            │
 │longform_articles -> array of article objects            │
 │opinion_articles  -> array of article objects            │
+│all_nf_articles   -> array of article objects            │
 │                                                         │
 │USAGE:                                                   │
 │featured_article.title, featured_article.extra.image, etc│
@@ -65,32 +83,35 @@
 <div class="container">
     <div class="magazine-layout">
         <div class="magazine-column">
-            <div class="article-format text-[#0a5e66]">
-                <p>Longform</p>
-            </div>
-            {% for article in longform_articles %}
-                {{ macros_article::article(story=longform_articles[loop.index0], size="small", featured=false) }}
-            {% endfor %}
+            {% if nf_articles_length >=1 %}
+                {% for article in all_nf_articles %}
+                    {% if loop.index0 == 0 or loop.index0 == 1 %}
+                        {{ macros_article::article(story=article, size="small") }}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
         <!--            Featured Article-->
         <div class="magazine-column">
-            {{ macros_article::article(story=featured_article, size="medium", featured=true) }}
+            {{ macros_article::article(story=featured_article, size="medium") }}
         </div>
         <div class="magazine-column">
-            <div class="article-format text-[#0a5e66]">
-                <p>News</p>
-            </div>
-            {% for article in news_articles %}
-                {{ macros_article::article(story=news_articles[loop.index0], size="small", featured=false) }}
-            {% endfor %}
+            {% if nf_articles_length >=3 %}
+                {% for article in all_nf_articles %}
+                    {% if loop.index0 == 2 or loop.index0 == 3 %}
+                        {{ macros_article::article(story=article, size="small") }}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
         <div class="magazine-column">
-            <div class="article-format text-[#0a5e66]">
-                <p>Opinion</p>
-            </div>
-            {% for article in opinion_articles %}
-                {{ macros_article::article(story=opinion_articles[loop.index0], size="small", featured=false) }}
-            {% endfor %}
+            {% if nf_articles_length >=5 %}
+                {% for article in all_nf_articles %}
+                    {% if loop.index0 == 4 or loop.index0 == 5 %}
+                        {{ macros_article::article(story=article, size="small") }}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
     <section class="call-to-action">
