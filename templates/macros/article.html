@@ -1,20 +1,21 @@
 {% macro article(story, size="medium") %}
 <article class="article article--{{ size }}">
-    <a href="/longform/blue">
-        {# {{ story.link | default(value="") }} #}
-        {% if story.image %}
+    <a href="{{ story.permalink }}">
+        {% if story.extra.image %}
         <figure class="article-img">
-            <img src="{{ story.image }}" />
+            <img src="{{ story.extra.image }}" />
         </figure>
         {% endif %}
-        <div class="article-format text-[#0a5e66]">
-            <p>{{ story.format }}</p>
-        </div>
+            {% set url_parts = story.permalink | split(pat="/") %}
+            {% set section_name = url_parts | slice(start=url_parts | length - 3, end=url_parts | length - 2) %}
+            <div class="article-format text-[#0a5e66]">
+                <p>{{ section_name[0] }}</p>
+            </div>
         <h2 class="article-title article-title--{{ size }}">
             {{ story.title }}
         </h2>
         <div class="article-excerpt">
-            <p>{{ story.firstLine | safe }}</p>
+            <p>{{ story.description | safe }}</p>
         </div>
     </a>
 </article>
