@@ -1,10 +1,9 @@
----
-title: About
-authors: 
-  - The Editors
-date: 2024-10-12
-template: article.html
----
++++
+title = "About"
+authors = ["The Editors"]
+date = 2024-10-12
+template = "article.html"
++++
 The Carolina Razor is a student-run news magazine at UNC Chapel Hill. Our mission is to tell extraordinary stories — the bizarre, overlooked, and important ones — and to provide a forum for student voices. 
 
 Anyone can pitch or submit a story to the Razor, regardless of their affiliation with UNC or political orientation. Stories can come from anywhere — a crazy job or life experience, or a class assignment. We’re looking for unique perspectives that resonate with readers in the UNC community.

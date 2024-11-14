@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-{% set stories = load_data(path="data/stories.json") %}
 
 <!--Get featured article-->
 {% set_global all_featured_articles = [] %}
@@ -62,7 +60,7 @@
         {% endif %}
     {% endfor %}
 {% endfor %}
-{% set all_nf_articles = all_nf_articles | sort(attribute="date") | reverse | slice(start=0, end=5) %}
+{% set all_nf_articles = all_nf_articles | sort(attribute="date") | reverse | slice(start=0, end=6) %}
 {% set nf_articles_length = all_nf_articles | length %}
 <!--Get 6 non-featured articles-->
 

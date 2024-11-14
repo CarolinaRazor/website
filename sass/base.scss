@@ -22,7 +22,7 @@ body {
 	font-weight: 600;
 	color: var(--format-color);
 	text-transform: uppercase;
-	margin-bottom: 0.3rem;
+	margin-bottom: 0;
 }
 
 
@@ -54,7 +54,8 @@ body {
 
 /* Main Content Area */
 .site-content {
-    max-width: 1200px;
+    //max-width: 1200px;
+    max-width: 90%;
     margin: 0 auto;
     padding: 2rem 1rem;
 }

@@ -1,19 +1,94 @@
+/* Basic list and item styling */
+.title {
+  text-align: center;
+}
+
+.articles-div {
+  display: flex;
+  justify-content: center; /* Center the container */
+  width: 100%; /* Ensure the container takes full width */
+}
+
 #article-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Align the articles to the left */
+  gap: 16px; /* Spacing between boxes */
+  padding: 0;
+  margin: 0; /* Remove default margin */
   list-style-type: none;
+  width: 2000px; /* Limit the width of the article list */
 }
 
-.story-link:hover, .story-link:visited, .story-link:link, .story-link:active  {
-    text-decoration: none;
+.article-item {
+  width: 300px; /* Fixed width for each article box */
+  height: 450px; /* Fixed height for each article box */
+  border: 2px solid #ccc; /* Border around each article */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden;
+  box-sizing: border-box; /* Ensures padding and borders are included in the size */
+  display: flex;
+  flex-direction: column;
+  padding: 16px; /* Padding inside each article */
+  background-color: #fff; /* Background color for the article box */
+  margin-bottom: 16px; /* Adds space between articles vertically */
 }
 
-.story-authors {
-
+/* Style the story-link to fill the item container */
+.story-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
 }
 
-.story-date {
-
+.story-image {
+  width: 100%;
+  max-height: 200px; /* Limits the height of the image */
+  object-fit: cover; /* Ensures the image covers the area proportionally */
+  border-radius: 4px;
+  margin-bottom: 12px;
 }
 
 .story-title {
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
 
+.story-meta {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.story-authors, .story-date {
+  display: block;
+}
+
+.story-description {
+  font-size: 0.95em;
+  color: #333;
+  margin-top: auto; /* Pushes the description to the bottom of the container */
+}
+
+/* Mobile styles */
+@media (max-width: 700px) {
+  .articles-div {
+    justify-content: center; /* Keep it centered on small screens */
+  }
+
+  .article-item {
+    width: 95%; /* Boxes take 95% width of the viewport */
+    height: 500px; /* Fixed height for mobile */
+  }
+
+  .article-item + .article-item {
+    border-top: 1px solid #ddd; /* Thin line between articles on mobile */
+  }
+
+  .story-image {
+    max-height: 300px; /* Adjust for mobile by increasing the max height */
+  }
 }

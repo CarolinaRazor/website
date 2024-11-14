@@ -1,7 +1,7 @@
 +++
-title = "News Article Test"
+title = "News Article Test4"
 authors = ["Alex Kreidler"]
-date = 2023-12-10
+date = 2024-11-13
 template = "article.html"
 visible = true
 description = "bla bla bla"

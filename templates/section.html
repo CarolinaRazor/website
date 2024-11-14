@@ -1,21 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-    {{ section.title }}
-</h1>
-<ul id="article-list">
-    <!-- If you are using pagination, section.pages will be empty.
-         You need to use the paginator object -->
-    {% for page in section.pages %}
-    <li><a class="story-link" href="{{ page.permalink | safe }}">
-        {% if page.extra.image %}
-        <img src="{{ page.extra.image }}">
-        {% endif %}
-        <span class="story-title">{{ page.title }}</span><br>
-        <span class="story-authors">By {{ page.authors | join(sep=", ") }}</span>
-        <span class="story-date">{{ page.date | date(format="%B %d, %Y") }}</span>
-    </a></li>
-    {% endfor %}
-</ul>
+<div class="section_content section-page">
+    <h1 class="title">{{ section.title }}</h1>
+    <div class="articles-div">
+        <ul id="article-list">
+            {% for page in section.pages %}
+            <li class="article-item">
+                <a class="story-link" href="{{ page.permalink | safe }}">
+                    {% if page.extra.image %}
+                    <img class="story-image" src="{{ page.extra.image }}">
+                    {% endif %}
+                    <div class="story-content">
+                        <div class="story-header">
+                            <span class="story-title">{{ page.title }}</span>
+                        </div>
+                        <div class="story-meta">
+                            <span class="story-authors">By {{ page.authors | join(sep=", ") }}</span>
+                            <span class="story-date">{{ page.date | date(format="%B %d, %Y") }}</span>
+                        </div>
+                        <span class="story-description">{{ page.description }}</span>
+                    </div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock content %}
