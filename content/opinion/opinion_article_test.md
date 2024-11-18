@@ -1,6 +1,6 @@
 +++
 title = "Opinion Article Test"
-authors = ["Alex Kreidler"]
+authors = ["0"]
 date = 2023-12-10
 template = "article.html"
 visible = true

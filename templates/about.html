@@ -21,37 +21,18 @@
 
 
 {% block content %}
-{% set authors = get_section(path="authors/_index.md") %}
-{% set_global author_map = [] %}
-{% for author in authors.pages %}
-    {% set author_ind = [author.extra.id, author.title, author.permalink] %}
-    {% set_global author_map = author_map | concat(with=[author_ind]) %}
-{% endfor %}
 <div class="article-main">
     <article class="article-content">
         <h1 class="article-title">{{ page.title }}</h1>
         {% if page.extra.subtitle %}<h2 class="article-subtitle">{{ page.extra.subtitle }}</h2>{% endif %}
         <div class="article-meta">
-            {% set author_links = [] %}
-            {% for author_id in page.authors %}
-                {% set author_page = author_map[author_id] %}
-                {% set author_link = "<a href='" ~ author_page[2] ~ "'>" ~ author_page[1] ~ "</a>" %}
-            {% set_global author_links = author_links | concat(with=[author_link]) %}
-            {% endfor %}
-            <span class="article-authors">By {{ author_links | join(sep=", ") | safe }}</span>
+            <span class="article-authors">By {{ page.authors | join(sep=", ") }}</span>
             <span class="article-date">{{ page.date | date(format="%B %d, %Y") }}</span>
         </div>
-        {% if page.extra.image %}
+        {% if page.image %}
         <div class="article-image-container">
-            <img src="{{ page.extra.image }}" alt="{{ page.extra.caption | default(value="Article featured image") }}" class="article-image" />
-            <div class="image-metadata">
-                {% if page.extra.caption %}
-                <span class="caption">{{ page.extra.caption }}</span>
-                {% endif %}
-                {% if page.extra.attribution %}
-                <span class="attribution">{{ page.extra.attribution }}</span>
-                {% endif %}
-            </div>
+            <img src="/{{ page.image }}" alt="{{ page.image_alt | default(value=" Article featured image")
+                }}" class="article-image" />
         </div>
         {% endif %}
 
