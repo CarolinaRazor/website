@@ -41,10 +41,17 @@
             <span class="article-authors">By {{ author_links | join(sep=", ") | safe }}</span>
             <span class="article-date">{{ page.date | date(format="%B %d, %Y") }}</span>
         </div>
-        {% if page.image %}
+        {% if page.extra.image %}
         <div class="article-image-container">
-            <img src="/{{ page.image }}" alt="{{ page.image_alt | default(value=" Article featured image")
-                }}" class="article-image" />
+            <img src="{{ page.extra.image }}" alt="{{ page.extra.caption | default(value="Article featured image") }}" class="article-image" />
+            <div class="image-metadata">
+                {% if page.extra.caption %}
+                <span class="caption">{{ page.extra.caption }}</span>
+                {% endif %}
+                {% if page.extra.attribution %}
+                <span class="attribution">{{ page.extra.attribution }}</span>
+                {% endif %}
+            </div>
         </div>
         {% endif %}
 

@@ -1,5 +1,5 @@
 .article-main {
-  max-width: 630px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -99,11 +99,33 @@ a { color: inherit; }
   margin-bottom: 1.5rem;
 }
 
+.article-image-container {
+  text-align: center; /* Center the image itself */
+  margin: 1em 0; /* Add spacing around the container */
+}
+
 .article-image {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
+
+.image-metadata {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5em; /* Space between the image and metadata */
+  font-size: 0.9em; /* Slightly smaller text for metadata */
+  color: #555; /* Neutral text color */
+}
+
+.caption {
+  text-align: left; /* Align caption to the left */
+}
+
+.attribution {
+  text-align: right; /* Align attribution to the right */
+}
+
 
 @media (max-width: 768px) {
   .article-body p {

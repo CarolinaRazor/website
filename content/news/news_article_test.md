@@ -10,6 +10,8 @@ description = "bla bla bla"
 topics = ["Campus"]
 source = "Copy of Campus preparedness story - Alex Kreidler"
 image = "/unc-images/bell-tower.webp"
+caption = "image caption"
+attribution = "image attribution"
 featured = true
 +++
 Hi!
