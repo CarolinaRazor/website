@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% set authors = get_section(path="authors/_index.md") %}
+{% set_global author_map = [] %}
+{% for author in authors.pages %}
+{% set author_ind = [author.extra.id, author.title, author.permalink] %}
+{% set_global author_map = author_map | concat(with=[author_ind]) %}
+{% endfor %}
 <div class="section_content section-page">
     <h1 class="title">{{ section.title }}</h1>
     <div class="articles-div">
@@ -16,7 +22,13 @@
                             <span class="story-title">{{ page.title }}</span>
                         </div>
                         <div class="story-meta">
-                            <span class="story-authors">By {{ page.authors | join(sep=", ") }}</span>
+                            {% set_global author_names = [] %}
+                            {% for author_id in page.authors %}
+                                {% set author_page = author_map[author_id] %}
+                                {% set author_name = author_page[1] %}
+                                {% set_global author_names = author_names | concat(with=[author_name]) %}
+                            {% endfor %}
+                            <span class="story-authors">By {{ author_names | join(sep=", ") }}</span>
                             <span class="story-date">{{ page.date | date(format="%B %d, %Y") }}</span>
                         </div>
                         <span class="story-description">{{ page.description }}</span>
