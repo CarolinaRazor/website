@@ -1,7 +1,7 @@
 +++
 title = "Longform Articles"
 sort_by = "date"
-template = "section.html"
+template = "author_section.html"
 page_template = "authors.html"
 generate_feeds = true
 +++

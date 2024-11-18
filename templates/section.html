@@ -11,7 +11,7 @@
     <h1 class="title">{{ section.title }}</h1>
     <div class="articles-div">
         <ul id="article-list">
-            {% for page in section.pages %}
+            {% for page in paginator.pages %}
             <li class="article-item">
                 <a class="story-link" href="{{ page.permalink | safe }}">
                     {% if page.extra.image %}
@@ -38,5 +38,24 @@
             {% endfor %}
         </ul>
     </div>
+    <div class="pagination-wrapper">
+        <nav class="pagination">
+            {% if paginator.previous %}
+            <a class="previous" href="{{ paginator.previous }}">‹ Previous</a>
+            {% endif %}
+            {% if paginator.previous and paginator.next %}
+            <b>|</b>
+            {% endif %}
+            {% if paginator.next %}
+            <a class="next" href="{{ paginator.next }}">
+                Next ›
+                {% if paginator.previous %}
+                <span class="space"></span> <!-- Increased space after 'Next' -->
+                {% endif %}
+            </a>
+            {% endif %}
+        </nav>
+    </div>
+
 </div>
 {% endblock content %}

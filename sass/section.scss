@@ -5,34 +5,36 @@
 
 .articles-div {
   display: flex;
-  justify-content: center; /* Center the container */
-  width: 100%; /* Ensure the container takes full width */
+  justify-content: center; /* Center the article group as a whole */
+  width: 100%; /* Ensure the container spans the full width */
 }
 
 #article-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start; /* Align the articles to the left */
-  gap: 16px; /* Spacing between boxes */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 16px 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: calc(300px * 5 + 16px * 4);
   padding: 0;
-  margin: 0; /* Remove default margin */
+  margin: 0 auto;
   list-style-type: none;
-  width: 2000px; /* Limit the width of the article list */
 }
+
 
 .article-item {
   width: 300px; /* Fixed width for each article box */
   height: 450px; /* Fixed height for each article box */
-  border: 2px solid #ccc; /* Border around each article */
-  border-radius: 8px; /* Rounded corners */
+  border: 2px solid #ccc;
+  border-radius: 8px;
   overflow: hidden;
-  box-sizing: border-box; /* Ensures padding and borders are included in the size */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 16px; /* Padding inside each article */
-  background-color: #fff; /* Background color for the article box */
-  margin-bottom: 16px; /* Adds space between articles vertically */
+  padding: 16px;
+  background-color: #fff;
 }
+
 
 /* Style the story-link to fill the item container */
 .story-link {
@@ -72,6 +74,34 @@
   color: #333;
   margin-top: auto; /* Pushes the description to the bottom of the container */
 }
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center; /* Center the pagination horizontally */
+  width: 100%;
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Three columns: Previous, |, Next */
+  align-items: center; /* Vertically center all items */
+  gap: 16px; /* Control space between elements */
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #007BFF; /* Adjust link color */
+  font-size: 1em;
+}
+
+.pagination .next .space {
+  display: inline-block;
+  width: 32px; /* Increased space after 'Next' */
+  height: 0;
+}
+
+
+
 
 /* Mobile styles */
 @media (max-width: 700px) {
