@@ -1,7 +1,26 @@
 backend:
   name: git-gateway
+  repo: carolinarazor/website
   branch: master
   squash_merges: true
+  identity_url: https://auth.decapbridge.com/sites/eb9a8db7-bcb4-46c2-978c-13c2c3abe7fd
+  gateway_url: https://gateway.decapbridge.com
+
+  # Quickly see who did what (optional)
+  commit_messages:
+    create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    openAuthoring: Message {{message}} - {{author-name}} <{{author-login}}> via DecapBridge
+
+# Better Decap + Bridge logo (optional)
+logo_url: https://decapbridge.com/decapcms-with-bridge.svg
+
+# Add site links in DecapCMS (optional)
+site_url: https://www.carolinarazor.com
+
 publish_mode: editorial_workflow
 
 media_folder: "static/uploads" # Media files will be stored in the repo under images/uploads
