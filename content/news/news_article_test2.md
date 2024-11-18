@@ -1,6 +1,6 @@
 +++
 title = "News Article Test2"
-authors = ["Alex Kreidler"]
+authors = ["0"]
 date = 2024-11-12
 template = "article.html"
 visible = true

@@ -24,7 +24,15 @@ collections:
     fields: # The fields for each document, usually in front matter
       # Top-level fields
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
+      - label: "Authors"
+        name: "authors"
+        widget: "select"
+        multiple: true
+        options:
+          - { label: "John Testing", value: "0" }
+          - { label: "Hadi Rahim", value: "1" }
+          - { label: "Katie Kovalaske", value: "2" }
+          - { label: "Liam Kiley", value: "3" }
       - { label: "Date Created/Posted", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "Last Modified", name: "updated", widget: "datetime", picker_utc: false, required: false }
       - { label: "Description", name: "description", widget: "text", required: true }
@@ -65,7 +73,15 @@ collections:
     fields: # The fields for each document, usually in front matter
       # Top-level fields
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
+      - label: "Authors"
+        name: "authors"
+        widget: "select"
+        multiple: true
+        options:
+          - { label: "John Testing", value: "0" }
+          - { label: "Hadi Rahim", value: "1" }
+          - { label: "Katie Kovalaske", value: "2" }
+          - { label: "Liam Kiley", value: "3" }
       - { label: "Date Created/Posted", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "Last Modified", name: "updated", widget: "datetime", picker_utc: false, required: false }
       - { label: "Description", name: "description", widget: "text", required: true }
@@ -104,19 +120,27 @@ collections:
     format: "toml-frontmatter"
     extension: "md"
     fields: # The fields for each document, usually in front matter
-  # Top-level fields
+      # Top-level fields
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Authors", name: "authors", widget: "list", field: { label: "Author", name: "author", widget: "string" }, required: true }
+      - label: "Authors"
+        name: "authors"
+        widget: "select"
+        multiple: true
+        options:
+          - { label: "John Testing", value: "0" }
+          - { label: "Hadi Rahim", value: "1" }
+          - { label: "Katie Kovalaske", value: "2" }
+          - { label: "Liam Kiley", value: "3" }
       - { label: "Date Created/Posted", name: "date", widget: "datetime", default: "{{now}}", picker_utc: false, required: true }
       - { label: "Last Modified", name: "updated", widget: "datetime", picker_utc: false, required: false }
-      - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Description", name: "description", widget: "text", required: true }
+      - { label: "template", name: "layout", widget: "hidden", default: "article.html" }
       - { label: "Visible", name: "visible", widget: "hidden", default: true }
       - label: "Topics"
         name: "taxonomies"
         widget: "object"
         fields:
-          - { label: "Topics", name: "topics", widget: "select", multiple: true, options: [ "Campus", "Local", "National", "Culture & Arts", "Sports", "Science and Technology", "Special Reports" ], required: true }
+          - { label: "Topics", name: "topics", widget: "select", multiple: true, options: ["Campus", "Local", "National", "Culture & Arts", "Sports", "Science and Technology", "Special Reports"], required: true }
 
       # Fields under [extra]
       - label: "Extra Fields"
