@@ -14,6 +14,9 @@ taxonomies = [
     {name = "topics", feed = true}
 ]
 
+[search]
+index_format = "fuse_javascript" # or "fuse_json"
+
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
