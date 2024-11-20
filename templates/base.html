@@ -48,22 +48,30 @@
         <div style="min-height:100vh; display: flex; flex-direction:column; justify-content:space-between;">
         <!-- Wraps everything except for the footer -->
             <div>
-                <div class="logo_bar">
-                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div class="logo-bar" style="margin: auto; max-width: 99%;">
+                    <div class="box box71"><span>
+                        <a href="/admin">
+                            <button class="btn btn-outline-secondary" type="button" style="margin-top:10px;">👤</button>
+                        </a>
+                    </span></div>
+                    <div class="box box72"><span>
                         <a href="/">
                             <img src="/img/text_logo.svg" style="width: 325px; margin-top:7px;">
                         </a>
-                    </div>
+                    </span></div>
+                    <div class="box box73"><span>
+                        <form class="d-flex" role="search" style="margin-top:10px;">
+                            <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">🔎</button>
+                            </div>
+                        </form>
+                    </span></div>
                 </div>
 
                 <div class="desktop-nav">
                     <nav class="desktop-nav navbar navbar-expand-md navbar" style="border-bottom: 2px solid #56A0D3">
                         <div class="container-fluid">
-                            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                                <a href="/admin">
-                                    <button class="btn btn-outline-secondary" type="button">👤</button>
-                                </a>
-                            </div>
                             <div class="mx-auto order-0" style=";font-family: 'Onest', sans-serif;font-size: 16px;font-weight: 600;letter-spacing: 1px;">
                                 <ul class="navbar-nav px-4 gap-4">
                                     <li class="nav-item">
@@ -102,14 +110,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                                <form class="d-flex navbar-nav ms-auto" role="search">
-                                    <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">🔎</button>
-                                    </div>
-                                </form>
-                            </div>
+
                         </div>
                     </nav>
                 </div>
@@ -117,8 +118,8 @@
                 <div class="mobile-nav">
                     <nav class="navbar">
                         <div class="container-fluid" style="border-bottom: 2px solid #56A0D3">
-                            <a class="navbar-brand mx-auto" href="/">
-                                <img src="/img/text_logo.svg" style="width: 300px;">
+                            <a class="navbar-brand" href="/">
+                                <img src="/img/text_logo.svg" style="width: 270px;">
                             </a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
@@ -129,9 +130,9 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 </div>
                                 <div class="offcanvas-body">
-                                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" style=";font-family: 'Onest', sans-serif;font-size: 16px;font-weight: 600;letter-spacing: 1px;>
+                                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" style=";font-family: 'Onest', sans-serif;font-size: 16px;font-weight: 600;letter-spacing: 1px;">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/" style="color: black;">HOME</a>
+                                            <a class="nav-link" href="/">HOME</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/news">NEWS</a>
@@ -173,7 +174,7 @@
                                             </div>
                                         </form>
                                         <a href="/admin">
-                                            <button class="btn btn-outline-secondary" type="button">👤</button>
+                                            <button class="btn btn-outline-secondary" type="button" style="margin-top: 10px;">👤</button>
                                         </a>
                                     </div>
                                 </div>

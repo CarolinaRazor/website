@@ -117,14 +117,27 @@ body {
     display: none;
 }
 
-@media (max-width: 1500px) {
-    .desktop-nav {
+.logo-bar {
+    display: flex;
+}
+
+.box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.box71 > span { margin-right: auto; }
+.box73 > span { margin-left: auto;  }
+
+@media (max-width: 1150px) {
+    .logo-bar {
         display: none;
     }
-    .logo_bar {
+    .desktop-nav {
         display: none;
     }
     .mobile-nav {
         display: contents;
     }
 }
+
