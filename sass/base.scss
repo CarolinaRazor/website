@@ -18,11 +18,11 @@ body {
 
 .article-format {
     font-family: "Onest";
-	font-size: 0.85rem;
-	font-weight: 600;
-	color: var(--format-color);
-	text-transform: uppercase;
-	margin-bottom: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--format-color);
+    text-transform: uppercase;
+    margin-bottom: 0;
 }
 
 
@@ -57,7 +57,7 @@ body {
     //max-width: 1200px;
     max-width: 90%;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
 }
 
 @media (max-width: 768px) {
@@ -102,5 +102,29 @@ body {
         &:hover {
             background-color: lighten(#13294B, 10%);
         }
+    }
+}
+
+.nav-link {
+    color: black !important;
+}
+
+.nav-link:hover {
+    color: #56A0D3 !important;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 1500px) {
+    .desktop-nav {
+        display: none;
+    }
+    .logo_bar {
+        display: none;
+    }
+    .mobile-nav {
+        display: contents;
     }
 }
