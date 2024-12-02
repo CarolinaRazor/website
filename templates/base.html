@@ -59,14 +59,23 @@
                             <img src="/img/text_logo.svg" style="width: 325px; margin-top:7px;">
                         </a>
                     </span></div>
-                    <div class="box box73"><span>
-                        <form class="d-flex" role="search" style="margin-top:10px;">
-                            <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">🔎</button>
+                    <div class="box box73">
+                        <span class="d-flex align-items-center" role="search" style="margin-top:10px;">
+                            <div class="collapse collapse-horizontal" id="collapse-search" style="overflow: hidden;">
+                                <div class="input-wrapper">
+                                    <input type="text" class="form-control" placeholder="Search"
+                                           aria-label="Search"
+                                           aria-describedby="basic-addon2"
+                                           style="width: 0; transition: width 0.3s ease;">
+                                </div>
                             </div>
-                        </form>
-                    </span></div>
+                            <button class="btn btn-outline-secondary" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse-search" aria-expanded="false"
+                                    aria-controls="collapse-search" type="button">
+                                🔎
+                            </button>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="desktop-nav">
@@ -110,7 +119,6 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
                     </nav>
                 </div>
@@ -199,6 +207,20 @@
             </footer>
         </div>
 
+    <script>
+        const collapseSearch = document.getElementById('collapse-search');
+        const inputField = collapseSearch.querySelector('input');
+
+        // Smoothly expand the input field during the "show" event
+        collapseSearch.addEventListener('show.bs.collapse', () => {
+            inputField.style.width = '300px'; // Desired expanded width
+        });
+
+        // Smoothly collapse the input field during the "hide" event
+        collapseSearch.addEventListener('hide.bs.collapse', () => {
+            inputField.style.width = '0'; // Collapse back to 0 width
+        });
+    </script>
     <script src="/js/bootstrap.bundle.js"></script>
     <!--<script src="/js/navbar.js"></script>-->
     </body>
