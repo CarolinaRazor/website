@@ -1,91 +1,227 @@
 {% import "macros/article.html" as macros_article -%}
 <!DOCTYPE html>
 <html lang="{{ config.extra.language_code | default(value="en-US") }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{% block title %}The Carolina Razor{% endblock title %}</title>
-    <link rel="icon" type="image/x-icon" href="/img/logo.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=News+Cycle:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Onest:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Space+Grotesk:wght@300..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>{% block title %}The Carolina Razor{% endblock title %}</title>
+        <link rel="icon" type="image/x-icon" href="/img/logo.ico">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=News+Cycle:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Onest:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Space+Grotesk:wght@300..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="/reset.css">
-    <link rel="stylesheet" href="/base.css">
-    <link rel="stylesheet" href="/article.css">
-    <link rel="stylesheet" href="/section.css">
-    <link rel="stylesheet" href="/colors.css">
-    <link rel="stylesheet" href="/magazine.css">
-    <link rel="stylesheet" href="/navbar.css">
+        <link rel="stylesheet" href="/reset.css">
+        <link rel="stylesheet" href="/base.css">
+        <link rel="stylesheet" href="/article.css">
+        <link rel="stylesheet" href="/section.css">
+        <link rel="stylesheet" href="/colors.css">
+        <link rel="stylesheet" href="/magazine.css">
+    <!--    <link rel="stylesheet" href="/navbar.css">-->
 
-    <meta name="twitter:card" content="summary">
-<!--    <meta name="twitter:site" content="@username">--> <!-- Ex: @NPR -->
-<!--    <meta name="twitter:creator" content="@username">--> <!-- Ex: @ArticleAuthor -->
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{config.base_url | safe}}/{{current_path | safe}}" />
-    <meta property="og:site_name" content="The Carolina Razor" />
+        <meta name="twitter:card" content="summary">
+    <!--    <meta name="twitter:site" content="@username">--> <!-- Ex: @NPR -->
+    <!--    <meta name="twitter:creator" content="@username">--> <!-- Ex: @ArticleAuthor -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="{{config.base_url | safe}}/{{current_path | safe}}" />
+        <meta property="og:site_name" content="The Carolina Razor" />
 
-    {% block meta_content %}
-    <meta property="og:image" content="/unc-images/bell-tower.webp">
-    <meta name="twitter:image" content="/unc-images/bell-tower.webp">
+        {% block meta_content %}
+        <meta property="og:image" content="/unc-images/bell-tower.webp">
+        <meta name="twitter:image" content="/unc-images/bell-tower.webp">
 
-    <meta name="twitter:title" content="The Carolina Razor">
-    <meta property="og:title" content="The Carolina Razor" />
+        <meta name="twitter:title" content="The Carolina Razor">
+        <meta property="og:title" content="The Carolina Razor" />
 
-    <meta name="description" content="The student-led paper." />
-    <meta name="twitter:description" content="The student-led paper.">
-    <meta property="og:description" content="The student-led paper." />
-    {% endblock meta_content %}
+        <meta name="description" content="The student-led paper." />
+        <meta name="twitter:description" content="The student-led paper.">
+        <meta property="og:description" content="The student-led paper." />
+        {% endblock meta_content %}
 
-<!--    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>-->
-</head>
-<body class="layout">
-<!--div for wrapping the header, content, and footer-->
-<div style="min-height:100vh; display: flex; flex-direction:column; justify-content:space-between;">
-<!--wraps everything except for the footer-->
-    <div>
-        <header class="header-container" id="topnavbar">
-            <div class="header-container-container">
-                <a href="javascript:void(0);" class="icon" onclick="navToggle()">
-                    <i class="fa fa-bars"></i>
-                </a>
-                <a href="/" class="logo">
-                    <img src="/img/text_logo.svg">
-                </a>
-                <p class="navzwsp">​</p>
-                <p class="navzwsp">​</p>
-                <!--                <a href="/">Home</a>-->
-                <div class="entries">
-                    <a class="entry" href="/">HOME</a>
-                    <a class="entry" href="/news">NEWS</a>
-                    <a class="entry" href="/opinion">OPINION</a>
-                    <a class="entry" href="/longform">LONGFORM</a>
-                    <a class="entry" href="/multimedia">MULTIMEDIA</a>
-                    <a class="entry" href="/donate">DONATE</a>
-                    <a class="entry" href="/about">ABOUT</a>
-                    <a class="entry" href="/search">SEARCH</a>
+    <!--    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>-->
+        <link href="/bootstrap/bootstrap.css" rel="stylesheet">
+    </head>
+    <body class="layout">
+    <!--div for wrapping the header, content, and footer-->
+        <div style="min-height:100vh; display: flex; flex-direction:column; justify-content:space-between;">
+        <!-- Wraps everything except for the footer -->
+            <div>
+                <div class="logo-bar" style="margin: auto; max-width: 99%;">
+                    <div class="box box71"><span>
+                        <a href="/admin">
+                            <button class="btn btn-outline-secondary" type="button" style="margin-top:10px;">👤</button>
+                        </a>
+                    </span></div>
+                    <div class="box box72"><span>
+                        <a href="/">
+                            <img src="/img/text_logo.svg" style="width: 325px; margin-top:7px;">
+                        </a>
+                    </span></div>
+                    <div class="box box73">
+                        <span class="d-flex align-items-center" role="search" style="margin-top:10px;">
+                            <div class="collapse collapse-horizontal" id="collapse-search" style="overflow: hidden;">
+                                <div class="input-wrapper">
+                                    <input type="text" class="form-control" placeholder="Search"
+                                           aria-label="Search"
+                                           aria-describedby="basic-addon2"
+                                           style="width: 0; transition: width 0.3s ease;">
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-secondary" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse-search" aria-expanded="false"
+                                    aria-controls="collapse-search" type="button">
+                                🔎
+                            </button>
+                        </span>
+                    </div>
                 </div>
-            </div>
-        </header>
 
-        <main class="site-content">
-            {% block content %}{% endblock content %}
-        </main>
-    </div>
+                <div class="desktop-nav">
+                    <nav class="desktop-nav navbar navbar-expand-md navbar" style="border-bottom: 2px solid #56A0D3">
+                        <div class="container-fluid">
+                            <div class="mx-auto order-0" style=";font-family: 'Onest', sans-serif;font-size: 16px;font-weight: 600;letter-spacing: 1px;">
+                                <ul class="navbar-nav px-4 gap-4">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/" style="color: black;">HOME</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/news">NEWS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/opinion">OPINION</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/longform">LONGFORM</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/sports">SPORTS</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            TOPICS
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/multimedia">MULTIMEDIA</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/donate">DONATE</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/about">ABOUT</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
 
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <p>The Carolina Razor is a student-run news magazine at UNC Chapel Hill. We are not affiliated with the university or its staff in any way. All opinions are our own.</p>
-                <p>Read <a href="/about" class="footer-link">our manifesto</a>.</p>
-                <p>Are you a writer or editor? <a href="/admin">Login Here.</a></p>
+                <div class="mobile-nav">
+                    <nav class="navbar">
+                        <div class="container-fluid" style="border-bottom: 2px solid #56A0D3">
+                            <a class="navbar-brand" href="/">
+                                <img src="/img/text_logo.svg" style="width: 270px;">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                                <div class="offcanvas-header" style="border-bottom: 2px solid #56A0D3">
+                                    <img src="/img/text_logo.svg" style="width: 80%;">
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3" style=";font-family: 'Onest', sans-serif;font-size: 16px;font-weight: 600;letter-spacing: 1px;">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/">HOME</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/news">NEWS</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/opinion">OPINION</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/longform">LONGFORM</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/sports">SPORTS</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                TOPICS
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/multimedia">MULTIMEDIA</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/donate">DONATE</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/about">ABOUT</a>
+                                        </li>
+                                    </ul>
+                                    <div>
+                                        <form class="d-flex mt-3" role="search">
+                                            <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" type="button">🔎</button>
+                                            </div>
+                                        </form>
+                                        <a href="/admin">
+                                            <button class="btn btn-outline-secondary" type="button" style="margin-top: 10px;">👤</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+
+                <main class="site-content">
+                    {% block content %}{% endblock content %}
+                </main>
             </div>
+
+            <footer class="site-footer">
+                <div class="footer-container">
+                    <div class="footer-content">
+                        <p>The Carolina Razor is a student-run news magazine at UNC Chapel Hill. We are not affiliated with the university or its staff in any way. All opinions are our own.</p>
+                        <p>Read <a href="/about" class="footer-link">our manifesto</a>.</p>
+                        <p>Are you a writer or editor? <a href="/admin">Login Here.</a></p>
+                    </div>
+                </div>
+            </footer>
         </div>
-    </footer>
-</div>
-<script src="/navbar.js"></script>
-</body>
+
+    <script>
+        const collapseSearch = document.getElementById('collapse-search');
+        const inputField = collapseSearch.querySelector('input');
+
+        // Smoothly expand the input field during the "show" event
+        collapseSearch.addEventListener('show.bs.collapse', () => {
+            inputField.style.width = '300px'; // Desired expanded width
+        });
+
+        // Smoothly collapse the input field during the "hide" event
+        collapseSearch.addEventListener('hide.bs.collapse', () => {
+            inputField.style.width = '0'; // Collapse back to 0 width
+        });
+    </script>
+    <script src="/js/bootstrap.bundle.js"></script>
+    <!--<script src="/js/navbar.js"></script>-->
+    </body>
 </html>
