@@ -4,7 +4,7 @@ import type { MagazineBlock as MagazineBlockProps } from '@/payload-types'
 import React from 'react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { PostCard } from '@/components/PostCard'
+import { MagazineCard } from '@/components/MagazineCard'
 
 export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = async ({
                                                                                       id,
@@ -55,26 +55,26 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
         {/* Left column */}
         <div className="xl:col-span-1 space-y-6">
           {columns[0].map((p) => (
-            <PostCard key={p.id} post={p as Post} size="small" />
+            <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Featured article */}
         <div className="xl:col-span-2">
-          {featuredArticle && <PostCard post={featuredArticle as Post} size="medium" />}
+          {featuredArticle && <MagazineCard post={featuredArticle as Post} size="medium" />}
         </div>
 
         {/* Middle column */}
         <div className="xl:col-span-1 space-y-6">
           {columns[1].map((p) => (
-            <PostCard key={p.id} post={p as Post} size="small" />
+            <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Right column */}
         <div className="xl:col-span-1 space-y-6">
           {columns[2].map((p) => (
-            <PostCard key={p.id} post={p as Post} size="small" />
+            <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
       </div>

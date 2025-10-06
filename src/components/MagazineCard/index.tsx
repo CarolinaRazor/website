@@ -20,7 +20,7 @@ function getTextFromContent(content: any): string {
   return text.trim()
 }
 
-export function PostCard({ post, size }: { post: Post; size: 'small' | 'medium' }) {
+export function MagazineCard({ post, size }: { post: Post; size: 'small' | 'medium' }) {
   const titleSize = size === 'medium' ? 'text-3xl' : 'text-xl'
   const excerptSize = size === 'medium' ? 'text-base' : 'text-sm'
 
