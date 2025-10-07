@@ -193,7 +193,21 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MagazineBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | MagazineBlock
+    | {
+        category: number | Category;
+        latestCount?: number | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'verticalcategoryblock';
+      }
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -1134,6 +1148,14 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         magazine?: T | MagazineBlockSelect<T>;
+        verticalcategoryblock?:
+          | T
+          | {
+              category?: T;
+              latestCount?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T

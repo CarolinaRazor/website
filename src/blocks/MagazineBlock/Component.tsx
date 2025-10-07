@@ -72,29 +72,29 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
               xl:col-span-2
             "
           >
-            <p className="uppercase text-lg sm:text-xl font-bold tracking-wide text-teal-700 dark:text-teal-300 mb-3">
+            <h2 className="uppercase font-extrabold tracking-widest text-lg border-l-4 pl-2 mb-3 border-black dark:border-white">
               Featured
-            </p>
+            </h2>
             <MagazineCard post={featuredArticle as Post} size="medium" />
           </div>
         )}
 
         {/* Left column */}
-        <div className="space-y-6 xl:col-span-1">
+        <div className="space-y-6 xl:col-span-1 mt-10">
           {columns[0].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Middle column */}
-        <div className="space-y-6 xl:col-span-1">
+        <div className="space-y-6 xl:col-span-1 mt-10">
           {columns[1].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Right column */}
-        <div className="space-y-6 xl:col-span-1">
+        <div className="space-y-6 xl:col-span-1 mt-10">
           {columns[2].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}

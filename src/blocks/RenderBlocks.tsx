@@ -8,6 +8,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { MagazineBlock } from '@/blocks/MagazineBlock/Component'
+import { VerticalCategoryBlock } from '@/blocks/VerticalCategoryBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -15,7 +16,8 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
-  magazine: MagazineBlock
+  magazine: MagazineBlock,
+  verticalcategoryblock: VerticalCategoryBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -35,6 +37,7 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
+              // @ts-ignore
               return (
                 <div className="" key={index}> {/*todo: add some border that doesn't apply at the top*/}
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
