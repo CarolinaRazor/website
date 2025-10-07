@@ -50,29 +50,51 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
   )
 
   return (
-    <section className="" id={`block-${id}`}> {/*possibly re-add mb or my-16 at some point*/}
-      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 gap-6 xl:grid-cols-5 xl:gap-8">
+    <section id={`block-${id}`} className="pb-12"> {/*removed py-12, remember this for later*/}
+      <div
+        className="
+          max-w-7xl mx-auto px-4
+          grid gap-6
+          sm:grid-cols-2
+          lg:grid-cols-3
+          xl:grid-cols-5 xl:gap-8
+          items-start
+        "
+      >
+        {/* Featured article */}
+        {featuredArticle && (
+          <div
+            className="
+              order-first
+              sm:col-span-2
+              lg:col-span-3
+              xl:order-none
+              xl:col-span-2
+            "
+          >
+            <p className="uppercase text-lg sm:text-xl font-bold tracking-wide text-teal-700 dark:text-teal-300 mb-3">
+              Featured
+            </p>
+            <MagazineCard post={featuredArticle as Post} size="medium" />
+          </div>
+        )}
+
         {/* Left column */}
-        <div className="xl:col-span-1 space-y-6">
+        <div className="space-y-6 xl:col-span-1">
           {columns[0].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
-        {/* Featured article */}
-        <div className="xl:col-span-2">
-          {featuredArticle && <MagazineCard post={featuredArticle as Post} size="medium" />}
-        </div>
-
         {/* Middle column */}
-        <div className="xl:col-span-1 space-y-6">
+        <div className="space-y-6 xl:col-span-1">
           {columns[1].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Right column */}
-        <div className="xl:col-span-1 space-y-6">
+        <div className="space-y-6 xl:col-span-1">
           {columns[2].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
