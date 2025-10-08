@@ -21,5 +21,5 @@ export interface Props {
   videoClassName?: string
   width?: number,
   height?: number,
-  style?: Object,
+  style?: object,
 }
