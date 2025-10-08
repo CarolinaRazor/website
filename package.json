@@ -2,6 +2,7 @@
   "name": "carolinarazor",
   "version": "1.0.0",
   "description": "Website template for Payload",
+  "packageManager": "pnpm@10.17.1",
   "license": "MIT",
   "type": "module",
   "scripts": {
