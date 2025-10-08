@@ -6,11 +6,29 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { MagazineCard } from '@/components/MagazineCard'
 
-export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = async ({
-                                                                                      id,
-                                                                                      featuredArticle: featuredArticleProp,
-                                                                                    }) => {
+export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = async ({ id }) => {
   const payload = await getPayload({ config })
+
+  const featuredGlobal = await payload.findGlobal({
+    slug: 'featured-article',
+    depth: 2,
+  })
+
+  const featuredArticleId =
+    typeof featuredGlobal?.post === 'number'
+      ? featuredGlobal.post
+      : featuredGlobal?.post?.id
+
+  let featuredArticle: Post | null = null
+
+  if (featuredArticleId) {
+    const { docs } = await payload.find({
+      collection: 'posts',
+      where: { id: { equals: featuredArticleId }, _status: { equals: 'published' } },
+      depth: 2,
+    })
+    featuredArticle = docs[0] ?? null
+  }
 
   const { docs: posts } = await payload.find({
     collection: 'posts',
@@ -18,24 +36,6 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
     where: { _status: { equals: 'published' } },
     depth: 2,
   })
-
-  let featuredArticle: Post | null = null
-
-  if (featuredArticleProp) {
-    const articleId =
-      typeof featuredArticleProp === 'number'
-        ? featuredArticleProp
-        : featuredArticleProp?.id
-
-    if (articleId) {
-      const { docs } = await payload.find({
-        collection: 'posts',
-        where: { id: { equals: articleId }, _status: { equals: 'published' } },
-        depth: 2,
-      })
-      featuredArticle = docs[0] ?? null
-    }
-  }
 
   if (!featuredArticle && posts?.[0]) {
     featuredArticle = posts[0]
@@ -50,7 +50,7 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
   )
 
   return (
-    <section id={`block-${id}`} className="pb-12"> {/*removed py-12, remember this for later*/}
+    <section id={`block-${id}`} className="pb-12">
       <div
         className="
           max-w-7xl mx-auto px-4

@@ -8,7 +8,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { MagazineBlock } from '@/blocks/MagazineBlock/Component'
-import { VerticalCategoryBlock } from '@/blocks/VerticalCategoryBlock/Component'
+import { VerticalCategoryStackBlock } from '@/blocks/VerticalCategoryStackBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -17,7 +17,7 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   magazine: MagazineBlock,
-  verticalcategoryblock: VerticalCategoryBlock,
+  verticalcategorystackblock: VerticalCategoryStackBlock,
 }
 
 export const RenderBlocks: React.FC<{

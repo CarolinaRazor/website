@@ -105,10 +105,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'featured-article': FeaturedArticle;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'featured-article': FeaturedArticleSelect<false> | FeaturedArticleSelect<true>;
   };
   locale: null;
   user: User & {
@@ -201,11 +203,11 @@ export interface Page {
     | FormBlock
     | MagazineBlock
     | {
-        category: number | Category;
+        categories: (number | Category)[];
         latestCount?: number | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'verticalcategoryblock';
+        blockType: 'verticalcategorystackblock';
       }
   )[];
   meta?: {
@@ -836,7 +838,7 @@ export interface Author {
     };
     [k: string]: unknown;
   } | null;
-  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MagazineBlock)[] | null;
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1148,10 +1150,10 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         magazine?: T | MagazineBlockSelect<T>;
-        verticalcategoryblock?:
+        verticalcategorystackblock?:
           | T
           | {
-              category?: T;
+              categories?: T;
               latestCount?: T;
               id?: T;
               blockName?: T;
@@ -1334,7 +1336,6 @@ export interface AuthorsSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
-        magazine?: T | MagazineBlockSelect<T>;
       };
   meta?:
     | T
@@ -1801,6 +1802,19 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featured-article".
+ */
+export interface FeaturedArticle {
+  id: number;
+  /**
+   * Select the post to feature globally.
+   */
+  post?: (number | null) | Post;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1841,6 +1855,16 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featured-article_select".
+ */
+export interface FeaturedArticleSelect<T extends boolean = true> {
+  post?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

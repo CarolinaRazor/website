@@ -19,7 +19,7 @@ export function HorizontalCard({ post }: { post: Post }) {
               resource={post.meta.image}
               fill={true} // fill the container
               style={{objectFit: "cover"}}
-              className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+              className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
             />
           </div>
         )}

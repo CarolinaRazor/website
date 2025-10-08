@@ -7,7 +7,7 @@ import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { MagazineBlock } from '@/blocks/MagazineBlock/config'
+// import { MagazineBlock } from '@/blocks/MagazineBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 // import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -99,7 +99,7 @@ export const Authors: CollectionConfig<'authors'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, MagazineBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
               admin: {
                 initCollapsed: true,
               },

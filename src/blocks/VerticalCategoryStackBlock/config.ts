@@ -1,17 +1,18 @@
 import type { Block } from 'payload'
 
-export const VerticalCategoryBlock: Block = {
-  slug: 'verticalcategoryblock',
+export const VerticalCategoryStackBlock: Block = {
+  slug: 'verticalcategorystackblock',
   labels: {
-    singular: 'Vertical Category',
-    plural: 'Vertical Categories',
+    singular: 'Vertical Category Stack',
+    plural: 'Vertical Category Stacks',
   },
   fields: [
     {
-      name: 'category',
-      label: 'Category',
+      name: 'categories',
+      label: 'Categories',
       type: 'relationship',
       relationTo: 'categories',
+      hasMany: true,
       required: true,
     },
     {
