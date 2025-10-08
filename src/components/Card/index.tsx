@@ -1,83 +1,99 @@
 'use client'
+
 import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React, { Fragment } from 'react'
 
 import type { Post } from '@/payload-types'
-
 import { Media } from '@/components/Media'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'content' | 'createdAt'>
 
 export const Card: React.FC<{
-  alignItems?: 'center'
   className?: string
   doc?: CardPostData
   relationTo?: 'posts'
   showCategories?: boolean
-  title?: string
-}> = (props) => {
+  size?: 'small' | 'medium'
+}> = ({ className, doc, relationTo = 'posts', showCategories = true, size = 'medium' }) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, showCategories, title: titleFromProps } = props
-
-  const { slug, categories, meta, title } = doc || {}
+  const { slug, categories, meta, title, content, createdAt } = doc || {}
   const { description, image: metaImage } = meta || {}
 
-  const hasCategories = categories && Array.isArray(categories) && categories.length > 0
-  const titleToUse = titleFromProps || title
-  const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
+  const categoryTitle = showCategories
+    ? (categories?.[0] as any)?.title ?? 'Uncategorized'
+    : undefined
+
+  const formattedDate = createdAt
+    ? new Date(createdAt).toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+    : null
+
+  const titleSize = size === 'medium' ? 'text-2xl md:text-3xl' : 'text-xl'
+  const excerptSize = size === 'medium' ? 'text-base' : 'text-sm'
+
+  // Generate excerpt
+  const excerpt =
+    size === 'medium' && content
+      ? (() => {
+        let text = ''
+        function traverse(nodes: any[]) {
+          for (const node of nodes) {
+            if (node.text) text += node.text + ' '
+            if (node.children) traverse(node.children)
+          }
+        }
+        traverse(content.root?.children || [])
+        return text.trim().slice(0, 200) + '...'
+      })()
+      : description
+
   const href = `/${relationTo}/${slug}`
 
   return (
     <article
+      ref={card.ref}
       className={cn(
-        'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
+        'group border border-border rounded-lg overflow-hidden bg-card hover:shadow-lg transition-shadow duration-200 cursor-pointer',
         className,
       )}
-      ref={card.ref}
     >
-      <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
-      </div>
+      {metaImage && (
+        <div className="relative aspect-[16/9] w-full overflow-hidden">
+          <Media
+            resource={metaImage}
+            size="100%"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+      )}
       <div className="p-4">
-        {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
-            {showCategories && hasCategories && (
-              <div>
-                {categories?.map((category, index) => {
-                  if (typeof category === 'object') {
-                    const { title: titleFromCategory } = category
+        {categoryTitle && (
+          <p className="uppercase text-xs md:text-sm font-semibold text-teal-700 dark:text-teal-300 mb-1">
+            {categoryTitle}
+          </p>
+        )}
 
-                    const categoryTitle = titleFromCategory || 'Untitled category'
-
-                    const isLast = index === categories.length - 1
-
-                    return (
-                      <Fragment key={index}>
-                        {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
-                    )
-                  }
-
-                  return null
-                })}
-              </div>
+        {title && (
+          <h2
+            className={cn(
+              titleSize,
+              'font-bold leading-snug group-hover:text-primary transition-colors mb-1',
             )}
-          </div>
+          >
+            <Link href={href} ref={link.ref} className="not-prose">
+              {title}
+            </Link>
+          </h2>
         )}
-        {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
-          </div>
-        )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+
+        {formattedDate && <p className="text-xs text-muted-foreground mb-2">{formattedDate}</p>}
+
+        {excerpt && <p className={cn(excerptSize, 'text-muted-foreground')}>{excerpt}</p>}
       </div>
     </article>
   )

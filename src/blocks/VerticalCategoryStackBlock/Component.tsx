@@ -89,7 +89,7 @@ export const VerticalCategoryStackBlock = async ({
         {validColumns.map(({ categoryDoc, mainPost, subPosts }) => (
           <div key={categoryDoc.id} className="flex flex-col">
             {/* Category header */}
-            <Link href={`/categories/${categoryDoc.slug}`} className="inline-block mb-3">
+            <Link href={`/posts/category/${categoryDoc.slug}`} className="inline-block mb-3">
               <h2 className="uppercase font-extrabold tracking-widest text-lg border-l-4 pl-2 border-black dark:border-white">
                 {categoryDoc.title}
               </h2>

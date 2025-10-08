@@ -12,19 +12,36 @@ import { cn } from '@/utilities/ui'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export const Pagination: React.FC<{
+interface PaginationProps {
   className?: string
   page: number
   totalPages: number
-}> = (props) => {
+  basePath?: string
+}
+
+export const Pagination: React.FC<PaginationProps> = ({
+                                                        className,
+                                                        page,
+                                                        totalPages,
+                                                        basePath = '/posts/page',
+                                                      }) => {
   const router = useRouter()
 
-  const { className, page, totalPages } = props
-  const hasNextPage = page < totalPages
-  const hasPrevPage = page > 1
+  const goToPage = (p: number) => {
+    if (p >= 1 && p <= totalPages) {
+      router.push(`${basePath}/${p}`)
+    }
+  }
 
-  const hasExtraPrevPages = page - 1 > 1
-  const hasExtraNextPages = page + 1 < totalPages
+  const pageNumbers: (number | 'ellipsis')[] = []
+
+  if (page > 2) pageNumbers.push(1)
+  if (page > 3) pageNumbers.push('ellipsis')
+  if (page - 1 >= 1) pageNumbers.push(page - 1)
+  pageNumbers.push(page)
+  if (page + 1 <= totalPages) pageNumbers.push(page + 1)
+  if (page + 2 < totalPages) pageNumbers.push('ellipsis')
+  if (page + 1 < totalPages) pageNumbers.push(totalPages)
 
   return (
     <div className={cn('my-12', className)}>
@@ -32,66 +49,30 @@ export const Pagination: React.FC<{
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              disabled={!hasPrevPage}
-              onClick={() => {
-                router.push(`/posts/page/${page - 1}`)
-              }}
+              disabled={page <= 1}
+              onClick={() => goToPage(page - 1)}
             />
           </PaginationItem>
 
-          {hasExtraPrevPages && (
-            <PaginationItem>
-              <PaginationEllipsis />
+          {pageNumbers.map((p, idx) => (
+            <PaginationItem key={idx}>
+              {p === 'ellipsis' ? (
+                <PaginationEllipsis />
+              ) : (
+                <PaginationLink
+                  isActive={p === page}
+                  onClick={() => goToPage(p as number)}
+                >
+                  {p}
+                </PaginationLink>
+              )}
             </PaginationItem>
-          )}
-
-          {hasPrevPage && (
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => {
-                  router.push(`/posts/page/${page - 1}`)
-                }}
-              >
-                {page - 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-
-          <PaginationItem>
-            <PaginationLink
-              isActive
-              onClick={() => {
-                router.push(`/posts/page/${page}`)
-              }}
-            >
-              {page}
-            </PaginationLink>
-          </PaginationItem>
-
-          {hasNextPage && (
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => {
-                  router.push(`/posts/page/${page + 1}`)
-                }}
-              >
-                {page + 1}
-              </PaginationLink>
-            </PaginationItem>
-          )}
-
-          {hasExtraNextPages && (
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
+          ))}
 
           <PaginationItem>
             <PaginationNext
-              disabled={!hasNextPage}
-              onClick={() => {
-                router.push(`/posts/page/${page + 1}`)
-              }}
+              disabled={page >= totalPages}
+              onClick={() => goToPage(page + 1)}
             />
           </PaginationItem>
         </PaginationContent>
