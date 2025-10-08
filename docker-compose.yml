@@ -4,8 +4,11 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - .:/home/node/app
+      - type: bind
+        source: .
+        target: /home/node/app
       - node_modules:/home/node/app/node_modules
+
     working_dir: /home/node/app/
     command: sh -c "ls && corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm migrate && pnpm start"
     depends_on:
