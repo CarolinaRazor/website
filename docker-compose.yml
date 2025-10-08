@@ -2,7 +2,7 @@ services:
   payload:
     image: node:18-alpine
     ports:
-      - ':3000'
+      - '3000:3000'
     volumes:
       - type: bind
         source: .
