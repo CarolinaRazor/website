@@ -16,6 +16,8 @@ services:
        - postgres
     env_file:
       - .env
+    labels:
+      - 'traefik.http.services.public_web.loadbalancer.server.port=3000'
 
 #  # Ensure your DATABASE_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
 #  mongo:
