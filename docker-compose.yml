@@ -35,9 +35,9 @@ services:
 #   Uncomment the following to use postgres
   postgres:
     restart: always
-    image: postgres:latest
+    image: postgres:18
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql
     env_file:
       - .env
 #    ports:
