@@ -8,6 +8,7 @@ services:
         source: .
         target: /home/node/app
       - node_modules:/home/node/app/node_modules
+      - media:/home/node/app/public/media
 
     working_dir: /home/node/app/
     command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm payload migrate && pnpm build && pnpm start"
@@ -45,3 +46,4 @@ services:
 volumes:
   pgdata:
   node_modules:
+  media:
