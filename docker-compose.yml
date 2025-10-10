@@ -1,38 +1,37 @@
 services:
   payload:
     image: node:18-alpine
-#    ports:
-#      - '3000:3000'
+    #    ports:
+    #      - '3000:3000'
     volumes:
       - type: bind
         source: .
         target: /home/node/app
       - node_modules:/home/node/app/node_modules
       - media:/home/node/app/public/media
+      - pdfs:/home/node/app/public/pdfs
 
     working_dir: /home/node/app/
-    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm payload migrate && pnpm build && node .next/standalone/server.js"
+    command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm dev"
     depends_on:
-#      - mongo
-       - postgres
+      #      - mongo
+      - postgres
     env_file:
       - .env
-    labels:
-      - 'traefik.http.services.public_web.loadbalancer.server.port=3000'
 
-#  # Ensure your DATABASE_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
-#  mongo:
-#    image: mongo:latest
-#    ports:
-#      - '27017:27017'
-#    command:
-#      - --storageEngine=wiredTiger
-#    volumes:
-#      - data:/data/db
-#    logging:
-#      driver: none
+  #  # Ensure your DATABASE_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
+  #  mongo:
+  #    image: mongo:latest
+  #    ports:
+  #      - '27017:27017'
+  #    command:
+  #      - --storageEngine=wiredTiger
+  #    volumes:
+  #      - data:/data/db
+  #    logging:
+  #      driver: none
 
-#   Uncomment the following to use postgres
+  #   Uncomment the following to use postgres
   postgres:
     restart: always
     image: postgres:18
@@ -47,3 +46,4 @@ volumes:
   pgdata:
   node_modules:
   media:
+  pdfs:
