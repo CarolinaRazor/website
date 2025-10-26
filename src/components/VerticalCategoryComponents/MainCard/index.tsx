@@ -16,7 +16,7 @@ export function MainCard({ post }: { post: Post }) {
             <Media
               resource={metaImage}
               size="100%"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-300 " // group-hover:scale-105
             />
           </div>
         )}

@@ -264,6 +264,7 @@ export interface Post {
     | {
         id?: string | null;
         name?: string | null;
+        avatar?: (number | null) | Media;
       }[]
     | null;
   slug?: string | null;
@@ -392,6 +393,14 @@ export interface Category {
 export interface User {
   id: number;
   name?: string | null;
+  /**
+   * Optional profile picture for authors
+   */
+  avatar?: (number | null) | Media;
+  /**
+   * Title
+   */
+  jobTitle?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -773,71 +782,6 @@ export interface Author {
   id: number;
   name: string;
   user: number | User;
-  /**
-   * Optional profile image for this author.
-   */
-  avatar?: (number | null) | Media;
-  hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: number | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: number | Post;
-                } | null);
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
-    media?: (number | null) | Media;
-  };
-  /**
-   * Introduce this author or add some background information.
-   */
-  bio?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
   meta?: {
     title?: string | null;
@@ -1290,6 +1234,7 @@ export interface PostsSelect<T extends boolean = true> {
     | {
         id?: T;
         name?: T;
+        avatar?: T;
       };
   slug?: T;
   slugLock?: T;
@@ -1304,30 +1249,6 @@ export interface PostsSelect<T extends boolean = true> {
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
   user?: T;
-  avatar?: T;
-  hero?:
-    | T
-    | {
-        type?: T;
-        richText?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
-        media?: T;
-      };
-  bio?: T;
   layout?:
     | T
     | {
@@ -1470,6 +1391,8 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  avatar?: T;
+  jobTitle?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

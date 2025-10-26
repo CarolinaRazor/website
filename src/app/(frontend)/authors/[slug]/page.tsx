@@ -6,8 +6,9 @@ import React, { cache } from 'react'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import RichText from '@/components/RichText'
+import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
+import PageClient from './page.client'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -35,24 +36,21 @@ export default async function AuthorPage({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
   const { slug = '' } = await paramsPromise
   const url = '/authors/' + slug
+
   const author = await queryAuthorBySlug({ slug })
 
   if (!author) return <PayloadRedirects url={url} />
 
+  const { layout } = author
+
   return (
-    <article className="pt-16 pb-16">
-      {/* Allows redirects for valid pages too */}
+    <article className="pb-24">
+      <PageClient />
       <PayloadRedirects disableNotFound url={url} />
       {draft && <LivePreviewListener />}
 
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container max-w-[48rem] mx-auto text-center">
-          <h1 className="text-4xl font-bold mb-4">{author.name}</h1>
-          {author.bio && (
-            <RichText className="text-lg text-gray-300" data={author.bio} enableGutter={false} />
-          )}
-        </div>
-      </div>
+      {/* Render author's layout */}
+      <RenderBlocks blocks={author.layout || []} />
     </article>
   )
 }

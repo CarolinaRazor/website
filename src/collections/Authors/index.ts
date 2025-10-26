@@ -68,38 +68,23 @@ export const Authors: CollectionConfig<'authors'> = {
       unique: true,
     },
 
-    {
-      name: 'avatar',
-      type: 'upload',
-      relationTo: 'media',
-      admin: {
-        description: 'Optional profile image for this author.',
-      },
-    },
 
     {
       type: 'tabs',
       tabs: [
         {
-          label: 'Hero',
-          fields: [hero],
-        },
-        {
           label: 'Content',
           fields: [
             {
-              name: 'bio',
-              type: 'richText',
-              label: 'Biography',
-              required: false,
-              admin: {
-                description: 'Introduce this author or add some background information.',
-              },
-            },
-            {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+              ],
               admin: {
                 initCollapsed: true,
               },

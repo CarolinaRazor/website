@@ -3,14 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: unset;
-    font-weight: unset;
+  /* Only set font-family for headings, leave spacing to Tailwind */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Onest', serif;
+    font-weight: 700;
+    color: var(--foreground);
   }
 
   :root {
@@ -88,8 +85,38 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    font-family: 'Onest', system-ui, sans-serif;
+    line-height: 1.65; /* readable newspaper-like spacing for paragraphs */
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: var(--foreground);
+  }
+
+  blockquote {
+    border-left: 4px solid var(--muted-foreground);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--muted-foreground);
+  }
+
+  .container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .meta {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    margin-bottom: 1rem;
   }
 }
 

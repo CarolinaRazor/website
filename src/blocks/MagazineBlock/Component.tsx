@@ -53,24 +53,30 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
     <section id={`block-${id}`} className="pb-12">
       <div
         className="
-          max-w-7xl mx-auto px-4
-          grid gap-6
-          sm:grid-cols-2
-          lg:grid-cols-3
-          xl:grid-cols-5 xl:gap-8
-          items-start
-        "
+      max-w-7xl mx-auto px-4
+      grid gap-6
+      sm:grid-cols-2
+      lg:grid-cols-3
+      xl:grid-cols-5 xl:gap-8
+      items-start
+    "
       >
-        {/* Featured article */}
+        {/* Left column */}
+        <div className="space-y-6 xl:col-span-1 mt-10 order-2 xl:order-1">
+          {columns[0].map((p) => (
+            <MagazineCard key={p.id} post={p as Post} size="small" />
+          ))}
+        </div>
+
+        {/* Featured article — first on mobile, second column on xl */}
         {featuredArticle && (
           <div
             className="
-              order-first
-              sm:col-span-2
-              lg:col-span-3
-              xl:order-none
-              xl:col-span-2
-            "
+          order-1 xl:order-2
+          sm:col-span-2
+          lg:col-span-3
+          xl:col-span-2
+        "
           >
             <h2 className="uppercase font-extrabold tracking-widest text-lg border-l-4 pl-2 mb-3 border-black dark:border-white">
               Featured
@@ -79,27 +85,24 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
           </div>
         )}
 
-        {/* Left column */}
-        <div className="space-y-6 xl:col-span-1 mt-10">
-          {columns[0].map((p) => (
-            <MagazineCard key={p.id} post={p as Post} size="small" />
-          ))}
-        </div>
-
         {/* Middle column */}
-        <div className="space-y-6 xl:col-span-1 mt-10">
+        <div className="space-y-6 xl:col-span-1 mt-10 order-3 xl:order-3">
           {columns[1].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Right column */}
-        <div className="space-y-6 xl:col-span-1 mt-10">
+        <div className="space-y-6 xl:col-span-1 mt-10 order-4 xl:order-4">
           {columns[2].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
       </div>
+
+      {/* Divider */}
+      <div className="border-t border-neutral-300 dark:border-neutral-700 mt-12 w-[80%] border-3 mx-auto"></div>
     </section>
+
   )
 }
