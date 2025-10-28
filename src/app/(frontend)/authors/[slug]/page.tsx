@@ -18,18 +18,14 @@ export async function generateStaticParams() {
     limit: 1000,
     overrideAccess: false,
     pagination: false,
-    select: {
-      slug: true,
-    },
+    select: { slug: true },
   })
 
   return authors.docs.map(({ slug }) => ({ slug }))
 }
 
 type Args = {
-  params: Promise<{
-    slug?: string
-  }>
+  params: Promise<{ slug?: string }>
 }
 
 export default async function AuthorPage({ params: paramsPromise }: Args) {
@@ -38,10 +34,12 @@ export default async function AuthorPage({ params: paramsPromise }: Args) {
   const url = '/authors/' + slug
 
   const author = await queryAuthorBySlug({ slug })
-
   if (!author) return <PayloadRedirects url={url} />
 
-  const { layout } = author
+  const { layout, populatedAuthors } = author
+  // We'll take the first populated author (usually only one)
+  const firstAuthor = populatedAuthors?.[0]
+  // console.log(populatedAuthors)
 
   return (
     <article className="pb-24">
@@ -49,8 +47,29 @@ export default async function AuthorPage({ params: paramsPromise }: Args) {
       <PayloadRedirects disableNotFound url={url} />
       {draft && <LivePreviewListener />}
 
-      {/* Render author's layout */}
-      <RenderBlocks blocks={author.layout || []} />
+      {/* Author Header */}
+      {firstAuthor && (
+        <header className="flex items-center gap-4 px-4 md:px-0 mb-12 max-w-4xl mx-auto">
+          {firstAuthor.avatar && typeof firstAuthor.avatar !== 'number' && (
+            <img
+              src={firstAuthor.avatar.url ?? ''}
+              alt={firstAuthor.name ?? 'Author avatar'}
+              className="w-24 h-24 object-cover rounded-md"
+            />
+          )}
+          <div className="flex flex-col justify-center">
+            <h1 className="text-4xl font-bold">{firstAuthor.name}</h1>
+            {firstAuthor.jobTitle && (
+              <p className="text-lg text-gray-400">{firstAuthor.jobTitle}</p>
+            )}
+          </div>
+        </header>
+      )}
+
+      {/* Layout blocks */}
+      <div className="max-w-4xl mx-auto px-4 md:px-0">
+        <RenderBlocks blocks={layout || []} />
+      </div>
     </article>
   )
 }
@@ -71,11 +90,7 @@ const queryAuthorBySlug = cache(async ({ slug }: { slug: string }) => {
     limit: 1,
     overrideAccess: draft,
     pagination: false,
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
+    where: { slug: { equals: slug } },
   })
 
   return result.docs?.[0] || null

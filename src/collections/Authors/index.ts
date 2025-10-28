@@ -1,18 +1,19 @@
-import type { CollectionConfig } from 'payload'
+import type {CollectionConfig} from 'payload'
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Archive } from '../../blocks/ArchiveBlock/config'
-import { CallToAction } from '../../blocks/CallToAction/config'
-import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
+import {authenticated} from '@/access/authenticated'
+import {authenticatedOrPublished} from '@/access/authenticatedOrPublished'
+import {Archive} from '@/blocks/ArchiveBlock/config'
+import {CallToAction} from '@/blocks/CallToAction/config'
+import {Content} from '@/blocks/Content/config'
+import {FormBlock} from '@/blocks/Form/config'
+import {MediaBlock} from '@/blocks/MediaBlock/config'
 // import { MagazineBlock } from '@/blocks/MagazineBlock/config'
-import { hero } from '@/heros/config'
-import { slugField } from '@/fields/slug'
+import {slugField} from '@/fields/slug'
 // import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import {generatePreviewPath} from '@/utilities/generatePreviewPath'
 // import { revalidateDelete, revalidatePage } from '../pages/hooks/revalidatePage'
+import {revalidateAuthor, revalidateDelete} from "@/collections/Authors/hooks/revalidateAuthor";
+import {populateAuthors} from "@/collections/Authors/hooks/populateAuthors";
 
 import {
   MetaDescriptionField,
@@ -21,6 +22,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+
 
 export const Authors: CollectionConfig<'authors'> = {
   slug: 'authors',
@@ -35,7 +37,7 @@ export const Authors: CollectionConfig<'authors'> = {
   admin: {
     defaultColumns: ['name', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data, req }) => {
+      url: ({data, req}) => {
         const path = generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'authors',
@@ -44,7 +46,7 @@ export const Authors: CollectionConfig<'authors'> = {
         return path
       },
     },
-    preview: (data, { req }) =>
+    preview: (data, {req}) =>
       generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
         collection: 'authors',
@@ -56,8 +58,12 @@ export const Authors: CollectionConfig<'authors'> = {
   fields: [
     {
       name: 'name',
+      label: 'User ID',
       type: 'text',
       required: true,
+      admin: {
+        hidden: true
+      }
     },
 
     {
@@ -66,6 +72,9 @@ export const Authors: CollectionConfig<'authors'> = {
       relationTo: 'users',
       required: true,
       unique: true,
+      admin: {
+        hidden: true
+      }
     },
 
 
@@ -88,6 +97,40 @@ export const Authors: CollectionConfig<'authors'> = {
               admin: {
                 initCollapsed: true,
               },
+            },
+            {
+              name: 'populatedAuthors',
+              type: 'array',
+              access: {
+                update: () => false,
+              },
+              admin: {
+                disabled: false,
+                readOnly: true,
+              },
+              fields: [
+                {
+                  name: 'id',
+                  type: 'text',
+                },
+                {
+                  name: 'name',
+                  type: 'text',
+                },
+                {
+                  name: 'avatar',
+                  type: 'upload',
+                  relationTo: 'media',
+                },
+                {
+                  name: 'jobTitle',
+                  type: 'text',
+                  required: false,
+                  admin: {
+                    description: 'Job Title',
+                  },
+                },
+              ],
             },
           ],
         },
@@ -129,9 +172,9 @@ export const Authors: CollectionConfig<'authors'> = {
   ],
 
   hooks: {
-    // afterChange: [revalidatePage],
-    // beforeChange: [populatePublishedAt],
-    // afterDelete: [revalidateDelete],
+    afterChange: [revalidateAuthor],
+    afterRead: [populateAuthors],
+    afterDelete: [revalidateDelete],
   },
 
   versions: {

@@ -1,19 +1,19 @@
-import type { CollectionConfig } from 'payload'
+import type {CollectionConfig} from 'payload'
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Archive } from '../../blocks/ArchiveBlock/config'
-import { CallToAction } from '../../blocks/CallToAction/config'
-import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { MagazineBlock } from "@/blocks/MagazineBlock/config";
-import { VerticalCategoryStackBlock } from "@/blocks/VerticalCategoryStackBlock/config";
-import { hero } from '@/heros/config'
-import { slugField } from '@/fields/slug'
-import { populatePublishedAt } from '../../hooks/populatePublishedAt'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import {authenticated} from '../../access/authenticated'
+import {authenticatedOrPublished} from '../../access/authenticatedOrPublished'
+import {Archive} from '../../blocks/ArchiveBlock/config'
+import {CallToAction} from '../../blocks/CallToAction/config'
+import {Content} from '../../blocks/Content/config'
+import {FormBlock} from '../../blocks/Form/config'
+import {MediaBlock} from '../../blocks/MediaBlock/config'
+import {MagazineBlock} from "@/blocks/MagazineBlock/config";
+import {VerticalCategoryStackBlock} from "@/blocks/VerticalCategoryStackBlock/config";
+import {hero} from '@/heros/config'
+import {slugField} from '@/fields/slug'
+import {populatePublishedAt} from '../../hooks/populatePublishedAt'
+import {generatePreviewPath} from '../../utilities/generatePreviewPath'
+import {revalidateDelete, revalidatePage} from './hooks/revalidatePage'
 
 import {
   MetaDescriptionField,
@@ -41,7 +41,7 @@ export const Pages: CollectionConfig<'pages'> = {
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data, req }) => {
+      url: ({data, req}) => {
         const path = generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'pages',
@@ -51,7 +51,7 @@ export const Pages: CollectionConfig<'pages'> = {
         return path
       },
     },
-    preview: (data, { req }) =>
+    preview: (data, {req}) =>
       generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
         collection: 'pages',

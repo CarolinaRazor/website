@@ -1,6 +1,6 @@
-import type { CollectionConfig } from 'payload'
+import type {CollectionConfig} from 'payload'
 
-import { authenticated } from '../../access/authenticated'
+import {authenticated} from '@/access/authenticated'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -35,7 +35,7 @@ export const Users: CollectionConfig = {
       type: 'text',
       required: false,
       admin: {
-        description: 'Title',
+        description: 'Job Title',
       },
     },
   ],

@@ -265,6 +265,10 @@ export interface Post {
         id?: string | null;
         name?: string | null;
         avatar?: (number | null) | Media;
+        /**
+         * Job Title
+         */
+        jobTitle?: string | null;
       }[]
     | null;
   slug?: string | null;
@@ -398,7 +402,7 @@ export interface User {
    */
   avatar?: (number | null) | Media;
   /**
-   * Title
+   * Job Title
    */
   jobTitle?: string | null;
   updatedAt: string;
@@ -783,6 +787,17 @@ export interface Author {
   name: string;
   user: number | User;
   layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+        avatar?: (number | null) | Media;
+        /**
+         * Job Title
+         */
+        jobTitle?: string | null;
+      }[]
+    | null;
   meta?: {
     title?: string | null;
     /**
@@ -1235,6 +1250,7 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
         avatar?: T;
+        jobTitle?: T;
       };
   slug?: T;
   slugLock?: T;
@@ -1257,6 +1273,14 @@ export interface AuthorsSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+      };
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+        avatar?: T;
+        jobTitle?: T;
       };
   meta?:
     | T

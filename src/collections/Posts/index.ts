@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type {CollectionConfig} from 'payload'
 
 import {
   BlocksFeature,
@@ -9,14 +9,14 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Banner } from '../../blocks/Banner/config'
-import { Code } from '../../blocks/Code/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
+import {authenticated} from '@/access/authenticated'
+import {authenticatedOrPublished} from '@/access/authenticatedOrPublished'
+import {Banner} from '@/blocks/Banner/config'
+import {Code} from '@/blocks/Code/config'
+import {MediaBlock} from '@/blocks/MediaBlock/config'
+import {generatePreviewPath} from '@/utilities/generatePreviewPath'
+import {populateAuthors} from './hooks/populateAuthors'
+import {revalidateDelete, revalidatePost} from './hooks/revalidatePost'
 
 import {
   MetaDescriptionField,
@@ -25,7 +25,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { slugField } from '@/fields/slug'
+import {slugField} from '@/fields/slug'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -50,7 +50,7 @@ export const Posts: CollectionConfig<'posts'> = {
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data, req }) => {
+      url: ({data, req}) => {
         const path = generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'posts',
@@ -60,7 +60,7 @@ export const Posts: CollectionConfig<'posts'> = {
         return path
       },
     },
-    preview: (data, { req }) =>
+    preview: (data, {req}) =>
       generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
         collection: 'posts',
@@ -88,11 +88,11 @@ export const Posts: CollectionConfig<'posts'> = {
               name: 'content',
               type: 'richText',
               editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
+                features: ({rootFeatures}) => {
                   return [
                     ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                    HeadingFeature({enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4']}),
+                    BlocksFeature({blocks: [Banner, Code, MediaBlock]}),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
@@ -113,7 +113,7 @@ export const Posts: CollectionConfig<'posts'> = {
               admin: {
                 position: 'sidebar',
               },
-              filterOptions: ({ id }) => {
+              filterOptions: ({id}) => {
                 return {
                   id: {
                     not_in: [id],
@@ -175,7 +175,7 @@ export const Posts: CollectionConfig<'posts'> = {
       },
       hooks: {
         beforeChange: [
-          ({ siblingData, value }) => {
+          ({siblingData, value}) => {
             if (siblingData._status === 'published' && !value) {
               return new Date()
             }
@@ -219,6 +219,14 @@ export const Posts: CollectionConfig<'posts'> = {
           name: 'avatar',
           type: 'upload',
           relationTo: 'media',
+        },
+        {
+          name: 'jobTitle',
+          type: 'text',
+          required: false,
+          admin: {
+            description: 'Job Title',
+          },
         },
       ],
     },
