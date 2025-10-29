@@ -42,7 +42,8 @@ export const Users: CollectionConfig = {
   ],
   timestamps: true,
   hooks: {
-    afterChange: [createAuthor],
+    afterChange: [],
     afterDelete: [],
+    afterOperation: [createAuthor]
   },
 }

@@ -60,7 +60,7 @@ export const Authors: CollectionConfig<'authors'> = {
       name: 'name',
       label: 'Name',
       type: 'text',
-      required: false,
+      required: true,
       admin: {
         hidden: true
       }
@@ -69,16 +69,16 @@ export const Authors: CollectionConfig<'authors'> = {
       name: 'author_id',
       label: 'User ID',
       type: 'text',
-      required: false,
+      required: true,
       admin: {
-        hidden: false
+        hidden: true
       }
     },
     {
       name: 'user',
       type: 'relationship',
       relationTo: 'users',
-      required: false,
+      required: true,
       unique: true,
       admin: {
         hidden: true

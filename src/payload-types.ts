@@ -784,9 +784,9 @@ export interface MagazineBlock {
  */
 export interface Author {
   id: number;
-  name?: string | null;
-  author_id?: string | null;
-  user?: (number | null) | User;
+  name: string;
+  author_id: string;
+  user: number | User;
   layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
   populatedAuthors?:
     | {

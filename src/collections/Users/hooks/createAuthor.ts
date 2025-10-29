@@ -1,36 +1,42 @@
-import type {CollectionAfterChangeHook} from 'payload'
+import type {CollectionAfterOperationHook} from 'payload'
+import type {User} from '@/payload-types'
 
-export const createAuthor: CollectionAfterChangeHook = async ({
-                                                                doc,
-                                                                operation,
-                                                                req: {payload},
-                                                              }) => {
-  if (operation !== 'create') return doc
+export const createAuthor: CollectionAfterOperationHook = async ({
+                                                                   operation,
+                                                                   result,
+                                                                   req: {payload},
+                                                                 }) => {
+  if (operation !== 'create' || !result) return result
 
-  try {
-    const existingAuthors = await payload.find({
-      collection: 'authors',
-      where: {user: {equals: doc.id}},
-      limit: 1,
-    })
-    console.log(doc)
-    if (existingAuthors.totalDocs > 0) return doc
+  const user = result as User
 
-    await payload.create({
-      collection: 'authors',
-      data: {
-        user: doc,
-        name: doc.name,
-        author_id: doc.id,
-        meta: {
-          title: `${doc.name} — The Carolina Razor`,
-          description: doc.jobTitle || 'Author',
+  setTimeout(async () => {
+    try {
+      const existingAuthors = await payload.find({
+        collection: 'authors',
+        where: {user: {equals: user.id}},
+        limit: 1,
+      })
+
+      if (existingAuthors.totalDocs > 0) return
+
+      await payload.create({
+        collection: 'authors',
+        data: {
+          user: user.id,
+          slug: String(user.id) ? String(user.id) : "1",
+          name: user.name ? user.name : "",
+          author_id: String(user.id) ? String(user.id) : "1",
+          meta: {
+            title: `${user.name} | The Carolina Razor`,
+            description: `${user.jobTitle || 'Author'}`,
+          },
         },
-      },
-    })
-  } catch (err) {
-    payload.logger.error(`Failed to create author for user ${doc.id}: ${err}`)
-  }
+      })
+    } catch (err) {
+      payload.logger.error(`Failed to create author for user ${user.id}: ${err}`)
+    }
+  }, 0)
 
-  return doc
+  return result
 }
