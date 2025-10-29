@@ -58,26 +58,32 @@ export const Authors: CollectionConfig<'authors'> = {
   fields: [
     {
       name: 'name',
-      label: 'User ID',
+      label: 'Name',
       type: 'text',
-      required: true,
+      required: false,
       admin: {
         hidden: true
       }
     },
-
+    {
+      name: 'author_id',
+      label: 'User ID',
+      type: 'text',
+      required: false,
+      admin: {
+        hidden: false
+      }
+    },
     {
       name: 'user',
       type: 'relationship',
       relationTo: 'users',
-      required: true,
+      required: false,
       unique: true,
       admin: {
         hidden: true
       }
     },
-
-
     {
       type: 'tabs',
       tabs: [
@@ -105,7 +111,7 @@ export const Authors: CollectionConfig<'authors'> = {
                 update: () => false,
               },
               admin: {
-                disabled: false,
+                disabled: true,
                 readOnly: true,
               },
               fields: [

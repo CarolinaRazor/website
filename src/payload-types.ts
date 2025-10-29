@@ -784,8 +784,9 @@ export interface MagazineBlock {
  */
 export interface Author {
   id: number;
-  name: string;
-  user: number | User;
+  name?: string | null;
+  author_id?: string | null;
+  user?: (number | null) | User;
   layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
   populatedAuthors?:
     | {
@@ -1264,6 +1265,7 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
+  author_id?: T;
   user?: T;
   layout?:
     | T

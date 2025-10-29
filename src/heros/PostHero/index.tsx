@@ -1,14 +1,14 @@
-import { formatDateTime } from 'src/utilities/formatDateTime'
+import {formatDateTime} from 'src/utilities/formatDateTime'
 import React from 'react'
 
-import type { Post } from '@/payload-types'
+import type {Post} from '@/payload-types'
 
-import { Media } from '@/components/Media'
-import { formatAuthors } from '@/utilities/formatAuthors'
+import {Media} from '@/components/Media'
+import {formatAuthors} from '@/utilities/formatAuthors'
 import Link from 'next/link'
 
-export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
-  const { categories, heroImage, populatedAuthors, publishedAt, title } = post
+export const PostHero: React.FC<{ post: Post }> = ({post}) => {
+  const {categories, heroImage, populatedAuthors, publishedAt, title} = post
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && populatedAuthors.length > 0
@@ -20,7 +20,7 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
           <div className="uppercase text-sm mb-6">
             {categories?.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
-                const { title: categoryTitle } = category
+                const {title: categoryTitle} = category
                 const titleToUse = categoryTitle || 'Untitled category'
                 const isLast = index === categories.length - 1
                 return (
@@ -48,8 +48,9 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
 
             {hasAuthors && (
               <div className="flex flex-col gap-1 mt-2">
-                <p className="text-sm">Author{populatedAuthors.length > 1 ? 's' : ''}</p>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 [&>*:not(:last-child)]:after:content-['•'] [&>*:not(:last-child)]:after:mx-3 [&>*:not(:last-child)]:after:text-white/70">
+                {/*<p className="text-sm">Author{populatedAuthors.length > 1 ? 's' : ''}</p>*/}
+                <div
+                  className="flex flex-wrap items-center gap-x-3 gap-y-2 [&>*:not(:last-child)]:after:content-['•'] [&>*:not(:last-child)]:after:mx-3 [&>*:not(:last-child)]:after:text-white/70">
                   {populatedAuthors.map((author) => (
                     <Link
                       key={author.id}
@@ -77,9 +78,10 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
 
       <div className="min-h-[80vh] select-none">
         {heroImage && typeof heroImage !== 'string' && (
-          <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
+          <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage}/>
         )}
-        <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
+        <div
+          className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent"/>
       </div>
     </div>
   )

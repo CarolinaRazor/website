@@ -1,6 +1,7 @@
 import type {CollectionConfig} from 'payload'
 
 import {authenticated} from '@/access/authenticated'
+import {createAuthor} from "@/collections/Users/hooks/createAuthor";
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -40,4 +41,8 @@ export const Users: CollectionConfig = {
     },
   ],
   timestamps: true,
+  hooks: {
+    afterChange: [createAuthor],
+    afterDelete: [],
+  },
 }

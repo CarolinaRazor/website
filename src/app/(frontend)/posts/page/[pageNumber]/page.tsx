@@ -1,13 +1,13 @@
-import type { Metadata } from 'next/types'
+import type {Metadata} from 'next/types'
 
-import { CollectionArchive } from '@/components/CollectionArchive'
-import { PageRange } from '@/components/PageRange'
-import { Pagination } from '@/components/Pagination'
+import {CollectionArchive} from '@/components/CollectionArchive'
+import {PageRange} from '@/components/PageRange'
+import {Pagination} from '@/components/Pagination'
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import {getPayload} from 'payload'
 import React from 'react'
 import PageClient from './page.client'
-import { notFound } from 'next/navigation'
+import {notFound} from 'next/navigation'
 
 export const revalidate = 600
 
@@ -17,9 +17,9 @@ type Args = {
   }>
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
-  const { pageNumber } = await paramsPromise
-  const payload = await getPayload({ config: configPromise })
+export default async function Page({params: paramsPromise}: Args) {
+  const {pageNumber} = await paramsPromise
+  const payload = await getPayload({config: configPromise})
 
   const sanitizedPageNumber = Number(pageNumber)
 
@@ -35,7 +35,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   return (
     <div className="pt-24 pb-24">
-      <PageClient />
+      <PageClient/>
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
           <h1>Posts</h1>
@@ -51,27 +51,27 @@ export default async function Page({ params: paramsPromise }: Args) {
         />
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      <CollectionArchive posts={posts.docs}/>
 
       <div className="container">
         {posts?.page && posts?.totalPages > 1 && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <Pagination page={posts.page} totalPages={posts.totalPages}/>
         )}
       </div>
     </div>
   )
 }
 
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { pageNumber } = await paramsPromise
+export async function generateMetadata({params: paramsPromise}: Args): Promise<Metadata> {
+  const {pageNumber} = await paramsPromise
   return {
-    title: `Payload Website Template Posts Page ${pageNumber || ''}`,
+    title: `The Carolina Razor Posts Page ${pageNumber || ''}`,
   }
 }
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
-  const { totalDocs } = await payload.count({
+  const payload = await getPayload({config: configPromise})
+  const {totalDocs} = await payload.count({
     collection: 'posts',
     overrideAccess: false,
   })
@@ -81,7 +81,7 @@ export async function generateStaticParams() {
   const pages: { pageNumber: string }[] = []
 
   for (let i = 1; i <= totalPages; i++) {
-    pages.push({ pageNumber: String(i) })
+    pages.push({pageNumber: String(i)})
   }
 
   return pages
