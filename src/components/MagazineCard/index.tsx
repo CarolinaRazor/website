@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
-import { Post } from '@/payload-types'
-import { Media } from '@/components/Media'
+import {Post} from '@/payload-types'
+import {Media} from '@/components/Media'
 
 // required for grabbing extra featured article text
 function getTextFromContent(content: any): string {
@@ -20,14 +20,17 @@ function getTextFromContent(content: any): string {
   return text.trim()
 }
 
-export function MagazineCard({ post, size }: { post: Post; size: 'small' | 'medium' }) {
+export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium' }) {
   const titleSize = size === 'medium' ? 'text-3xl' : 'text-xl'
   const excerptSize = size === 'medium' ? 'text-base' : 'text-sm'
 
+  // const excerpt =
+  //   size === 'medium' && post.content
+  //     ? getTextFromContent(post.content).slice(0, 500) + '...'
+  //     : post.meta?.description
+
   const excerpt =
-    size === 'medium' && post.content
-      ? getTextFromContent(post.content).slice(0, 500) + '...'
-      : post.meta?.description
+    size === 'medium' && post.meta?.description
 
   const category =
     (post.categories?.[0] as any)?.title ?? 'Uncategorized'
