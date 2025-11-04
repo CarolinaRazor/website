@@ -1,13 +1,17 @@
-import type { Block, Field } from 'payload'
+import type {Block, Field} from 'payload'
 
 import {
+  BlocksFeature,
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { link } from '@/fields/link'
+import {link} from '@/fields/link'
+import {Banner} from '@/blocks/Banner/config'
+import {Code} from '@/blocks/Code/config'
+import {MediaBlock} from '@/blocks/MediaBlock/config'
 
 const columnFields: Field[] = [
   {
@@ -37,10 +41,11 @@ const columnFields: Field[] = [
     name: 'richText',
     type: 'richText',
     editor: lexicalEditor({
-      features: ({ rootFeatures }) => {
+      features: ({rootFeatures}) => {
         return [
           ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          HeadingFeature({enabledHeadingSizes: ['h2', 'h3', 'h4']}),
+          BlocksFeature({blocks: [Banner, Code, MediaBlock]}),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
         ]
