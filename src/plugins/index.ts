@@ -16,7 +16,7 @@ import {getServerSideURL} from '@/utilities/getURL'
 
 const generateTitle: GenerateTitle<Post | Page> = ({doc}) => {
   return doc?.title
-    ? `${doc.title} | The LiberatorCH` : 'The LiberatorCH'
+    ? '${doc.title}' : 'The LiberatorCH'
 }
 
 const generateURL: GenerateURL<Post | Page> = ({doc}) => {
