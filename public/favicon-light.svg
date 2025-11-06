@@ -7,7 +7,8 @@
    xml:space="preserve"
    style="clip-rule:evenodd;fill-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
    id="svg1"
-   sodipodi:docname="libertybellicon.svg"
+   sodipodi:docname="favicon-light.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +21,16 @@
    inkscape:showpageshadow="0"
    inkscape:pageopacity="0"
    inkscape:pagecheckerboard="1"
-   inkscape:deskcolor="#d1d1d1"><inkscape:page
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="0.75936664"
+   inkscape:cx="553.75095"
+   inkscape:cy="553.09251"
+   inkscape:window-width="1920"
+   inkscape:window-height="1049"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg1"><inkscape:page
      x="0"
      y="0"
      width="1106.1851"
@@ -31,7 +41,7 @@
     
 <path
    d="m 125.92806,35.819079 287.91201,-1.309 52.651,-32.2019998 182.897,-2.307999931015 45.737,28.810999731015 306.79393,-1.411 5.51,10.845 2.92,252.710001 -4.22,9.765 0.26,143.086 -172.38993,-1.292 -47.792,-156.275 -103.428,-25.038 -17.148,80.821 12.085,33.898 c 0,0 131.868,20.436 130.99,77.81 0,0 10.556,43.193 12.184,124.881 0,0 -11.429,243.664 115.199,384.78397 l 47.16997,35.61999 50.33996,76.14996 -10.13,12.83 c 0,0 -311.44193,21.52 -452.08393,12.68 l -19.608,-11.07 -12.915,-54.75 -11.089,-34.31 -18.888,-21.89995 0.457,-19.34997 -45.081,-116.626 1.442,-108.846 0.604,-61.193 1.265,-13.798 -0.213,-12.226 -2.142,-8.872 -6.582,0.268 -2.723,10.907 -1.449,33.483 -3.145,160.021 7.808,25.882 36.539,88.48 1.879,24.13997 21.835,24.11995 8.057,17.39 6.623,14.26 c 0,0 9.587,40.11 9.559,58.58 0,0 0.397,5.22 -4.035,7.44 l -17.925,3.48 c 0,0 -292.964,-1.98 -429.72301,-7.04 l -19.349001,-16.99 c 0,0 17.349001,-60.13 53.037001,-85.12996 0,0 40.552,-27.15999 56.20201,-42.64996 15.65,-15.49 99.654,-144.039 102.853,-369.008 0,0 3.33,-74.921 8.134,-132.844 4.805,-57.923 88.667,-57.649 137.761,-79.45 l 12.724,-33.284 -19.031,-92.161 -100.509,36.302 -51.659,162.026 -168.655,1.524 -6.81801,-411.377001 z"
-   style="fill:#142964;fill-opacity:1"
+   style="fill:#000000;fill-opacity:1"
    id="path1"
    inkscape:label="path1"
    inkscape:export-filename="bell.svg"

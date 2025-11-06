@@ -58,6 +58,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `The Carolina Razor Posts`,
+    title: `The LiberatorCH Posts`,
   }
 }

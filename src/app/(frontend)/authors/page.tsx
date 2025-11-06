@@ -72,7 +72,7 @@ export default async function AuthorsPage() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Authors | The Carolina Razor`,
+    title: `Authors | The LiberatorCH`,
     description: 'Meet all of our authors and contributors.',
   }
 }

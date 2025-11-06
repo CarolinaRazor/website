@@ -28,7 +28,7 @@ export const createAuthor: CollectionAfterOperationHook = async ({
           name: user.name ? user.name : "",
           author_id: String(user.id) ? String(user.id) : "1",
           meta: {
-            title: `${user.name} | The Carolina Razor`,
+            title: `${user.name} | The LiberatorCH`,
             description: `${user.jobTitle || 'Author'}`,
           },
         },

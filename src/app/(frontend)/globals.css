@@ -2,14 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  /* Only set font-family for headings, leave spacing to Tailwind */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Onest', serif;
-    font-weight: 700;
-    color: var(--foreground);
-  }
+/* =========================================
+   FONT VARIABLES
+   ========================================= */
+:root {
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), monospace;
+  --font-onest: var(--font-onest), system-ui, sans-serif;
+}
 
+/* =========================================
+   LIGHT THEME
+   ========================================= */
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -46,6 +51,9 @@
     --error: 10 100% 86%;
   }
 
+  /* =========================================
+     DARK THEME
+     ========================================= */
   [data-theme='dark'] {
     --background: 0 0% 0%;
     --foreground: 210 40% 98%;
@@ -71,7 +79,7 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0, 0%, 15%, 0.8;
+    --border: 0 0% 15%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
@@ -81,15 +89,24 @@
   }
 }
 
+/* =========================================
+   TEXT
+   ========================================= */
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
-    font-family: 'Onest', system-ui, sans-serif;
-    line-height: 1.65; /* readable newspaper-like spacing for paragraphs */
+    @apply bg-background text-foreground min-h-screen flex flex-col;
+    font-family: var(--font-onest), serif;
+    line-height: 1.65; /* readable, newspaper-like spacing */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-onest), serif;
+    font-weight: 700;
+    color: var(--foreground);
   }
 
   p {
@@ -98,33 +115,32 @@
   }
 
   blockquote {
-    border-left: 4px solid var(--muted-foreground);
+    border-left: 4px solid hsl(var(--muted-foreground));
     padding-left: 1rem;
     margin: 1.5rem 0;
     font-style: italic;
-    color: var(--muted-foreground);
+    color: hsl(var(--muted-foreground));
   }
 
   .container {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    @apply max-w-[800px] mx-auto px-4;
   }
 
   .meta {
     font-size: 0.875rem;
-    color: var(--muted-foreground);
+    color: hsl(var(--muted-foreground));
     margin-bottom: 1rem;
   }
 }
 
+/* =========================================
+   TRANSITION FIX
+   ========================================= */
 html {
   opacity: 0;
 }
 
 html[data-theme='dark'],
 html[data-theme='light'] {
-  opacity: initial;
+  opacity: 1;
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="158.34357mm"
+   height="18.389624mm"
+   viewBox="0 0 158.34357 18.389624"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4829634"
+     inkscape:cx="261.97545"
+     inkscape:cy="75.524453"
+     inkscape:window-width="1920"
+     inkscape:window-height="1049"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="158.34357"
+       height="18.389624"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-26.700927,-151.43699)">
+    <text
+       xml:space="preserve"
+       style="font-size:25.4px;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#0b007c;fill-opacity:1;stroke-width:0.264583"
+       x="105.9108"
+       y="169.67421"
+       id="text1"
+       inkscape:label="text1"><tspan
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.4px;font-family:Onest;-inkscape-font-specification:Onest;fill:#ffffff;fill-opacity:1;stroke-width:0.264583"
+         x="105.9108"
+         y="169.67421"
+         sodipodi:role="line">The Liberator</tspan></text>
+  </g>
+</svg>
