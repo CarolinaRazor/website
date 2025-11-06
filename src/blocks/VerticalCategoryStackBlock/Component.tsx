@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
-import { getPayload } from 'payload'
+import {getPayload} from 'payload'
 import config from '@payload-config'
-import { Post, Category } from '@/payload-types'
-import { MainCard } from '@/components/VerticalCategoryComponents/MainCard'
-import { HorizontalCard } from '@/components/VerticalCategoryComponents/HorizontalCard'
+import {Category, Post} from '@/payload-types'
+import {MainCard} from '@/components/VerticalCategoryComponents/MainCard'
+import {HorizontalCard} from '@/components/VerticalCategoryComponents/HorizontalCard'
 
 interface VerticalCategoryStackBlockProps {
   categories: (Category | string | number)[]
@@ -15,7 +15,7 @@ export const VerticalCategoryStackBlock = async ({
                                                    categories,
                                                    latestCount = 6, // default to 6 to match magazine block behavior
                                                  }: VerticalCategoryStackBlockProps) => {
-  const payload = await getPayload({ config })
+  const payload = await getPayload({config})
 
   const featuredGlobal = await payload.findGlobal({
     slug: 'featured-article',
@@ -29,15 +29,15 @@ export const VerticalCategoryStackBlock = async ({
         ? String(featuredGlobal.post.id)
         : null
 
-  const { docs: latestPosts } =
+  const {docs: latestPosts} =
     latestCount > 0
       ? await payload.find({
         collection: 'posts',
         sort: '-createdAt',
-        where: { _status: { equals: 'published' } },
+        where: {_status: {equals: 'published'}},
         limit: latestCount,
       })
-      : { docs: [] }
+      : {docs: []}
 
   const excludedIDs = new Set([
     ...latestPosts.map((p) => String(p.id)),
@@ -57,13 +57,13 @@ export const VerticalCategoryStackBlock = async ({
 
   const columns = await Promise.all(
     categoryDocs.map(async (categoryDoc) => {
-      const { docs: categoryPosts } = await payload.find({
+      const {docs: categoryPosts} = await payload.find({
         collection: 'posts',
         sort: '-createdAt',
         where: {
-          _status: { equals: 'published' },
-          categories: { in: [String(categoryDoc.id)] },
-          id: { not_in: Array.from(excludedIDs) },
+          _status: {equals: 'published'},
+          categories: {in: [String(categoryDoc.id)]},
+          id: {not_in: Array.from(excludedIDs)},
         },
         limit: 3,
       })
@@ -73,7 +73,7 @@ export const VerticalCategoryStackBlock = async ({
       const mainPost = categoryPosts[0]
       const subPosts = categoryPosts.slice(1)
 
-      return { categoryDoc, mainPost, subPosts }
+      return {categoryDoc, mainPost, subPosts}
     })
   )
 
@@ -86,29 +86,30 @@ export const VerticalCategoryStackBlock = async ({
   return (
     <section className="w-full py-8">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {validColumns.map(({ categoryDoc, mainPost, subPosts }) => (
+        {validColumns.map(({categoryDoc, mainPost, subPosts}) => (
           <div key={categoryDoc.id} className="flex flex-col">
             {/* Category header */}
             <Link href={`/posts/category/${categoryDoc.slug}`} className="inline-block mb-3">
-              <h2 className="uppercase font-extrabold tracking-widest text-lg border-l-4 pl-2 border-black dark:border-white">
+              <h2
+                className="uppercase font-extrabold tracking-widest text-lg border-l-4 pl-2 border-black dark:border-white">
                 {categoryDoc.title}
               </h2>
             </Link>
 
             {/* Top main article */}
-            <MainCard post={mainPost} />
+            <MainCard post={mainPost}/>
 
             {/* Sub articles */}
             <div className="mt-6 space-y-4">
               {subPosts.map((p) => (
-                <HorizontalCard key={p.id} post={p} />
+                <HorizontalCard key={p.id} post={p}/>
               ))}
             </div>
 
             {/* Read more button */}
             <div className="mt-6">
               <Link
-                href={`/categories/${categoryDoc.slug}`}
+                href={`/posts/category/${categoryDoc.slug}`}
                 className="text-primary font-semibold hover:underline"
               >
                 Read more →
