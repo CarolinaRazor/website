@@ -5,7 +5,7 @@ services:
       args:
         DATABASE_URI: ${DATABASE_URI}
         PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-        #        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
+        NEXT_PUBLIC_SERVER_URL: ${SERVICE_URL_PAYLOAD}
         CRON_SECRET: ${CRON_SECRET}
         PREVIEW_SECRET: ${PREVIEW_SECRET}
     volumes:
@@ -14,6 +14,8 @@ services:
       - avatars:/app/public/avatars
     env_file:
       - .env
+    environment:
+      NEXT_PUBLIC_SERVER_URL: ${SERVICE_URL_PAYLOAD}
 
 volumes:
   node_modules:

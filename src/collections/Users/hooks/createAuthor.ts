@@ -20,7 +20,7 @@ export const createAuthor: CollectionAfterOperationHook = async ({
 
       if (existingAuthors.totalDocs > 0) return
 
-      await payload.create({
+      const authorPage = await payload.create({
         collection: 'authors',
         data: {
           user: user.id,
@@ -33,6 +33,15 @@ export const createAuthor: CollectionAfterOperationHook = async ({
           },
         },
       })
+
+      await payload.update({
+        collection: 'users',
+        id: user.id,
+        data: {
+          page: authorPage.id,
+        },
+      })
+
     } catch (err) {
       payload.logger.error(`Failed to create author for user ${user.id}: ${err}`)
     }

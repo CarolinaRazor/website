@@ -54,7 +54,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
                   {populatedAuthors.map((author) => (
                     <Link
                       key={author.id}
-                      href={`/authors/${author.id}`}
+                      href={(author.authorPage === 1) ? `/authors/${author.id}` : ''}
                       className="flex items-center gap-2 text-white"
                     >
                       {author.avatar && typeof author.avatar !== 'number' && (

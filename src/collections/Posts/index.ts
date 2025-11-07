@@ -176,11 +176,11 @@ export const Posts: CollectionConfig<'posts'> = {
       name: 'populatedAuthors',
       type: 'array',
       access: {
-        update: () => false,
+        // update: () => false,
       },
       admin: {
-        disabled: true,
-        readOnly: true,
+        // disabled: true,
+        // readOnly: true,
       },
       fields: [
         {name: 'id', type: 'text'},
@@ -188,7 +188,7 @@ export const Posts: CollectionConfig<'posts'> = {
         {
           name: 'avatar',
           type: 'upload',
-          relationTo: 'media',
+          relationTo: 'avatars',
         },
         {
           name: 'jobTitle',
@@ -197,6 +197,11 @@ export const Posts: CollectionConfig<'posts'> = {
           admin: {
             description: 'Job Title',
           },
+        },
+        {
+          name: "authorPage",
+          type: "number",
+          required: false,
         },
       ],
     },

@@ -252,11 +252,12 @@ export interface Post {
     | {
         id?: string | null;
         name?: string | null;
-        avatar?: (number | null) | Media;
+        avatar?: (number | null) | Avatar;
         /**
          * Job Title
          */
         jobTitle?: string | null;
+        authorPage?: number | null;
       }[]
     | null;
   slug?: string | null;
@@ -728,7 +729,7 @@ export interface Category {
  */
 export interface User {
   id: number;
-  name?: string | null;
+  name: string;
   /**
    * Optional profile picture for authors
    */
@@ -737,6 +738,7 @@ export interface User {
    * Job Title
    */
   jobTitle?: string | null;
+  page?: number | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -887,13 +889,12 @@ export interface Author {
   id: number;
   name: string;
   author_id: string;
-  user: number | User;
   layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
         name?: string | null;
-        avatar?: (number | null) | Media;
+        avatar?: (number | null) | Avatar;
         /**
          * Job Title
          */
@@ -1366,6 +1367,7 @@ export interface PostsSelect<T extends boolean = true> {
         name?: T;
         avatar?: T;
         jobTitle?: T;
+        authorPage?: T;
       };
   slug?: T;
   slugLock?: T;
@@ -1400,7 +1402,6 @@ export interface CodeBlockSelect<T extends boolean = true> {
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
   author_id?: T;
-  user?: T;
   layout?:
     | T
     | {
@@ -1645,6 +1646,7 @@ export interface UsersSelect<T extends boolean = true> {
   name?: T;
   avatar?: T;
   jobTitle?: T;
+  page?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

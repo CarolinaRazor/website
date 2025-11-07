@@ -71,17 +71,7 @@ export const Authors: CollectionConfig<'authors'> = {
       type: 'text',
       required: true,
       admin: {
-        hidden: true
-      }
-    },
-    {
-      name: 'user',
-      type: 'relationship',
-      relationTo: 'users',
-      required: true,
-      unique: true,
-      admin: {
-        hidden: true
+        // hidden: true
       }
     },
     {
@@ -126,7 +116,7 @@ export const Authors: CollectionConfig<'authors'> = {
                 {
                   name: 'avatar',
                   type: 'upload',
-                  relationTo: 'media',
+                  relationTo: 'avatars',
                 },
                 {
                   name: 'jobTitle',
@@ -179,7 +169,7 @@ export const Authors: CollectionConfig<'authors'> = {
 
   hooks: {
     afterChange: [revalidateAuthor],
-    afterRead: [populateAuthors],
+    afterRead: [populateAuthors], //
     afterDelete: [revalidateDelete],
   },
 

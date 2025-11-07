@@ -21,6 +21,7 @@ export const Users: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
+      required: true,
     },
     {
       name: 'avatar',
@@ -38,6 +39,15 @@ export const Users: CollectionConfig = {
       admin: {
         description: 'Job Title',
       },
+    },
+    {
+      name: 'page',
+      type: 'number',
+      // relationTo: 'authors',
+      required: false,
+      admin: {
+        // hidden: true
+      }
     },
   ],
   timestamps: true,

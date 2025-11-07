@@ -21,11 +21,18 @@ export const populateAuthors: CollectionAfterReadHook = async ({doc, req, req: {
           authorDocs.push(authorDoc)
         }
 
+        const authorPage = await payload.findByID({
+          id: String(authorDoc.page),
+          collection: 'authors',
+          depth: 1,
+        })
+
         if (authorDocs.length > 0) {
           doc.populatedAuthors = authorDocs.map((authorDoc) => ({
             id: authorDoc.id,
             name: authorDoc.name,
             avatar: authorDoc.avatar || null,
+            authorPage: (authorPage._status === "published") ? 1 : 0 || 0,
           }))
         }
       } catch {
