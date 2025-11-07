@@ -1,4 +1,4 @@
-import { withPayload } from '@payloadcms/next/withPayload'
+import {withPayload} from '@payloadcms/next/withPayload'
 
 import redirects from './redirects.js'
 
@@ -11,7 +11,7 @@ const nextConfig = {
   output: 'standalone',
   images: {
     remotePatterns: [
-      ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
+      ...[NEXT_PUBLIC_SERVER_URL /* 'https://www.liberatorch.com' */].map((item) => {
         const url = new URL(item)
 
         return {
