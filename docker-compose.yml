@@ -9,7 +9,7 @@ services:
         target: /home/node/app
       - node_modules:/home/node/app/node_modules
       - media:/home/node/app/public/media
-      - pdfs:/home/node/app/public/pdfs
+      - avatars:/home/node/app/public/avatars
 
     working_dir: /home/node/app/
     command: sh -c "corepack enable && corepack prepare pnpm@latest --activate && pnpm dev"
@@ -46,4 +46,4 @@ volumes:
   pgdata:
   node_modules:
   media:
-  pdfs:
+  avatars:

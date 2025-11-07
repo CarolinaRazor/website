@@ -1,24 +1,25 @@
 // storage-adapter-import-placeholder
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import {postgresAdapter} from '@payloadcms/db-postgres'
 
 import sharp from 'sharp' // sharp-import
 import path from 'path'
-import { buildConfig, PayloadRequest } from 'payload'
-import { fileURLToPath } from 'url'
+import {buildConfig, PayloadRequest} from 'payload'
+import {fileURLToPath} from 'url'
 
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
-import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
-import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
+import {Categories} from './collections/Categories'
+import {Media} from './collections/Media'
+import {Avatars} from './collections/Avatars'
+import {Pages} from './collections/Pages'
+import {Posts} from './collections/Posts'
+import {Users} from './collections/Users'
+import {Footer} from './Footer/config'
+import {Header} from './Header/config'
+import {plugins} from './plugins'
+import {defaultLexical} from '@/fields/defaultLexical'
+import {getServerSideURL} from './utilities/getURL'
 import {Authors} from "@/collections/Authors";
 
-import { FeaturedArticle } from "@/globals/FeaturedArticle/config"
+import {FeaturedArticle} from "@/globals/FeaturedArticle/config"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -67,7 +68,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Authors, Media, Categories, Users],
+  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, FeaturedArticle],
   plugins: [
@@ -81,7 +82,7 @@ export default buildConfig({
   },
   jobs: {
     access: {
-      run: ({ req }: { req: PayloadRequest }): boolean => {
+      run: ({req}: { req: PayloadRequest }): boolean => {
         // Allow logged in users to execute this endpoint (default)
         if (req.user) return true
 

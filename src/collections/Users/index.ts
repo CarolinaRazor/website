@@ -25,7 +25,7 @@ export const Users: CollectionConfig = {
     {
       name: 'avatar',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'avatars',
       required: false,
       admin: {
         description: 'Optional profile picture for authors',
