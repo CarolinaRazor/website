@@ -735,9 +735,10 @@ export interface User {
    */
   avatar?: (number | null) | Avatar;
   /**
-   * Job Title
+   * Friendly title for position.
    */
   jobTitle?: string | null;
+  role: 'admin' | 'editor' | 'author' | 'guest';
   page?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -1646,6 +1647,7 @@ export interface UsersSelect<T extends boolean = true> {
   name?: T;
   avatar?: T;
   jobTitle?: T;
+  role?: T;
   page?: T;
   updatedAt?: T;
   createdAt?: T;

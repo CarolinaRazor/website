@@ -37,8 +37,20 @@ export const Users: CollectionConfig = {
       type: 'text',
       required: false,
       admin: {
-        description: 'Job Title',
+        description: 'Friendly title for position.',
       },
+    },
+    {
+      name: 'role',
+      type: 'select',
+      options: [
+        {label: 'Admin', value: 'admin'},
+        {label: 'Editor', value: 'editor'},
+        {label: 'Author', value: 'author'},
+        {label: 'Guest', value: 'guest'},
+      ],
+      required: true,
+      defaultValue: 'guest',
     },
     {
       name: 'page',

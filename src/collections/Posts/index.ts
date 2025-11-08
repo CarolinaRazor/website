@@ -176,11 +176,11 @@ export const Posts: CollectionConfig<'posts'> = {
       name: 'populatedAuthors',
       type: 'array',
       access: {
-        // update: () => false,
+        update: () => false,
       },
       admin: {
-        // disabled: true,
-        // readOnly: true,
+        disabled: true,
+        readOnly: true,
       },
       fields: [
         {name: 'id', type: 'text'},
