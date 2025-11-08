@@ -23,7 +23,7 @@ export const createAuthor: CollectionAfterOperationHook = async ({
       const authorPage = await payload.create({
         collection: 'authors',
         data: {
-          user: user.id,
+          // user: user.id,
           slug: String(user.id) ? String(user.id) : "1",
           name: user.name ? user.name : "",
           author_id: String(user.id) ? String(user.id) : "1",
