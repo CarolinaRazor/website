@@ -71,7 +71,7 @@ export const Authors: CollectionConfig<'authors'> = {
       type: 'text',
       required: true,
       admin: {
-        // hidden: true
+        hidden: true
       }
     },
     {

@@ -14,7 +14,7 @@ export const createAuthor: CollectionAfterOperationHook = async ({
     try {
       const existingAuthors = await payload.find({
         collection: 'authors',
-        where: {user: {equals: user.id}},
+        where: {author_id: {equals: user.id}},
         limit: 1,
       })
 
