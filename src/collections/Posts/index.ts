@@ -13,6 +13,7 @@ import {MediaBlock} from '@/blocks/MediaBlock/config'
 import {CallToAction} from '@/blocks/CallToAction/config'
 import {Content} from '@/blocks/Content/config'
 import {FormBlock} from '@/blocks/Form/config'
+import {RichTextBlock} from '@/blocks/RichTextBlock/config'
 import {MagazineBlock} from '@/blocks/MagazineBlock/config'
 import {VerticalCategoryStackBlock} from '@/blocks/VerticalCategoryStackBlock/config'
 
@@ -90,6 +91,7 @@ export const Posts: CollectionConfig<'posts'> = {
                 CallToAction,
                 Content,
                 FormBlock,
+                RichTextBlock,
               ],
             },
           ],

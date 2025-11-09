@@ -55,34 +55,31 @@ export default async function Post({params: paramsPromise}: Args) {
     <article className="pt-16 pb-16">
       <PageClient/>
 
-      {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url}/>
-
       {draft && <LivePreviewListener/>}
 
       <PostHero post={post as Post}/>
 
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-full max-w-4xl px-6 mx-auto">
-          {typeof post.heroImage === 'object' && post.heroImage?.caption && (
-            <RichText
-              className="max-w-[49.5rem] mx-auto"
-              data={post.heroImage.caption as DefaultTypedEditorState}
-              enableGutter={false}
-            />
-          )}
+      <div className="w-full px-4 sm:px-6 lg:px-0 max-w-[48rem] mx-auto flex flex-col gap-6">
+        {typeof post.heroImage === 'object' && post.heroImage?.caption && (
+          <RichText
+            className="w-full"
+            data={post.heroImage.caption as DefaultTypedEditorState}
+            enableGutter={false}
+          />
+        )}
 
-          <RenderBlocks blocks={layout}/>
+        <RenderBlocks blocks={layout}/>
 
-          {relatedPosts && relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="mt-12 w-full"
-              docs={relatedPosts.filter((p) => typeof p === 'object')}
-            />
-          )}
-        </div>
+        {relatedPosts && relatedPosts.length > 0 && (
+          <RelatedPosts
+            className="mt-12 w-full"
+            docs={relatedPosts.filter((p) => typeof p === 'object')}
+          />
+        )}
       </div>
     </article>
+
   )
 }
 

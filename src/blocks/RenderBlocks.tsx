@@ -10,6 +10,7 @@ import {MediaBlock} from '@/blocks/MediaBlock/Component'
 import {MagazineBlock} from '@/blocks/MagazineBlock/Component'
 import {VerticalCategoryStackBlock} from '@/blocks/VerticalCategoryStackBlock/Component'
 import {CodeBlock} from '@/blocks/Code/Component'
+import {RichTextBlock} from '@/blocks/RichTextBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,6 +21,7 @@ const blockComponents = {
   magazine: MagazineBlock,
   verticalcategorystackblock: VerticalCategoryStackBlock,
   code: CodeBlock,
+  richText: RichTextBlock,
 }
 
 type BlockType = Page['layout'][0] | Post['layout'][0]
