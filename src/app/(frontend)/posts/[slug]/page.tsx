@@ -12,6 +12,8 @@ import {RenderBlocks} from '@/blocks/RenderBlocks'
 import {generateMeta} from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import {LivePreviewListener} from '@/components/LivePreviewListener'
+import RichText from "@/components/RichText";
+import {DefaultTypedEditorState} from "@payloadcms/richtext-lexical";
 
 export async function generateStaticParams() {
   const payload = await getPayload({config: configPromise})
@@ -62,6 +64,14 @@ export default async function Post({params: paramsPromise}: Args) {
 
       <div className="flex flex-col items-center gap-4">
         <div className="w-full max-w-4xl px-6 mx-auto">
+          {typeof post.heroImage === 'object' && post.heroImage?.caption && (
+            <RichText
+              className="max-w-[49.5rem] mx-auto"
+              data={post.heroImage.caption as DefaultTypedEditorState}
+              enableGutter={false}
+            />
+          )}
+
           <RenderBlocks blocks={layout}/>
 
           {relatedPosts && relatedPosts.length > 0 && (
@@ -92,6 +102,7 @@ const queryPostBySlug = cache(async ({slug}: { slug: string }) => {
     limit: 1,
     overrideAccess: draft,
     pagination: false,
+    // depth: 2,
     where: {
       slug: {
         equals: slug,
