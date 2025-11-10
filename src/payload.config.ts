@@ -28,8 +28,8 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   email: nodemailerAdapter({
-    defaultFromAddress: 'info@payloadcms.com',
-    defaultFromName: 'Payload',
+    defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? "",
+    defaultFromName: process.env.SMTP_FROM_NAME ?? "",
     // Any Nodemailer transport
     transport: await nodemailer.createTransport({
       host: process.env.SMTP_HOST,
