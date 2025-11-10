@@ -27,17 +27,18 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  email: nodemailerAdapter({
-    defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? "",
-    defaultFromName: process.env.SMTP_FROM_NAME ?? "",
-    // Any Nodemailer transport
-    transport: await nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: 587,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+  ...(process.env.NODE_ENV === 'production' && {
+    email: nodemailerAdapter({
+      defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? 'info@payloadcms.com',
+      defaultFromName: process.env.SMTP_FROM_NAME ?? 'Payload',
+      transport: await nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: 587,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      }),
     }),
   }),
   admin: {
