@@ -6,6 +6,8 @@ import type {Post} from '@/payload-types'
 import {Media} from '@/components/Media'
 import {formatAuthors} from '@/utilities/formatAuthors'
 import Link from 'next/link'
+import RichText from "@/components/RichText";
+import {DefaultTypedEditorState} from "@payloadcms/richtext-lexical";
 
 export const PostHero: React.FC<{ post: Post }> = ({post}) => {
   const {categories, heroImage, populatedAuthors, publishedAt, title} = post
@@ -17,7 +19,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
     <div className="relative -mt-[10.4rem] flex items-end">
       <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
-          <div className="uppercase text-sm mb-6">
+          <div className="uppercase text-sm mb-6 font-bold">
             {categories?.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
                 const {title: categoryTitle} = category
@@ -71,8 +73,15 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
 
               </div>
             )}
-
           </div>
+          {typeof heroImage === 'object' && heroImage?.caption && (
+            <RichText
+              // className=""
+              className="[&_a]:text-white/90 [&_a]:underline [&_a]:hover:text-white [&_p]:text-white w-full mt-7" // links are invisible without this
+              data={heroImage.caption as DefaultTypedEditorState}
+              enableGutter={false}
+            />
+          )}
         </div>
       </div>
 
