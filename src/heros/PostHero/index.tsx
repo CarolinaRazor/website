@@ -37,13 +37,13 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
           </div>
 
           <div className="">
-            <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl">{title}</h1>
+            <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl text-white">{title}</h1>
           </div>
 
           <div className="flex flex-col gap-4">
             {publishedAt && (
               <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
+                <p className="text-sm text-white">Date Published</p>
                 <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
               </div>
             )}
@@ -90,7 +90,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
           <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage}/>
         )}
         <div
-          className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent"/>
+          className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-black to-transparent"/>
       </div>
     </div>
   )
