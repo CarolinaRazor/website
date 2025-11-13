@@ -11,6 +11,8 @@
 @custom-variant 2xl (@media (width >= theme(--breakpoint-2xl)));
 
 @plugin "@tailwindcss/typography";
+/*@plugin '../../lib/hero.ts';*/
+@source '../../node_modules/@heroui/theme/dist/components/navbar.js';
 
 @theme {
   --breakpoint-sm: 40rem;
@@ -18,9 +20,12 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
-  --font-sans: var(--font-sans), system-ui, sans-serif;
-  --font-mono: var(--font-mono), monospace;
-  --font-onest: var(--font-onest), system-ui, sans-serif;
+  /*--font-sans: var(--font-sans), system-ui, sans-serif;*/
+  /*--font-mono: var(--font-mono), monospace;*/
+  /*--font-onest: var(--font-onest), system-ui, sans-serif;*/
+  --font-inter: var(--font-inter);
+  --font-playfair: var(--font-playfair);
+  /*--font-dmsans: var(--font-dmsans);*/
 }
 
 /* =========================================
@@ -143,7 +148,7 @@
 
   body {
     @apply bg-background text-foreground min-h-screen flex flex-col;
-    font-family: var(--font-sans), serif;
+    font-family: var(--font-inter), serif;
     line-height: 1.65;
   }
 
@@ -153,8 +158,8 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-sans), serif;
-    font-weight: 700;
+    font-family: var(--font-inter), sans-serif;
+    /*font-weight: 500;*/
     color: var(--foreground);
   }
 

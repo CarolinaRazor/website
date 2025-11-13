@@ -5,8 +5,10 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    "./node_modules/@heroui/theme/dist/components/navbar.js",
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
+  // plugins: [heroui()],
   prefix: '',
   safelist: [
     'lg:col-span-4',

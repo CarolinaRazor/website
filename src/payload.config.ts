@@ -87,7 +87,7 @@ export default buildConfig({
   collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users],
   cors: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   csrf: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
-  globals: [Header, Footer, FeaturedArticle],
+  globals: [Footer, FeaturedArticle],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

@@ -9,6 +9,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  allowedDevOrigins: ['58e73b951675.ngrok-free.app'],
   images: {
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://www.liberatorch.com' */].map((item) => {
@@ -19,6 +20,8 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      { protocol: 'http', hostname: 'localhost', port: '3000' },
+      { protocol: 'https', hostname: '*.ngrok-free.app' },
     ],
   },
   webpack: (webpackConfig) => {

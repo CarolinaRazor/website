@@ -59,7 +59,7 @@ export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium
         )}
 
 
-        <p className="uppercase text-[0.8rem] font-semibold text-teal-700 dark:text-teal-300 mb-1">
+        <p className="uppercase text-[0.8rem] font-semibold text-teal-700 dark:text-teal-300 mb-1 font-dmsans">
           {category}
         </p>
 

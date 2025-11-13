@@ -1,12 +1,12 @@
-import type { Metadata } from 'next'
-import { CollectionArchive } from '@/components/CollectionArchive'
-import { PageRange } from '@/components/PageRange'
-import { Pagination } from '@/components/Pagination'
+import type {Metadata} from 'next'
+import {CollectionArchive} from '@/components/CollectionArchive'
+import {PageRange} from '@/components/PageRange'
+import {Pagination} from '@/components/Pagination'
 import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import {getPayload} from 'payload'
 import React from 'react'
 import PageClient from './page.client'
-import { notFound } from 'next/navigation'
+import {notFound} from 'next/navigation'
 
 export const revalidate = 600
 
@@ -49,8 +49,8 @@ export default async function CategoryPage({ params: paramsPromise }: Args) {
   if (!postsResult.docs.length && sanitizedPageNumber > 1) notFound()
 
   return (
-    <div className="pt-24 pb-24">
-      <PageClient />
+    <div className="lg:pt-24 md:pt-2 sm:pt-0 pb-16 md:pb-24">
+    <PageClient />
 
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
