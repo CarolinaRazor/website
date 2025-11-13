@@ -54,6 +54,7 @@ export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium
               resource={metaImage}
               size="100%"
               className="object-cover transition-transform duration-300 " // group-hover:scale-110
+              priority={true}
             />
           </div>
         )}
