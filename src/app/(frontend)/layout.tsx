@@ -3,7 +3,7 @@ import type {Metadata} from 'next'
 import {cn} from '@/utilities/ui'
 // import {GeistMono} from 'geist/font/mono'
 // import {GeistSans} from 'geist/font/sans'
-import {DM_Sans, Inter, Playfair_Display} from 'next/font/google'
+import {Inter, Playfair_Display} from 'next/font/google'
 import {AdminBar} from '@/components/AdminBar'
 import {Footer} from '@/Footer/Component'
 import {Header} from '@/Header/Component'
@@ -15,22 +15,9 @@ import {getServerSideURL} from '@/utilities/getURL'
 
 import './globals.css'
 
-
-// const onest = Onest({
-//   subsets: ['latin'],
-//   variable: "--font-onest",
-// })
-
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
-})
-
-
-const dmsans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-dmsans"
 })
 
 const inter = Inter({
@@ -43,7 +30,7 @@ export default async function RootLayout({children}: { children: React.ReactNode
 
   return (
     // GeistSans.variable, GeistMono.variable, onest.variable,
-    <html className={cn(playfair.variable, inter.variable, dmsans.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(playfair.variable, inter.variable)} lang="en" suppressHydrationWarning>
     <head>
       <InitTheme/>
       <link href="/favicon.ico" rel="icon" sizes="32x32"/>
