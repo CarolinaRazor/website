@@ -15,7 +15,7 @@ const HeroHeader = () => {
     ["Campus", "/posts/category/campus"],
     ["Local", "/posts/category/local"],
     ["National", "/posts/category/national"],
-    ["Opinion", "/posts/category/opinion"],
+    // ["Opinion", "/posts/category/opinion"],
     ["About Us", "/about"],
     ["Contact", "/contact"],
     ["Search", "/search"],

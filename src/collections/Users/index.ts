@@ -58,7 +58,7 @@ export const Users: CollectionConfig = {
       // relationTo: 'authors',
       required: false,
       admin: {
-        // hidden: true
+        hidden: true
       }
     },
   ],
