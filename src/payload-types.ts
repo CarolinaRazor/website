@@ -109,10 +109,12 @@ export interface Config {
   globals: {
     footer: Footer;
     'featured-article': FeaturedArticle;
+    'breaking-header': BreakingHeader;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     'featured-article': FeaturedArticleSelect<false> | FeaturedArticleSelect<true>;
+    'breaking-header': BreakingHeaderSelect<false> | BreakingHeaderSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2020,6 +2022,31 @@ export interface FeaturedArticle {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "breaking-header".
+ */
+export interface BreakingHeader {
+  id: number;
+  visible?: boolean | null;
+  text?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -2047,6 +2074,17 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface FeaturedArticleSelect<T extends boolean = true> {
   post?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "breaking-header_select".
+ */
+export interface BreakingHeaderSelect<T extends boolean = true> {
+  visible?: T;
+  text?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

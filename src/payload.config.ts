@@ -22,6 +22,7 @@ import {FeaturedArticle} from "@/globals/FeaturedArticle/config"
 
 import {nodemailerAdapter} from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
+import {BreakingHeader} from "@/globals/BreakingHeader/config";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -87,7 +88,7 @@ export default buildConfig({
   collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users],
   cors: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   csrf: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
-  globals: [Footer, FeaturedArticle],
+  globals: [Footer, FeaturedArticle, BreakingHeader],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

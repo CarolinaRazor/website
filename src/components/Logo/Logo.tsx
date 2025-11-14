@@ -16,7 +16,7 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt="Payload Logo"
+      alt="LiberatorCH Logo"
       width={230}
       height={50}
       loading={loading}
@@ -24,6 +24,27 @@ export const Logo = (props: Props) => {
       decoding="async"
       className={clsx('', className)} // max-w-[9.375rem] w-full h-[34px]
       src="/logo.svg"
+    />
+  )
+}
+
+export const LogoTagline = (props: Props) => {
+  const {loading: loadingFromProps, priority: priorityFromProps, className} = props
+
+  const loading = loadingFromProps || 'lazy'
+  const priority = priorityFromProps || 'low'
+
+  return (
+    /* eslint-disable @next/next/no-img-element */
+    <img
+      alt="LiberatorCH Logo"
+      width={230}
+      height={50}
+      loading={loading}
+      fetchPriority={priority}
+      decoding="async"
+      className={clsx('', className)} // max-w-[9.375rem] w-full h-[34px]
+      src="/logo_tagline.svg"
     />
   )
 }

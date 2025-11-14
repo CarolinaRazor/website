@@ -14,6 +14,8 @@ import {draftMode} from 'next/headers'
 import {getServerSideURL} from '@/utilities/getURL'
 
 import './globals.css'
+import BreakingHeaderServer from "@/components/BreakingNewsHeaderServer";
+
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -44,8 +46,9 @@ export default async function RootLayout({children}: { children: React.ReactNode
           preview: isEnabled,
         }}
       />
-
       <Header/>
+      <BreakingHeaderServer/>
+      <div className={"pb-3"}></div>
       {children}
       <Footer/>
     </Providers>

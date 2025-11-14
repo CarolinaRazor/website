@@ -1,7 +1,7 @@
 "use client";
 
 import {Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuToggle,} from "@heroui/navbar";
-import {Logo} from "@/components/Logo/Logo";
+import {Logo, LogoTagline} from "@/components/Logo/Logo";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import React from "react";
@@ -22,7 +22,7 @@ const HeroHeader = () => {
   ];
 
   return (
-    <header className="w-full bg-background pb-3">
+    <header className="w-full bg-background">
       <Navbar
         className="sm:hidden"
         isBordered
@@ -38,7 +38,7 @@ const HeroHeader = () => {
 
         <NavbarContent justify="center">
           <Link href="/">
-            <Logo className="h-8 invert dark:invert-0" />
+            <LogoTagline className="h-12 invert dark:invert-0" />
           </Link>
         </NavbarContent>
 
@@ -63,7 +63,7 @@ const HeroHeader = () => {
 
         <div className="flex justify-center">
           <Link href="/">
-            <Logo loading="eager" priority="high" className="invert dark:invert-0 w-60 sm:w-80 lg:w-110" />
+            <LogoTagline loading="eager" priority="high" className="invert dark:invert-0 w-60 sm:w-80 lg:w-110" />
           </Link>
         </div>
 
