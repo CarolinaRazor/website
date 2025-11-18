@@ -1,10 +1,9 @@
-import type { Post } from '@/payload-types'
-import type { MagazineBlock as MagazineBlockProps } from '@/payload-types'
+import type {MagazineBlock as MagazineBlockProps, Post} from '@/payload-types'
 
 import React from 'react'
-import { getPayload } from 'payload'
+import {getPayload} from 'payload'
 import config from '@payload-config'
-import { MagazineCard } from '@/components/MagazineCard'
+import {MagazineCard} from '@/components/MagazineCard'
 
 export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = async ({ id }) => {
   const payload = await getPayload({ config })
@@ -56,26 +55,24 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
       max-w-7xl mx-auto px-4
       grid gap-6
       sm:grid-cols-2
-      lg:grid-cols-3
-      xl:grid-cols-5 xl:gap-8
+      lg:grid-cols-5 lg:gap-8
       items-start
     "
       >
         {/* Left column */}
-        <div className="space-y-6 xl:col-span-1 mt-10 order-2 xl:order-1">
+        <div className="space-y-6 lg:col-span-1 mt-10 order-2 lg:order-1">
           {columns[0].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
-        {/* Featured article — first on mobile, second column on xl */}
+        {/* Featured article — first on mobile, centered column on lg */}
         {featuredArticle && (
           <div
             className="
-          order-1 xl:order-2
+          order-1 lg:order-2
           sm:col-span-2
-          lg:col-span-3
-          xl:col-span-2
+          lg:col-span-2
         "
           >
             <h2 className="uppercase font-extrabold tracking-widest text-lg border-l-4 pl-2 mb-3 border-black dark:border-white">
@@ -86,14 +83,14 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
         )}
 
         {/* Middle column */}
-        <div className="space-y-6 xl:col-span-1 mt-10 order-3 xl:order-3">
+        <div className="space-y-6 lg:col-span-1 mt-10 order-3 lg:order-3">
           {columns[1].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Right column */}
-        <div className="space-y-6 xl:col-span-1 mt-10 order-4 xl:order-4">
+        <div className="space-y-6 lg:col-span-1 mt-10 order-4 lg:order-4">
           {columns[2].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
