@@ -43,8 +43,8 @@ export default async function RootLayout({children}: { children: React.ReactNode
     <head>
       <InitTheme/>
       <link href="/favicon.ico" rel="icon" sizes="32x32"/>
-      <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: light)" type="image/svg+xml"/>
-      <link href="/favicon-dark.svg" rel="icon" media="(prefers-color-scheme: dark)" type="image/svg+xml"/>
+      <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: dark)" type="image/svg+xml"/>
+      <link href="/favicon-dark.svg" rel="icon" media="(prefers-color-scheme: light)" type="image/svg+xml"/>
     </head>
     <body>
     <Providers>
