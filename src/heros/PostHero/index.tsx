@@ -16,8 +16,12 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
     <div className="flex flex-col gap-6">
       {heroImage && typeof heroImage !== 'string' && (
         <div className="w-full max-w-[48rem] mx-auto px-4 sm:px-6 lg:px-0">
-          <div className="relative aspect-[5/3]">
-            <Media fill priority imgClassName="object-cover w-full h-full" resource={heroImage}/>
+          <div className="relative">
+            <Media
+              priority
+              imgClassName="w-full h-auto object-cover"
+              resource={heroImage}
+            />
           </div>
 
           {typeof heroImage === 'object' && heroImage.caption && (

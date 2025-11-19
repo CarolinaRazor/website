@@ -24,6 +24,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import {FixedToolbarFeature, InlineToolbarFeature, lexicalEditor} from "@payloadcms/richtext-lexical";
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -78,6 +79,15 @@ export const Posts: CollectionConfig<'posts'> = {
               relationTo: 'media',
             },
             {
+              name: 'subtitle',
+              type: 'richText',
+              editor: lexicalEditor({
+                features: ({rootFeatures}) => {
+                  return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
+                },
+              }),
+            },
+            {
               name: 'layout',
               type: 'blocks',
               required: true,
@@ -99,6 +109,11 @@ export const Posts: CollectionConfig<'posts'> = {
         {
           label: 'Meta',
           fields: [
+            {
+              name: 'featuredtext',
+              type: 'text',
+              label : 'Featured Preview Text'
+            },
             {
               name: 'relatedPosts',
               type: 'relationship',

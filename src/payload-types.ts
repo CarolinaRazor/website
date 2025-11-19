@@ -237,7 +237,23 @@ export interface Post {
   id: number;
   title: string;
   heroImage?: (number | null) | Media;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   layout: (BannerBlock | CodeBlock | MediaBlock | CallToActionBlock | ContentBlock | FormBlock | RichTextBlock)[];
+  featuredtext?: string | null;
   relatedPosts?: (number | Post)[] | null;
   categories?: (number | Category)[] | null;
   meta?: {
@@ -1379,6 +1395,7 @@ export interface MagazineBlockSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
+  subtitle?: T;
   layout?:
     | T
     | {
@@ -1390,6 +1407,7 @@ export interface PostsSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         richText?: T | RichTextBlockSelect<T>;
       };
+  featuredtext?: T;
   relatedPosts?: T;
   categories?: T;
   meta?:
