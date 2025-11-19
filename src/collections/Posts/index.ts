@@ -111,7 +111,7 @@ export const Posts: CollectionConfig<'posts'> = {
           fields: [
             {
               name: 'featuredtext',
-              type: 'text',
+              type: 'textarea',
               label : 'Featured Preview Text'
             },
             {
