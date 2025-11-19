@@ -3,6 +3,7 @@ import canUseDOM from './canUseDOM'
 export const getServerSideURL = () => {
   return (
     process.env.NEXT_PUBLIC_SERVER_URL ||
+    process.env.SERVICE_URL_PAYLOAD ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : 'http://localhost:3000')
