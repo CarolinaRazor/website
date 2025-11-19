@@ -9,6 +9,9 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
                                                                   previousDoc,
                                                                   req: {payload, context},
                                                                 }) => {
+  revalidatePath('/')
+  revalidateTag('pages-sitemap')
+
   if (!context.disableRevalidate) {
     if (doc._status === 'published') {
       const path = `/posts/${doc.slug}`
