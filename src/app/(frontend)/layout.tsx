@@ -3,7 +3,7 @@ import type {Metadata} from 'next'
 import {cn} from '@/utilities/ui'
 // import {GeistMono} from 'geist/font/mono'
 // import {GeistSans} from 'geist/font/sans'
-import {Inter, Playfair_Display} from 'next/font/google'
+import {Inter, Playfair_Display, Source_Serif_4} from 'next/font/google'
 import {AdminBar} from '@/components/AdminBar'
 import {Footer} from '@/Footer/Component'
 import {Header} from '@/Header/Component'
@@ -27,12 +27,19 @@ const inter = Inter({
   variable: "--font-inter",
 })
 
+const notoSerif = Source_Serif_4({
+  subsets: ["latin"],
+  // weight: ["390"],
+  variable: "--font-bodyserif",
+  // style: "normal"
+})
+
 export default async function RootLayout({children}: { children: React.ReactNode }) {
   const {isEnabled} = await draftMode()
 
   return (
     // GeistSans.variable, GeistMono.variable, onest.variable,
-    <html className={cn(playfair.variable, inter.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(playfair.variable, inter.variable, notoSerif.variable)} lang="en" suppressHydrationWarning>
     <head>
       <InitTheme/>
       <link href="/favicon.ico" rel="icon" sizes="32x32"/>

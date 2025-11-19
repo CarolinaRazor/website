@@ -25,6 +25,7 @@
   /*--font-onest: var(--font-onest), system-ui, sans-serif;*/
   --font-inter: var(--font-inter);
   --font-playfair: var(--font-playfair);
+  --font-bodyserif: var(--font-bodyserif);
 }
 
 /* =========================================
@@ -147,7 +148,7 @@
 
   body {
     @apply bg-background text-foreground min-h-screen flex flex-col;
-    font-family: var(--font-inter), serif;
+    font-family: var(--font-bodyserif), serif;
     line-height: 1.65;
   }
 
@@ -165,6 +166,7 @@
   p {
     margin-bottom: 1rem;
     color: var(--foreground);
+    font-family: var(--font-bodyserif), serif;
   }
 
   blockquote {
