@@ -57,6 +57,12 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
 
         <h1 className="text-2xl md:text-3xl lg:text-5xl -mt-1">{title}</h1>
 
+        {/*subtitle*/}
+        <RichText
+          className="[&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 m-2 mx-px"
+          data={post.subtitle as DefaultTypedEditorState}
+          enableGutter={false}
+        />
         <div className="flex flex-col gap-3 text-gray-600 text-sm">
           {publishedAt && (
             <div>

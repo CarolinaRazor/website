@@ -30,7 +30,7 @@ export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium
   //     : post.meta?.description
 
   const excerpt =
-    size === 'medium' && post.meta?.description
+    size === 'medium' && post.featuredtext
 
   const category =
     (post.categories?.[0] as any)?.title ?? 'Uncategorized'
