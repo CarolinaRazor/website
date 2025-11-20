@@ -44,7 +44,7 @@ export default async function RootLayout({children}: { children: React.ReactNode
         rel="stylesheet"
         href="https://use.typekit.net/yna8bmx.css"
       />
-      {process.env.NODE_ENV === 'production' && (
+      {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== 'true' && (
         <script defer src="https://analytics.liberatorch.com/script.js" data-website-id="23711cc5-b98b-48ee-a037-09f37d07f433"></script>
       )}
       <InitTheme/>
