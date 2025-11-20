@@ -44,6 +44,7 @@ export default async function RootLayout({children}: { children: React.ReactNode
         rel="stylesheet"
         href="https://use.typekit.net/yna8bmx.css"
       />
+      <script defer src="https://analytics.liberatorch.com/script.js" data-website-id="23711cc5-b98b-48ee-a037-09f37d07f433"></script>
       <InitTheme/>
       <link href="/favicon.ico" rel="icon" sizes="32x32"/>
       <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: dark)" type="image/svg+xml"/>
