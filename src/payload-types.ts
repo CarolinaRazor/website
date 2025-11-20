@@ -213,6 +213,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'verticalcategorystackblock';
       }
+    | RichTextBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1280,6 +1281,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        richText?: T | RichTextBlockSelect<T>;
       };
   meta?:
     | T
@@ -1390,6 +1392,15 @@ export interface MagazineBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  richText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1451,15 +1462,6 @@ export interface BannerBlockSelect<T extends boolean = true> {
 export interface CodeBlockSelect<T extends boolean = true> {
   language?: T;
   code?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "RichTextBlock_select".
- */
-export interface RichTextBlockSelect<T extends boolean = true> {
-  richText?: T;
   id?: T;
   blockName?: T;
 }

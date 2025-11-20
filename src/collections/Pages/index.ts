@@ -22,6 +22,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import {RichTextBlock} from "@/blocks/RichTextBlock/config";
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -77,7 +78,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, MagazineBlock, VerticalCategoryStackBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, MagazineBlock, VerticalCategoryStackBlock, RichTextBlock],
               required: true,
               admin: {
                 initCollapsed: true,
