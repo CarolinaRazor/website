@@ -55,7 +55,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
           </div>
         )}
 
-        <h1 className="text-2xl md:text-3xl lg:text-5xl -mt-1">{title}</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-5xl -mt-1">{title}</h1>
 
         {/*subtitle*/}
         <RichText

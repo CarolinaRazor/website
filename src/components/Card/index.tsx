@@ -74,9 +74,9 @@ export const Card: React.FC<{
           </h3>
         )}
 
-        {description && (
-          <p className="text-sm text-muted-foreground">{sanitizedDescription}</p>
-        )}
+        {/*{description && (*/}
+        {/*  <p className="text-sm text-muted-foreground">{sanitizedDescription}</p>*/}
+        {/*)}*/}
       </div>
     </Link>
   )

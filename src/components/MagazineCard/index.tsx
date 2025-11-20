@@ -65,7 +65,7 @@ export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium
         </p>
 
         <h2
-          className={`${titleSize} font-bold leading-snug group-hover:text-primary transition-colors`}
+          className={`${titleSize} leading-snug group-hover:text-primary transition-colors`}
         >
           {post.title}
         </h2>
