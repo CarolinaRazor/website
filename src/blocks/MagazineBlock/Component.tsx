@@ -60,7 +60,7 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
     "
       >
         {/* Left column */}
-        <div className="space-y-6 lg:col-span-1 mt-10 order-2 lg:order-1">
+        <div className="space-y-6 lg:col-span-1 mt-0 md:mt-10 lg:md-10 order-2 lg:order-1">
           {columns[0].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
@@ -83,14 +83,14 @@ export const MagazineBlock: React.FC<MagazineBlockProps & { id?: string }> = asy
         )}
 
         {/* Middle column */}
-        <div className="space-y-6 lg:col-span-1 mt-10 order-3 lg:order-3">
+        <div className="space-y-6 lg:col-span-1 mt-0 md:mt-10 lg:md-10 order-3 lg:order-3">
           {columns[1].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
         </div>
 
         {/* Right column */}
-        <div className="space-y-6 lg:col-span-1 mt-10 order-4 lg:order-4">
+        <div className="space-y-6 lg:col-span-1 mt-0 md:mt-10 lg:md-10 order-4 lg:order-4">
           {columns[2].map((p) => (
             <MagazineCard key={p.id} post={p as Post} size="small" />
           ))}
