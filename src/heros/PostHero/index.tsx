@@ -26,7 +26,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
 
           {typeof heroImage === 'object' && heroImage.caption && (
             <RichText
-              className="[&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 mt-2"
+              className="[&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 dark:[&_a]:text-white dark:[&_a]:hover:text-blue-500 dark:[&_p]:text-white mt-2"
               data={heroImage.caption as DefaultTypedEditorState}
               enableGutter={false}
             />
@@ -38,7 +38,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
       <div className="w-full max-w-[48rem] mx-auto px-4 sm:px-6 lg:px-0 flex flex-col gap-2">
         {/* Categories */}
         {categories && categories.length > 0 && (
-          <div className="uppercase text-base font-semibold text-gray-500 ">
+          <div className="uppercase text-base font-semibold text-gray-500 dark:text-teal-300">
             {categories.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
                 const titleToUse = category.title || 'Untitled category'
@@ -59,11 +59,11 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
 
         {/*subtitle*/}
         <RichText
-          className="[&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 m-2 mx-px"
+          className="[&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 dark:[&_a]:text-white dark:[&_a]:hover:text-blue-500 dark:[&_p]:text-white m-2 mx-px"
           data={post.subtitle as DefaultTypedEditorState}
           enableGutter={false}
         />
-        <div className="flex flex-col gap-3 text-gray-600 text-sm">
+        <div className="flex flex-col gap-3 text-gray-600 text-sm dark:text-white font-inter">
           {publishedAt && (
             <div>
               <span className="font-semibold">Published:</span>{" "}
