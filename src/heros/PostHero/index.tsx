@@ -59,7 +59,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
 
         {/*subtitle*/}
         <RichText
-          className="[&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 dark:[&_a]:text-white dark:[&_a]:hover:text-blue-500 dark:[&_p]:text-white m-2 mx-px"
+          className="text-lg [&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 dark:[&_a]:text-white dark:[&_a]:hover:text-blue-500 dark:[&_p]:text-white m-2 mx-px"
           data={post.subtitle as DefaultTypedEditorState}
           enableGutter={false}
         />
