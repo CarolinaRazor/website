@@ -94,6 +94,10 @@ const config = {
       fontFamily: {
         mono: ['var(--font-geist-mono)'],
         sans: ['var(--font-geist-sans)'],
+        utopiaregular: ['utopia-std', 'sans-serif'],
+        utopiacaption: ['utopia-std-caption', 'sans-serif'],
+        utopiadisplay: ['utopia-std-display', 'sans-serif'],
+        utopiasubhead: ['utopia-std-subhead', 'sans-serif']
       },
       keyframes: {
         'accordion-down': {

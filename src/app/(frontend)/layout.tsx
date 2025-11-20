@@ -38,9 +38,12 @@ export default async function RootLayout({children}: { children: React.ReactNode
   const {isEnabled} = await draftMode()
 
   return (
-    // GeistSans.variable, GeistMono.variable, onest.variable,
     <html className={cn(playfair.variable, inter.variable, notoSerif.variable)} lang="en" suppressHydrationWarning>
     <head>
+      <link
+        rel="stylesheet"
+        href="https://use.typekit.net/yna8bmx.css"
+      />
       <InitTheme/>
       <link href="/favicon.ico" rel="icon" sizes="32x32"/>
       <link href="/favicon-light.svg" rel="icon" media="(prefers-color-scheme: dark)" type="image/svg+xml"/>
