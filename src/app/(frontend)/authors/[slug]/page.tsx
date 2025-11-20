@@ -67,7 +67,7 @@ export default async function AuthorPage({params: paramsPromise}: Args) {
 
       {/* Layout blocks */}
       <div className="max-w-4xl mx-auto px-4 md:px-0">
-        <RenderBlocks blocks={layout || []}/>
+        <RenderBlocks blocks={layout || []} constraint="page"/>
       </div>
     </article>
   )

@@ -1,5 +1,5 @@
-import type { Block } from 'payload'
-import { updateFeaturedArticleGlobal } from "@/blocks/MagazineBlock/hooks/updateFeaturedArticleGlobal";
+import type {Block} from 'payload'
+import {updateFeaturedArticleGlobal} from "@/blocks/MagazineBlock/hooks/updateFeaturedArticleGlobal";
 
 export const MagazineBlock: Block = {
   slug: 'magazine',
@@ -22,6 +22,16 @@ export const MagazineBlock: Block = {
       hooks: {
         afterChange: [updateFeaturedArticleGlobal],
       },
+    },
+    {
+      name: 'fullWidth',
+      type: 'checkbox',
+      label: 'Full Width (ignore layout constraints)',
+      admin: {
+        description: 'Enable to let this block span the full page width.',
+        hidden: true,
+      },
+      defaultValue: true,
     },
   ],
 }

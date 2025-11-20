@@ -209,6 +209,10 @@ export interface Page {
     | {
         categories: (number | Category)[];
         latestCount?: number | null;
+        /**
+         * Enable to let this block span the full page width.
+         */
+        fullWidth?: boolean | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'verticalcategorystackblock';
@@ -908,6 +912,10 @@ export interface ArchiveBlock {
         value: number | Post;
       }[]
     | null;
+  /**
+   * Enable to let this block span the full page width.
+   */
+  fullWidth?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
@@ -921,6 +929,10 @@ export interface MagazineBlock {
    * Optionally override the featured article.
    */
   featuredArticle?: (number | null) | Post;
+  /**
+   * Enable to let this block span the full page width.
+   */
+  fullWidth?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'magazine';
@@ -1278,6 +1290,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               categories?: T;
               latestCount?: T;
+              fullWidth?: T;
               id?: T;
               blockName?: T;
             };
@@ -1367,6 +1380,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  fullWidth?: T;
   id?: T;
   blockName?: T;
 }
@@ -1387,6 +1401,7 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface MagazineBlockSelect<T extends boolean = true> {
   featuredArticle?: T;
+  fullWidth?: T;
   id?: T;
   blockName?: T;
 }

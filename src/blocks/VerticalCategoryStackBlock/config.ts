@@ -1,4 +1,4 @@
-import type { Block } from 'payload'
+import type {Block} from 'payload'
 
 export const VerticalCategoryStackBlock: Block = {
   slug: 'verticalcategorystackblock',
@@ -20,6 +20,16 @@ export const VerticalCategoryStackBlock: Block = {
       label: 'Skip latest # of posts',
       type: 'number',
       defaultValue: 0,
+    },
+    {
+      name: 'fullWidth',
+      type: 'checkbox',
+      label: 'Full Width (ignore layout constraints)',
+      admin: {
+        description: 'Enable to let this block span the full page width.',
+        hidden: true,
+      },
+      defaultValue: true,
     },
   ],
 }

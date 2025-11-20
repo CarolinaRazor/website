@@ -1,11 +1,6 @@
-import type { Block } from 'payload'
+import type {Block} from 'payload'
 
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import {FixedToolbarFeature, HeadingFeature, InlineToolbarFeature, lexicalEditor,} from '@payloadcms/richtext-lexical'
 
 export const Archive: Block = {
   slug: 'archive',
@@ -85,6 +80,16 @@ export const Archive: Block = {
       hasMany: true,
       label: 'Selection',
       relationTo: ['posts'],
+    },
+    {
+      name: 'fullWidth',
+      type: 'checkbox',
+      label: 'Full Width (ignore layout constraints)',
+      admin: {
+        description: 'Enable to let this block span the full page width.',
+        hidden: true,
+      },
+      defaultValue: true,
     },
   ],
   labels: {
