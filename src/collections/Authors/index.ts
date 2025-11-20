@@ -22,6 +22,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import {RichTextBlock} from "@/blocks/RichTextBlock/config";
 
 
 export const Authors: CollectionConfig<'authors'> = {
@@ -89,6 +90,7 @@ export const Authors: CollectionConfig<'authors'> = {
                 MediaBlock,
                 Archive,
                 FormBlock,
+                RichTextBlock,
               ],
               admin: {
                 initCollapsed: true,
