@@ -70,7 +70,7 @@ export const RenderBlocks = ({
         return (
           <div key={index}>
             {shouldConstrain ? (
-              <div className={`w-full px-4 sm:px-6 lg:px-0 ${constraintClass} mx-auto flex flex-col gap-6`}>
+              <div className={`w-full px-4 sm:px-6 lg:px-0 ${constraintClass} mx-auto flex flex-col gap-6 my-6`}>
                 {inner}
               </div>
             ) : (
