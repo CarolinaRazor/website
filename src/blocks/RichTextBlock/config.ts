@@ -1,12 +1,6 @@
 import type {Block} from 'payload'
 
-import {
-  BlocksFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import {BlocksFeature, lexicalEditor,} from '@payloadcms/richtext-lexical'
 
 import {Banner} from '@/blocks/Banner/config'
 import {Code} from '@/blocks/Code/config'
@@ -23,10 +17,7 @@ export const RichTextBlock: Block = {
         features: ({rootFeatures}) => {
           return [
             ...rootFeatures,
-            HeadingFeature({enabledHeadingSizes: ['h2', 'h3', 'h4']}),
             BlocksFeature({blocks: [Banner, Code, MediaBlock]}),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
           ]
         },
       }),

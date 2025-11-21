@@ -1,22 +1,54 @@
-import type { TextFieldSingleValidation } from 'payload'
+import type {TextFieldSingleValidation} from 'payload'
 import {
+  AlignFeature,
+  BlockquoteFeature,
   BoldFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  IndentFeature,
+  InlineToolbarFeature,
   ItalicFeature,
-  LinkFeature,
-  ParagraphFeature,
   lexicalEditor,
-  UnderlineFeature,
+  LinkFeature,
   type LinkFields,
+  OrderedListFeature,
+  ParagraphFeature,
+  StrikethroughFeature,
+  SubscriptFeature,
+  SuperscriptFeature,
+  TextStateFeature,
+  UnderlineFeature,
+  UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
+import {Code} from "@/blocks/Code/config";
+import {MediaBlock} from "@/blocks/MediaBlock/config";
+import {Banner} from "@/blocks/Banner/config";
 
 export const defaultLexical = lexicalEditor({
   features: [
+    HeadingFeature({enabledHeadingSizes: ['h2', 'h3', 'h4']}),
+
+    FixedToolbarFeature(),
+    InlineToolbarFeature(),
     ParagraphFeature(),
     UnderlineFeature(),
     BoldFeature(),
     ItalicFeature(),
+    HorizontalRuleFeature(),
+    IndentFeature(),
+    StrikethroughFeature(),
+    SubscriptFeature(),
+    SuperscriptFeature(),
+    OrderedListFeature(),
+    UnorderedListFeature(),
+    TextStateFeature(),
+    // TreeViewFeature(),
+    AlignFeature(),
+    BlockquoteFeature(),
+
     LinkFeature({
-      enabledCollections: ['pages', 'posts'],
+      enabledCollections: ['pages', 'posts', 'authors'],
       fields: ({ defaultFields }) => {
         const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
           if ('name' in field && field.name === 'url') return false

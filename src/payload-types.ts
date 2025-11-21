@@ -945,7 +945,7 @@ export interface Author {
   id: number;
   name: string;
   author_id: string;
-  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[] | null;
+  layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | RichTextBlock)[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
@@ -1495,6 +1495,7 @@ export interface AuthorsSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        richText?: T | RichTextBlockSelect<T>;
       };
   populatedAuthors?:
     | T
