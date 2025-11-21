@@ -21,14 +21,10 @@ import {
   UnderlineFeature,
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
-import {Code} from "@/blocks/Code/config";
-import {MediaBlock} from "@/blocks/MediaBlock/config";
-import {Banner} from "@/blocks/Banner/config";
 
 export const defaultLexical = lexicalEditor({
   features: [
     HeadingFeature({enabledHeadingSizes: ['h2', 'h3', 'h4']}),
-
     FixedToolbarFeature(),
     InlineToolbarFeature(),
     ParagraphFeature(),
@@ -43,10 +39,8 @@ export const defaultLexical = lexicalEditor({
     OrderedListFeature(),
     UnorderedListFeature(),
     TextStateFeature(),
-    // TreeViewFeature(),
     AlignFeature(),
     BlockquoteFeature(),
-
     LinkFeature({
       enabledCollections: ['pages', 'posts', 'authors'],
       fields: ({ defaultFields }) => {
