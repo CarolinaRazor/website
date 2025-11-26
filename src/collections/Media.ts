@@ -40,6 +40,7 @@ export const Media: CollectionConfig = {
     mimeTypes: ['image/*'],
     adminThumbnail: 'thumbnail',
     focalPoint: true,
+    crop: true,
     imageSizes: [
       {
         name: 'thumbnail',

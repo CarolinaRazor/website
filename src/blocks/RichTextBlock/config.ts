@@ -1,6 +1,6 @@
 import type {Block} from 'payload'
 
-import {BlocksFeature, lexicalEditor,} from '@payloadcms/richtext-lexical'
+import {BlocksFeature, lexicalEditor, UploadFeature,} from '@payloadcms/richtext-lexical'
 
 import {Banner} from '@/blocks/Banner/config'
 import {Code} from '@/blocks/Code/config'
@@ -18,6 +18,25 @@ export const RichTextBlock: Block = {
           return [
             ...rootFeatures,
             BlocksFeature({blocks: [Banner, Code, MediaBlock]}),
+            UploadFeature({
+              collections: {
+                uploads: {
+                  fields: [
+                    {
+                      name: 'caption',
+                      type: 'text',
+                      label: 'Caption',
+                    },
+                    {
+                      name: 'alt',
+                      type: 'text',
+                      label: 'Alt Text',
+                    },
+                  ],
+                },
+              },
+              maxDepth: 1,
+            })
           ]
         },
       }),
