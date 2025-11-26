@@ -2,6 +2,7 @@ import type {CollectionConfig} from 'payload'
 import crypto from 'crypto';
 import admin from "@/collections/Users/access/admin";
 import {nobody} from "@/collections/Users/access/nobody";
+import {getServerSideURL} from "@/utilities/getURL";
 
 export const Invitations: CollectionConfig = {
   slug: 'invitations',
@@ -28,7 +29,7 @@ export const Invitations: CollectionConfig = {
         await req.payload.sendEmail({
           to: doc.email,
           subject: 'You have been invited to the LiberatorCH!',
-          html: `<a href="${process.env.APP_URL}/accept-invite?token=${doc.token}">
+          html: `<a href="${getServerSideURL()}/accept-invite?token=${doc.token}">
                   Click to join
                  </a>`
         })
