@@ -1,8 +1,13 @@
 import type {GlobalConfig} from 'payload'
 import {FixedToolbarFeature, InlineToolbarFeature, lexicalEditor} from "@payloadcms/richtext-lexical";
+import sauthor from "@/collections/Users/access/sauthor";
+import seditor from "@/collections/Users/access/seditor";
 
 export const BreakingHeader: GlobalConfig = {
   slug: 'breaking-header',
+  access: {
+    update: sauthor || seditor
+  },
   label: {
     singular: 'Breaking News Header',
     plural: 'Breaking News Header',

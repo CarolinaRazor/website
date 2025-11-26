@@ -40,7 +40,7 @@ export const Authors: CollectionConfig<'authors'> = {
         return true;
       }
       return {
-        id: { equals: user?.id }
+        id: { equals: user?.page }
       };
     },
   },

@@ -1,8 +1,12 @@
-// globals/FeaturedArticle.ts
-import type { GlobalConfig } from 'payload'
+import type {GlobalConfig} from 'payload'
+import sauthor from "@/collections/Users/access/sauthor";
+import seditor from "@/collections/Users/access/seditor";
 
 export const FeaturedArticle: GlobalConfig = {
   slug: 'featured-article',
+  access: {
+    update: sauthor || seditor
+  },
   label: {
     singular: 'Featured Article',
     plural: 'Featured Article',
