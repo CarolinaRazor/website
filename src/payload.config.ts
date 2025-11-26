@@ -23,6 +23,7 @@ import {FeaturedArticle} from "@/globals/FeaturedArticle/config"
 import {nodemailerAdapter} from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
 import {BreakingHeader} from "@/globals/BreakingHeader/config";
+import {Invitations} from "@/collections/Invitations";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -85,7 +86,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users],
+  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations],
   cors: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   csrf: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   globals: [Footer, FeaturedArticle, BreakingHeader],

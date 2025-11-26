@@ -60,7 +60,10 @@ export const Users: CollectionConfig = {
         description: 'Friendly title for position.',
       },
       access: {
-        update: ({req: {user}}) => checkRole(['admin'], user as User)
+        update: ({ req: { user } }) => {
+          const u = user as User;
+          return checkRole(['admin'], u) || u?.id === 1;
+        }
       },
     },
     {
@@ -81,7 +84,10 @@ export const Users: CollectionConfig = {
         beforeChange: [protectRoles]
       },
       access: {
-        update: ({req: {user}}) => checkRole(['admin'], user as User)
+        update: ({ req: { user } }) => {
+          const u = user as User;
+          return checkRole(['admin'], u) || u?.id === 1;
+        }
       },
     },
     {
