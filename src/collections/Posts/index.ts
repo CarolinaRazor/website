@@ -194,6 +194,15 @@ export const Posts: CollectionConfig<'posts'> = {
       relationTo: 'users',
     },
     {
+      name: 'guestAuthors',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
+      required: false,
+      hasMany: true,
+    },
+    {
       name: 'populatedAuthors',
       type: 'array',
       access: {

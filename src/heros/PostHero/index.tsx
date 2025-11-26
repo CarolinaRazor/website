@@ -7,10 +7,11 @@ import Image from 'next/image'
 import RichText from "@/components/RichText";
 import {DefaultTypedEditorState} from "@payloadcms/richtext-lexical";
 
-export const PostHero: React.FC<{ post: Post }> = ({post}) => {
-  const {categories, heroImage, populatedAuthors, publishedAt, title} = post
+export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
+  const { categories, heroImage, populatedAuthors, guestAuthors, publishedAt, title } = post;
 
-  const hasAuthors = populatedAuthors && populatedAuthors.length > 0
+  const hasAuthors = populatedAuthors && populatedAuthors.length > 0;
+  const hasGuestAuthors = !hasAuthors && guestAuthors && guestAuthors.length > 0;
 
   return (
     <div className="flex flex-col gap-6">
@@ -41,16 +42,16 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
           <div className="uppercase text-base font-semibold text-gray-500 dark:text-teal-300">
             {categories.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
-                const titleToUse = category.title || 'Untitled category'
-                const isLast = index === categories.length - 1
+                const titleToUse = category.title || 'Untitled category';
+                const isLast = index === categories.length - 1;
                 return (
                   <React.Fragment key={index}>
                     {titleToUse}
                     {!isLast && ', '}
                   </React.Fragment>
-                )
+                );
               }
-              return null
+              return null;
             })}
           </div>
         )}
@@ -71,6 +72,7 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
             </div>
           )}
 
+          {/* --- Authors --- */}
           {hasAuthors && (
             <div className="flex flex-wrap items-center gap-4">
               {populatedAuthors.map((author) => (
@@ -94,8 +96,16 @@ export const PostHero: React.FC<{ post: Post }> = ({post}) => {
               ))}
             </div>
           )}
+
+          {/* --- Guest Authors Fallback --- */}
+          {hasGuestAuthors && (
+            <div>
+              <span className="font-semibold">By </span>
+              {guestAuthors.join(', ')}
+            </div>
+          )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

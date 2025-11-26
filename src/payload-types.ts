@@ -273,6 +273,7 @@ export interface Post {
   };
   publishedAt?: string | null;
   authors?: (number | User)[] | null;
+  guestAuthors?: string[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
@@ -1462,6 +1463,7 @@ export interface PostsSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   authors?: T;
+  guestAuthors?: T;
   populatedAuthors?:
     | T
     | {
