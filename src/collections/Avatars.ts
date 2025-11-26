@@ -10,6 +10,9 @@ const dirname = path.dirname(filename)
 
 export const Avatars: CollectionConfig = {
   slug: 'avatars',
+  admin: {
+    group: 'Users',
+  },
   access: {
     create: authenticated,
     delete: authenticated,
