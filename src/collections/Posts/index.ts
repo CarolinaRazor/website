@@ -25,14 +25,18 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import {FixedToolbarFeature, InlineToolbarFeature, lexicalEditor} from "@payloadcms/richtext-lexical";
+import author from "@/collections/Users/access/author";
+import seditor from "@/collections/Users/access/seditor";
+import sauthor from "@/collections/Users/access/sauthor";
+import editor from "../Users/access/editor"
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: author,
+    delete: seditor || sauthor,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: author || editor,
   },
   defaultPopulate: {
     title: true,

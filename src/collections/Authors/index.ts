@@ -23,19 +23,30 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import {RichTextBlock} from "@/blocks/RichTextBlock/config";
+import admin from "@/collections/Users/access/admin";
+import {User} from "@/payload-types";
+import {checkRole} from "@/collections/Users/access/checkRole";
 
 
 export const Authors: CollectionConfig<'authors'> = {
   slug: 'authors',
 
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: admin,
+    delete: admin,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: ({ req: { user } }) => {
+      if (checkRole(['admin'], user as User)) {
+        return true;
+      }
+      return {
+        id: { equals: user?.id }
+      };
+    },
   },
 
   admin: {
+    group: "Users",
     defaultColumns: ['name', 'slug', 'updatedAt'],
     livePreview: {
       url: ({data, req}) => {

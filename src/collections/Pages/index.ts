@@ -23,14 +23,17 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import {RichTextBlock} from "@/blocks/RichTextBlock/config";
+import seditor from "@/collections/Users/access/seditor";
+import sauthor from "@/collections/Users/access/sauthor";
+import admin from "@/collections/Users/access/admin";
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: sauthor || seditor,
+    delete: admin,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: seditor || sauthor,
   },
   // This config controls what's populated by default when a page is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
