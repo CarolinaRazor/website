@@ -13,22 +13,36 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
   const hasAuthors = populatedAuthors && populatedAuthors.length > 0;
   const hasGuestAuthors = !hasAuthors && guestAuthors && guestAuthors.length > 0;
 
+  const preferredImage =
+    typeof heroImage === "object" && heroImage !== null
+      ? {
+        ...heroImage,
+        ...(heroImage.sizes?.large
+          ? {
+            url: heroImage.sizes.large.url,
+            width: heroImage.sizes.large.width,
+            height: heroImage.sizes.large.height,
+          }
+          : {}),
+      }
+      : heroImage;
+
   return (
     <div className="flex flex-col gap-6">
-      {heroImage && typeof heroImage !== 'string' && (
+      {preferredImage && typeof preferredImage !== 'string' && (
         <div className="w-full max-w-[48rem] mx-auto px-4 sm:px-6 lg:px-0">
           <div className="relative">
             <Media
               priority
               imgClassName="w-full h-auto object-cover"
-              resource={heroImage}
+              resource={preferredImage}
             />
           </div>
 
-          {typeof heroImage === 'object' && heroImage.caption && (
+          {typeof preferredImage === 'object' && preferredImage.caption && (
             <RichText
               className="text-base font-utopiacaption [&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 dark:[&_a]:text-white dark:[&_a]:hover:text-blue-500 dark:[&_p]:text-white mt-2"
-              data={heroImage.caption as DefaultTypedEditorState}
+              data={preferredImage.caption as DefaultTypedEditorState}
               enableGutter={false}
             />
           )}
@@ -84,7 +98,7 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
                   {author.avatar && typeof author.avatar !== 'number' && (
                     <div className="w-12 h-12 relative">
                       <Image
-                        src={author.avatar.url ?? ''}
+                        src={author.avatar?.sizes?.thumbnail?.url ?? ''}
                         alt={author.name ?? 'Author avatar'}
                         fill
                         className="rounded-full object-cover"

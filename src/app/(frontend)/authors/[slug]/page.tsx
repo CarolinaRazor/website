@@ -3,7 +3,7 @@ import {draftMode} from 'next/headers'
 import {getPayload} from 'payload'
 import configPromise from '@payload-config'
 import React, {cache} from 'react'
-
+import Image from 'next/image'
 import {PayloadRedirects} from '@/components/PayloadRedirects'
 import {LivePreviewListener} from '@/components/LivePreviewListener'
 import {RenderBlocks} from '@/blocks/RenderBlocks'
@@ -50,11 +50,11 @@ export default async function AuthorPage({params: paramsPromise}: Args) {
       {firstAuthor && (
         <header className="flex items-center gap-4 px-4 md:px-0 mb-12 max-w-4xl mx-auto">
           {firstAuthor.avatar && typeof firstAuthor.avatar !== 'number' && (
-            <img
-              src={firstAuthor.avatar.url ?? ''}
-              alt={firstAuthor.name ?? 'Author avatar'}
-              className="w-24 h-24 object-cover rounded-md"
-            />
+            <Image src={firstAuthor.avatar.sizes?.small?.url ?? ''}
+                   alt={firstAuthor.name ?? 'Author avatar'}
+                   width={firstAuthor.avatar.sizes?.small?.width ?? 1}
+                   height={firstAuthor.avatar.sizes?.small?.width ?? 1}
+                   className="w-24 h-24 object-cover rounded-md"/>
           )}
           <div className="flex flex-col justify-center">
             <h1 className="text-4xl font-bold">{firstAuthor.name}</h1>

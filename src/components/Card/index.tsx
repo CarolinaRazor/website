@@ -28,6 +28,20 @@ export const Card: React.FC<{
   const sanitizedDescription = description?.replace(/\s/g, ' ')
   const href = `/${relationTo}/${slug}`
 
+  const preferredImage =
+    typeof metaImage === "object" && metaImage !== null
+      ? {
+        ...metaImage,
+        ...(metaImage.sizes?.small
+          ? {
+            url: metaImage.sizes.small.url,
+            width: metaImage.sizes.small.width,
+            height: metaImage.sizes.small.height,
+          }
+          : {}),
+      }
+      : metaImage;
+
   return (
     <Link
       href={href}
@@ -43,7 +57,7 @@ export const Card: React.FC<{
     >
       <div className="relative w-full aspect-[16/9] overflow-hidden">
         <Media
-          resource={metaImage}
+          resource={preferredImage}
           className="w-full h-full object-cover"
         />
       </div>

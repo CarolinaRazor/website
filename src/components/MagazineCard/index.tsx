@@ -43,15 +43,30 @@ export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium
     })
     : null
 
-  const metaImage = post.meta?.image
+  const original = post.heroImage;
+
+  const preferredImage =
+    typeof original === "object" && original !== null
+      ? {
+        ...original,
+        ...(original.sizes?.medium
+          ? {
+            url: original.sizes.medium.url,
+            width: original.sizes.medium.width,
+            height: original.sizes.medium.height,
+          }
+          : {}),
+      }
+      : original;
+
 
   return (
     <article className={`article-${size}`}>
       <Link href={`/posts/${post.slug}`} className="block group">
-        {metaImage && (
+        {preferredImage && (
           <div className="relative aspect-[16/9] overflow-hidden rounded-lg mb-3">
             <Media
-              resource={metaImage}
+              resource={preferredImage}
               size="100%"
               className="object-cover transition-transform duration-300 " // group-hover:scale-110
               priority={true}
