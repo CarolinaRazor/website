@@ -4,7 +4,8 @@ import AcceptInviteForm from "@/components/AcceptInvitationForm";
 
 export default async function AcceptInvitePage({ searchParams }: any) {
   const payload = await getPayload({ config: configPromise });
-  const token = searchParams?.token ?? '';
+  const params = await searchParams;
+  const token = params?.token ?? '';
 
   const inviteResults = await payload.find({
     collection: 'invitations',
