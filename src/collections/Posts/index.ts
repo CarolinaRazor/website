@@ -1,21 +1,21 @@
-import type {CollectionConfig} from 'payload'
+import type { CollectionConfig } from 'payload'
 
-import {authenticated} from '@/access/authenticated'
-import {authenticatedOrPublished} from '@/access/authenticatedOrPublished'
-import {generatePreviewPath} from '@/utilities/generatePreviewPath'
-import {populateAuthors} from './hooks/populateAuthors'
-import {revalidateDelete, revalidatePost} from './hooks/revalidatePost'
-import {slugField} from '@/fields/slug'
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { populateAuthors } from './hooks/populateAuthors'
+import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
+import { slugField } from '@/fields/slug'
 
-import {Banner} from '@/blocks/Banner/config'
-import {Code} from '@/blocks/Code/config'
-import {MediaBlock} from '@/blocks/MediaBlock/config'
-import {CallToAction} from '@/blocks/CallToAction/config'
-import {Content} from '@/blocks/Content/config'
-import {FormBlock} from '@/blocks/Form/config'
-import {RichTextBlock} from '@/blocks/RichTextBlock/config'
-import {MagazineBlock} from '@/blocks/MagazineBlock/config'
-import {VerticalCategoryStackBlock} from '@/blocks/VerticalCategoryStackBlock/config'
+import { Banner } from '@/blocks/Banner/config'
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { CallToAction } from '@/blocks/CallToAction/config'
+import { Content } from '@/blocks/Content/config'
+import { FormBlock } from '@/blocks/Form/config'
+import { RichTextBlock } from '@/blocks/RichTextBlock/config'
+import { MagazineBlock } from '@/blocks/MagazineBlock/config'
+import { VerticalCategoryStackBlock } from '@/blocks/VerticalCategoryStackBlock/config'
 
 import {
   MetaDescriptionField,
@@ -24,11 +24,15 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import {FixedToolbarFeature, InlineToolbarFeature, lexicalEditor} from "@payloadcms/richtext-lexical";
-import author from "@/collections/Users/access/author";
-import seditor from "@/collections/Users/access/seditor";
-import sauthor from "@/collections/Users/access/sauthor";
-import editor from "../Users/access/editor"
+import {
+  FixedToolbarFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
+import author from '@/collections/Users/access/author'
+import seditor from '@/collections/Users/access/seditor'
+import sauthor from '@/collections/Users/access/sauthor'
+import editor from '../Users/access/editor'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -50,14 +54,14 @@ export const Posts: CollectionConfig<'posts'> = {
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({data, req}) =>
+      url: ({ data, req }) =>
         generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'posts',
           req,
         }),
     },
-    preview: (data, {req}) =>
+    preview: (data, { req }) =>
       generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
         collection: 'posts',
@@ -84,9 +88,10 @@ export const Posts: CollectionConfig<'posts'> = {
             },
             {
               name: 'subtitle',
+              label: 'Article Subtitle',
               type: 'richText',
               editor: lexicalEditor({
-                features: ({rootFeatures}) => {
+                features: ({ rootFeatures }) => {
                   return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
                 },
               }),
@@ -98,15 +103,7 @@ export const Posts: CollectionConfig<'posts'> = {
               admin: {
                 initCollapsed: true,
               },
-              blocks: [
-                Banner,
-                Code,
-                MediaBlock,
-                CallToAction,
-                Content,
-                FormBlock,
-                RichTextBlock,
-              ],
+              blocks: [Banner, Code, MediaBlock, CallToAction, Content, FormBlock, RichTextBlock],
             },
           ],
         },
@@ -116,7 +113,7 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'featuredtext',
               type: 'textarea',
-              label : 'Featured Preview Text'
+              label: 'Featured Preview Text',
             },
             {
               name: 'relatedPosts',
@@ -124,8 +121,8 @@ export const Posts: CollectionConfig<'posts'> = {
               admin: {
                 position: 'sidebar',
               },
-              filterOptions: ({id}) => ({
-                id: {not_in: [id]},
+              filterOptions: ({ id }) => ({
+                id: { not_in: [id] },
               }),
               hasMany: true,
               relationTo: 'posts',
@@ -170,12 +167,12 @@ export const Posts: CollectionConfig<'posts'> = {
       name: 'publishedAt',
       type: 'date',
       admin: {
-        date: {pickerAppearance: 'dayAndTime'},
+        date: { pickerAppearance: 'dayAndTime' },
         position: 'sidebar',
       },
       hooks: {
         beforeChange: [
-          ({siblingData, value}) => {
+          ({ siblingData, value }) => {
             if (siblingData._status === 'published' && !value) {
               return new Date()
             }
@@ -213,8 +210,8 @@ export const Posts: CollectionConfig<'posts'> = {
         readOnly: true,
       },
       fields: [
-        {name: 'id', type: 'text'},
-        {name: 'name', type: 'text'},
+        { name: 'id', type: 'text' },
+        { name: 'name', type: 'text' },
         {
           name: 'avatar',
           type: 'upload',
@@ -229,8 +226,8 @@ export const Posts: CollectionConfig<'posts'> = {
           },
         },
         {
-          name: "authorPage",
-          type: "number",
+          name: 'authorPage',
+          type: 'number',
           required: false,
         },
       ],

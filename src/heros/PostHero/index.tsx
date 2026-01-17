@@ -1,42 +1,40 @@
-import {formatDateTime} from 'src/utilities/formatDateTime'
+import { formatDateTime } from 'src/utilities/formatDateTime'
 import React from 'react'
-import type {Post} from '@/payload-types'
-import {Media} from '@/components/Media'
+import type { Post } from '@/payload-types'
+import { Media } from '@/components/Media'
 import Link from 'next/link'
 import Image from 'next/image'
-import RichText from "@/components/RichText";
-import {DefaultTypedEditorState} from "@payloadcms/richtext-lexical";
+import RichText from '@/components/RichText'
+import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
+import { ShareButton } from '@/components/ShareButton'
+import { hasText } from '@payloadcms/richtext-lexical/shared'
 
 export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
-  const { categories, heroImage, populatedAuthors, guestAuthors, publishedAt, title } = post;
-
-  const hasAuthors = populatedAuthors && populatedAuthors.length > 0;
-  const hasGuestAuthors = !hasAuthors && guestAuthors && guestAuthors.length > 0;
+  const { categories, heroImage, populatedAuthors, guestAuthors, publishedAt, title, slug } = post
+  const postUrl = process.env.NEXT_PUBLIC_SITE_URL + '/posts/' + slug
+  const hasAuthors = populatedAuthors && populatedAuthors.length > 0
+  const hasGuestAuthors = !hasAuthors && guestAuthors && guestAuthors.length > 0
 
   const preferredImage =
-    typeof heroImage === "object" && heroImage !== null
+    typeof heroImage === 'object' && heroImage !== null
       ? {
-        ...heroImage,
-        ...(heroImage.sizes?.large
-          ? {
-            url: heroImage.sizes.large.url,
-            width: heroImage.sizes.large.width,
-            height: heroImage.sizes.large.height,
-          }
-          : {}),
-      }
-      : heroImage;
+          ...heroImage,
+          ...(heroImage.sizes?.large
+            ? {
+                url: heroImage.sizes.large.url,
+                width: heroImage.sizes.large.width,
+                height: heroImage.sizes.large.height,
+              }
+            : {}),
+        }
+      : heroImage
 
   return (
     <div className="flex flex-col gap-6">
       {preferredImage && typeof preferredImage !== 'string' && (
         <div className="w-full max-w-[48rem] mx-auto px-4 sm:px-6 lg:px-0">
           <div className="relative">
-            <Media
-              priority
-              imgClassName="w-full h-auto object-cover"
-              resource={preferredImage}
-            />
+            <Media priority imgClassName="w-full h-auto object-cover" resource={preferredImage} />
           </div>
 
           {typeof preferredImage === 'object' && preferredImage.caption && (
@@ -56,16 +54,16 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
           <div className="uppercase text-base font-semibold text-gray-500 dark:text-teal-300">
             {categories.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
-                const titleToUse = category.title || 'Untitled category';
-                const isLast = index === categories.length - 1;
+                const titleToUse = category.title || 'Untitled category'
+                const isLast = index === categories.length - 1
                 return (
                   <React.Fragment key={index}>
                     {titleToUse}
                     {!isLast && ', '}
                   </React.Fragment>
-                );
+                )
               }
-              return null;
+              return null
             })}
           </div>
         )}
@@ -73,15 +71,17 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
         <h1 className="text-4xl md:text-5xl lg:text-5xl -mt-1">{title}</h1>
 
         {/*subtitle*/}
-        <RichText
-          className="text-2xl font-utopiasubhead [&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 dark:[&_a]:text-white dark:[&_a]:hover:text-blue-500 dark:[&_p]:text-white m-2 mx-px"
-          data={post.subtitle as DefaultTypedEditorState}
-          enableGutter={false}
-        />
+        {hasText(post.subtitle) && (
+          <RichText
+            className="text-2xl font-utopiasubhead [&_a]:text-gray-600 [&_a]:underline [&_a]:hover:text-gray-900 [&_p]:text-gray-600 dark:[&_a]:text-white dark:[&_a]:hover:text-blue-500 dark:[&_p]:text-white m-2 mx-px"
+            data={post.subtitle as DefaultTypedEditorState}
+            enableGutter={false}
+          />
+        )}
         <div className="flex flex-col gap-3 text-gray-600 text-base dark:text-white font-utopiasubhead">
           {publishedAt && (
             <div>
-              <span className="font-semibold">Published:</span>{" "}
+              <span className="font-semibold">Published:</span>{' '}
               <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
             </div>
           )}
@@ -118,8 +118,11 @@ export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
               {guestAuthors.join(', ')}
             </div>
           )}
+
+          {/* --- Share Button --- */}
+          <ShareButton url={postUrl} title={title} />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
