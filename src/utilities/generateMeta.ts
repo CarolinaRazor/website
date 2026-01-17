@@ -6,7 +6,7 @@ import {mergeOpenGraph} from './mergeOpenGraph'
 import {getServerSideURL} from './getURL'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
-  const serverUrl = getServerSideURL()
+  const serverUrl = getServerSideURL() || 'https://www.liberatorch.com'
 
   let url = serverUrl + '/website-template-OG.webp'
 

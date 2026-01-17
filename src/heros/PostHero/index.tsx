@@ -1,17 +1,19 @@
-import { formatDateTime } from 'src/utilities/formatDateTime'
+import {formatDateTime} from 'src/utilities/formatDateTime'
 import React from 'react'
-import type { Post } from '@/payload-types'
-import { Media } from '@/components/Media'
+import type {Post} from '@/payload-types'
+import {Media} from '@/components/Media'
 import Link from 'next/link'
 import Image from 'next/image'
 import RichText from '@/components/RichText'
-import { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
-import { ShareButton } from '@/components/ShareButton'
-import { hasText } from '@payloadcms/richtext-lexical/shared'
+import {DefaultTypedEditorState} from '@payloadcms/richtext-lexical'
+import {ShareButton} from '@/components/ShareButton'
+import {hasText} from '@payloadcms/richtext-lexical/shared'
+import {getServerSideURL} from '@/utilities/getURL'
 
 export const PostHero: React.FC<{ post: Post }> = ({ post }) => {
   const { categories, heroImage, populatedAuthors, guestAuthors, publishedAt, title, slug } = post
-  const postUrl = process.env.NEXT_PUBLIC_SITE_URL + '/posts/' + slug
+  const siteUrl = getServerSideURL() || 'https://www.liberatorch.com'
+  const postUrl = siteUrl + '/posts/' + slug
   const hasAuthors = populatedAuthors && populatedAuthors.length > 0
   const hasGuestAuthors = !hasAuthors && guestAuthors && guestAuthors.length > 0
 
