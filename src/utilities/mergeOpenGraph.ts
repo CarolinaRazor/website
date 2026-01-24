@@ -3,10 +3,10 @@ import {getServerSideURL} from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'An open-source website built with Payload and Next.js.',
+  description: 'UNC\'s Progressive Student Newspaper',
   images: [
     {
-      url: `${getServerSideURL()}/website-template-OG.webp`,
+      url: `${getServerSideURL()}/logo_tagline_text.svg`,
     },
   ],
   siteName: 'The LiberatorCH',
