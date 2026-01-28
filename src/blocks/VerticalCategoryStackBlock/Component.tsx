@@ -8,12 +8,10 @@ import {HorizontalCard} from '@/components/VerticalCategoryComponents/Horizontal
 
 interface VerticalCategoryStackBlockProps {
   categories: (Category | string | number)[]
-  latestCount?: number
 }
 
 export const VerticalCategoryStackBlock = async ({
                                                    categories,
-                                                   latestCount = 6, // default to 6 to match magazine block behavior
                                                  }: VerticalCategoryStackBlockProps) => {
   const payload = await getPayload({config})
 
@@ -29,20 +27,37 @@ export const VerticalCategoryStackBlock = async ({
         ? String(featuredGlobal.post.id)
         : null
 
-  const {docs: latestPosts} =
-    latestCount > 0
-      ? await payload.find({
-        collection: 'posts',
-        sort: '-createdAt',
-        where: {_status: {equals: 'published'}},
-        limit: latestCount,
-      })
-      : {docs: []}
+  // Fetch all posts to determine which ones MagazineBlock would display
+  const {docs: allPublishedPosts} = await payload.find({
+    collection: 'posts',
+    sort: '-createdAt',
+    where: {_status: {equals: 'published'}},
+    limit: 10, // MagazineBlock shows max 7 posts (1 featured + 6 columns), fetch a few extra to be safe
+  })
 
-  const excludedIDs = new Set([
-    ...latestPosts.map((p) => String(p.id)),
-    ...(featuredArticleId ? [featuredArticleId] : []),
-  ])
+  // Determine which post MagazineBlock uses as featured
+  let magazineFeaturedId = featuredArticleId
+  if (!magazineFeaturedId && allPublishedPosts.length > 0) {
+    magazineFeaturedId = String(allPublishedPosts[0].id)
+  }
+
+  // MagazineBlock displays: featured article + next 6 posts (excluding featured)
+  const magazineDisplayedIds = new Set<string>()
+  if (magazineFeaturedId) {
+    magazineDisplayedIds.add(magazineFeaturedId)
+  }
+
+  // Add the next 6 posts that aren't the featured article
+  let addedCount = 0
+  for (const post of allPublishedPosts) {
+    const postId = String(post.id)
+    if (postId !== magazineFeaturedId && addedCount < 6) {
+      magazineDisplayedIds.add(postId)
+      addedCount++
+    }
+  }
+
+  const excludedIDs = magazineDisplayedIds
 
   const categoryDocs: Category[] = await Promise.all(
     categories.map(async (cat) => {
@@ -100,11 +115,13 @@ export const VerticalCategoryStackBlock = async ({
             <MainCard post={mainPost}/>
 
             {/* Sub articles */}
-            <div className="mt-6 space-y-4">
-              {subPosts.map((p) => (
-                <HorizontalCard key={p.id} post={p}/>
-              ))}
-            </div>
+            {subPosts.length > 0 &&
+              <div className="mt-6 space-y-4">
+                {subPosts.map((p) => (
+                  <HorizontalCard key={p.id} post={p}/>
+                ))}
+              </div>
+            }
 
             {/* Read more button */}
             <div className="mt-6">

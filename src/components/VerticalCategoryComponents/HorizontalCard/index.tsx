@@ -4,7 +4,7 @@ import {Post} from '@/payload-types'
 import {Media} from '@/components/Media'
 
 export function HorizontalCard({ post }: { post: Post }) {
-  const titleSize = 'text-lg'
+  const titleSize = 'text-xl'
   const squareSize = 112 // 28 * 4 = 112px
 
   const original = post.heroImage
@@ -39,7 +39,7 @@ export function HorizontalCard({ post }: { post: Post }) {
           </div>
         )}
         <h2
-          className={`${titleSize} font-bold leading-snug group-hover:text-primary transition-colors flex-1`}
+          className={`${titleSize} leading-snug group-hover:text-primary transition-colors flex-1`}
         >
           {post.title}
         </h2>

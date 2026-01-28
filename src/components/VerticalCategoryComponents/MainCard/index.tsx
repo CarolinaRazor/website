@@ -35,7 +35,7 @@ export function MainCard({ post }: { post: Post }) {
         )}
 
         <h2
-          className={`${titleSize} font-bold leading-snug group-hover:text-primary transition-colors`}
+          className={`${titleSize} leading-snug group-hover:text-primary transition-colors`}
         >
           {post.title}
         </h2>
