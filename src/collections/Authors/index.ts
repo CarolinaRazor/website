@@ -172,6 +172,7 @@ export const Authors: CollectionConfig<'authors'> = {
     {
       name: 'publishedAt',
       type: 'date',
+      timezone: true,
       admin: {
         position: 'sidebar',
       },

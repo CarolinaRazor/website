@@ -122,6 +122,7 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       name: 'publishedAt',
       type: 'date',
+      timezone: true,
       admin: {
         position: 'sidebar',
       },

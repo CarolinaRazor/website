@@ -12,54 +12,7 @@
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "supportedTimezones".
  */
-export type SupportedTimezones =
-  | 'Pacific/Midway'
-  | 'Pacific/Niue'
-  | 'Pacific/Honolulu'
-  | 'Pacific/Rarotonga'
-  | 'America/Anchorage'
-  | 'Pacific/Gambier'
-  | 'America/Los_Angeles'
-  | 'America/Tijuana'
-  | 'America/Denver'
-  | 'America/Phoenix'
-  | 'America/Chicago'
-  | 'America/Guatemala'
-  | 'America/New_York'
-  | 'America/Bogota'
-  | 'America/Caracas'
-  | 'America/Santiago'
-  | 'America/Buenos_Aires'
-  | 'America/Sao_Paulo'
-  | 'Atlantic/South_Georgia'
-  | 'Atlantic/Azores'
-  | 'Atlantic/Cape_Verde'
-  | 'Europe/London'
-  | 'Europe/Berlin'
-  | 'Africa/Lagos'
-  | 'Europe/Athens'
-  | 'Africa/Cairo'
-  | 'Europe/Moscow'
-  | 'Asia/Riyadh'
-  | 'Asia/Dubai'
-  | 'Asia/Baku'
-  | 'Asia/Karachi'
-  | 'Asia/Tashkent'
-  | 'Asia/Calcutta'
-  | 'Asia/Dhaka'
-  | 'Asia/Almaty'
-  | 'Asia/Jakarta'
-  | 'Asia/Bangkok'
-  | 'Asia/Shanghai'
-  | 'Asia/Singapore'
-  | 'Asia/Tokyo'
-  | 'Asia/Seoul'
-  | 'Australia/Brisbane'
-  | 'Australia/Sydney'
-  | 'Pacific/Guam'
-  | 'Pacific/Noumea'
-  | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
+export type SupportedTimezones = 'America/New_York';
 
 export interface Config {
   auth: {
@@ -231,6 +184,7 @@ export interface Page {
     description?: string | null;
   };
   publishedAt?: string | null;
+  publishedAt_tz?: SupportedTimezones;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -273,6 +227,7 @@ export interface Post {
     description?: string | null;
   };
   publishedAt?: string | null;
+  publishedAt_tz?: SupportedTimezones;
   authors?: (number | User)[] | null;
   guestAuthors?: string[] | null;
   populatedAuthors?:
@@ -970,6 +925,7 @@ export interface Author {
     description?: string | null;
   };
   publishedAt?: string | null;
+  publishedAt_tz?: SupportedTimezones;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1323,6 +1279,7 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  publishedAt_tz?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1463,6 +1420,7 @@ export interface PostsSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  publishedAt_tz?: T;
   authors?: T;
   guestAuthors?: T;
   populatedAuthors?:
@@ -1533,6 +1491,7 @@ export interface AuthorsSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  publishedAt_tz?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;

@@ -36,6 +36,12 @@ export default buildConfig({
     }),
   }),
   admin: {
+    timezones: {
+      supportedTimezones: [
+        { label: 'New York', value: 'America/New_York' },
+      ],
+      defaultTimezone: 'America/New_York',
+    },
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.

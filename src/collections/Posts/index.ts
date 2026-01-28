@@ -1,21 +1,21 @@
-import type { CollectionConfig } from 'payload'
+import type {CollectionConfig} from 'payload'
 
-import { authenticated } from '@/access/authenticated'
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
-import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
-import { slugField } from '@/fields/slug'
+import {authenticated} from '@/access/authenticated'
+import {authenticatedOrPublished} from '@/access/authenticatedOrPublished'
+import {generatePreviewPath} from '@/utilities/generatePreviewPath'
+import {populateAuthors} from './hooks/populateAuthors'
+import {revalidateDelete, revalidatePost} from './hooks/revalidatePost'
+import {slugField} from '@/fields/slug'
 
-import { Banner } from '@/blocks/Banner/config'
-import { Code } from '@/blocks/Code/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { CallToAction } from '@/blocks/CallToAction/config'
-import { Content } from '@/blocks/Content/config'
-import { FormBlock } from '@/blocks/Form/config'
-import { RichTextBlock } from '@/blocks/RichTextBlock/config'
-import { MagazineBlock } from '@/blocks/MagazineBlock/config'
-import { VerticalCategoryStackBlock } from '@/blocks/VerticalCategoryStackBlock/config'
+import {Banner} from '@/blocks/Banner/config'
+import {Code} from '@/blocks/Code/config'
+import {MediaBlock} from '@/blocks/MediaBlock/config'
+import {CallToAction} from '@/blocks/CallToAction/config'
+import {Content} from '@/blocks/Content/config'
+import {FormBlock} from '@/blocks/Form/config'
+import {RichTextBlock} from '@/blocks/RichTextBlock/config'
+import {MagazineBlock} from '@/blocks/MagazineBlock/config'
+import {VerticalCategoryStackBlock} from '@/blocks/VerticalCategoryStackBlock/config'
 
 import {
   MetaDescriptionField,
@@ -24,11 +24,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import {
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import {FixedToolbarFeature, InlineToolbarFeature, lexicalEditor,} from '@payloadcms/richtext-lexical'
 import author from '@/collections/Users/access/author'
 import seditor from '@/collections/Users/access/seditor'
 import sauthor from '@/collections/Users/access/sauthor'
@@ -166,6 +162,7 @@ export const Posts: CollectionConfig<'posts'> = {
     {
       name: 'publishedAt',
       type: 'date',
+      timezone: true,
       admin: {
         date: { pickerAppearance: 'dayAndTime' },
         position: 'sidebar',
