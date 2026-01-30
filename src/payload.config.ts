@@ -22,13 +22,14 @@ import {FeaturedArticle} from "@/globals/FeaturedArticle/config"
 import {BreakingHeader} from "@/globals/BreakingHeader/config";
 import {Invitations} from "@/collections/Invitations";
 import {resendAdapter} from '@payloadcms/email-resend'
+import {Subscribers} from "@/collections/Subscribers";
 
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  ...(process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== "true" && {
+  ...(process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_PREVIEW !== "false" && {
     email: resendAdapter({
       defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? '',
       defaultFromName: process.env.SMTP_FROM_NAME ?? '',
@@ -88,7 +89,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations],
+  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations, Subscribers],
   cors: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   csrf: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   globals: [Footer, FeaturedArticle, BreakingHeader],
