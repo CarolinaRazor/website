@@ -61,6 +61,9 @@ ENV NEXT_PUBLIC_SERVER_URL=${SERVICE_URL_PAYLOAD}
 ENV CRON_SECRET=${CRON_SECRET}
 ENV PREVIEW_SECRET=${PREVIEW_SECRET}
 
+# Enable pnpm for running scripts
+RUN corepack enable pnpm
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
@@ -70,6 +73,10 @@ RUN chown nextjs:nodejs .next
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/scripts ./scripts
+COPY --from=builder --chown=nextjs:nodejs /app/src ./src
+COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./tsconfig.json
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 
 USER nextjs
 

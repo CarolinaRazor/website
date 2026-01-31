@@ -1,4 +1,4 @@
-import { withPayload } from '@payloadcms/next/withPayload'
+import {withPayload} from '@payloadcms/next/withPayload'
 
 import redirects from './redirects.js'
 
@@ -10,6 +10,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 const nextConfig = {
   output: 'standalone',
   images: {
+    qualities: [25, 50, 75, 100],
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://www.liberatorch.com' */].map((item) => {
         const url = new URL(item)
