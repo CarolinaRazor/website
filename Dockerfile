@@ -61,8 +61,9 @@ ENV NEXT_PUBLIC_SERVER_URL=${SERVICE_URL_PAYLOAD}
 ENV CRON_SECRET=${CRON_SECRET}
 ENV PREVIEW_SECRET=${PREVIEW_SECRET}
 
-# Enable pnpm for running scripts
-RUN corepack enable pnpm
+# needed otherwise it'll give an interactive prompt on run
+RUN corepack enable
+RUN corepack prepare pnpm@10.17.1 --activate
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
