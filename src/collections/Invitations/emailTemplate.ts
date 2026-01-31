@@ -15,7 +15,7 @@ export const getInvitationEmailHtml = (inviteUrl: string, email: string): string
           <!-- Header with logo -->
           <tr>
             <td style="background: #42A5F5; padding: 40px 20px; text-align: center;">
-              <img src="https://www.liberatorch.com/logo_tagline.svg" alt="Liberatorch" style="max-width: 250px; height: auto; display: block; margin: 0 auto; filter: invert(1);" />
+              <img src="https://www.liberatorch.com/logo_tagline_white.png" alt="Liberatorch" style="max-width: 250px; height: auto; display: block; margin: 0 auto;" />
             </td>
           </tr>
 
@@ -67,7 +67,7 @@ export const getInvitationEmailHtml = (inviteUrl: string, email: string): string
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
-                    <img src="https://www.liberatorch.com/favicon.svg" alt="LiberatorCH Icon" style="width: 32px; height: 32px; margin-bottom: 15px;" />
+                    <img src="https://www.liberatorch.com/favicon_white.png" alt="LiberatorCH Icon" style="width: 32px; height: 32px; margin-bottom: 15px;" />
                   </td>
                 </tr>
                 <tr>

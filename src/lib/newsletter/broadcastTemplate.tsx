@@ -34,7 +34,7 @@ export default function broadcastTemplate({ newsletter, posts }: BroadcastTempla
                 {/* Header with logo */}
                 <tr>
                   <td style={{ background: '#42A5F5', padding: '40px 20px', textAlign: 'center' }}>
-                    <img src="https://www.liberatorch.com/logo_tagline.svg" alt="Liberatorch" style={{ maxWidth: '500px', height: 'auto', display: 'block', margin: '0 auto' }} />
+                    <img src="https://www.liberatorch.com/logo_tagline_white.png" alt="Liberatorch" style={{ maxWidth: '500px', height: 'auto', display: 'block', margin: '0 auto' }} />
                   </td>
                 </tr>
 
@@ -122,7 +122,7 @@ export default function broadcastTemplate({ newsletter, posts }: BroadcastTempla
                     <table width="100%" cellPadding="0" cellSpacing="0">
                       <tr>
                         <td align="center">
-                          <img src="https://www.liberatorch.com/favicon.svg" alt="LiberatorCH Icon" style={{ width: '64px', height: '64px', marginBottom: '25px' }} />
+                          <img src="https://www.liberatorch.com/favicon_white.png" alt="LiberatorCH Icon" style={{ width: '64px', height: '64px', marginBottom: '25px' }} />
                         </td>
                       </tr>
                       <tr>
