@@ -15,7 +15,7 @@ export const Subscribers: CollectionConfig = {
     plural: 'Subscribers'
   },
   admin: {
-    group: 'Newsletter',
+    group: 'Newsletters',
     useAsTitle: 'email',
   },
   fields: [

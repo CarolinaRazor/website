@@ -14,7 +14,7 @@ const MAX_REQUESTS_PER_WINDOW = 3 // Max email submissions per cycle
 /**
  * Clean up old entries periodically to prevent memory leaks
  */
-function cleanupOldEntries() {
+export function cleanupOldEntries() {
   const now = Date.now()
   for (const [ip, entry] of rateLimitMap.entries()) {
     if (now - entry.lastRequestTime > RATE_LIMIT_WINDOW_MS) {
@@ -23,8 +23,8 @@ function cleanupOldEntries() {
   }
 }
 
-// Run cleanup every 30 minutes
-setInterval(cleanupOldEntries, 30 * 60 * 1000)
+// // Run cleanup every 30 minutes
+// setInterval(cleanupOldEntries, 30 * 60 * 1000)
 
 /**
  * Check if an IP address has exceeded the rate limit

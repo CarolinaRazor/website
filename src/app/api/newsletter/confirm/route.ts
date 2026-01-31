@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     await resend.contacts.create({
       email: confirmation.email,
       unsubscribed: false,
-      segments: [{id: "c60debdc-21ba-4970-b27f-7e7c95df0523"}]
+      segments: [{id: process.env.NEWSLETTER_SEGMENT_1!}]
     });
 
     return NextResponse.json({

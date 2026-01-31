@@ -29,6 +29,7 @@ export interface Config {
     users: User;
     invitations: Invitation;
     subscribers: Subscriber;
+    newsletters: Newsletter;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -50,6 +51,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     invitations: InvitationsSelect<false> | InvitationsSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
+    newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -966,6 +968,26 @@ export interface Subscriber {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters".
+ */
+export interface Newsletter {
+  id: number;
+  generated: string;
+  generated_tz: SupportedTimezones;
+  subject?: string | null;
+  introduction?: string | null;
+  posts?:
+    | {
+        postText?: string | null;
+        post: number | Post;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1189,6 +1211,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'subscribers';
         value: number | Subscriber;
+      } | null)
+    | ({
+        relationTo: 'newsletters';
+        value: number | Newsletter;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1781,6 +1807,25 @@ export interface SubscribersSelect<T extends boolean = true> {
   lastSent?: T;
   lastSent_tz?: T;
   confirmed?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters_select".
+ */
+export interface NewslettersSelect<T extends boolean = true> {
+  generated?: T;
+  generated_tz?: T;
+  subject?: T;
+  introduction?: T;
+  posts?:
+    | T
+    | {
+        postText?: T;
+        post?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
