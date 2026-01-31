@@ -28,6 +28,8 @@ export interface Config {
     categories: Category;
     users: User;
     invitations: Invitation;
+    subscribers: Subscriber;
+    newsletters: Newsletter;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -48,6 +50,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     invitations: InvitationsSelect<false> | InvitationsSelect<true>;
+    subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
+    newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -174,6 +178,11 @@ export interface Page {
         blockType: 'verticalcategorystackblock';
       }
     | RichTextBlock
+    | {
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'newsletterSignup';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -945,6 +954,40 @@ export interface Invitation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers".
+ */
+export interface Subscriber {
+  id: number;
+  email: string;
+  token?: string | null;
+  lastSent?: string | null;
+  lastSent_tz?: SupportedTimezones;
+  confirmed?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters".
+ */
+export interface Newsletter {
+  id: number;
+  generated: string;
+  generated_tz: SupportedTimezones;
+  subject?: string | null;
+  introduction?: string | null;
+  posts?:
+    | {
+        postText?: string | null;
+        post: number | Post;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1166,6 +1209,14 @@ export interface PayloadLockedDocument {
         value: number | Invitation;
       } | null)
     | ({
+        relationTo: 'subscribers';
+        value: number | Subscriber;
+      } | null)
+    | ({
+        relationTo: 'newsletters';
+        value: number | Newsletter;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1270,6 +1321,12 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         richText?: T | RichTextBlockSelect<T>;
+        newsletterSignup?:
+          | T
+          | {
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1737,6 +1794,38 @@ export interface UsersSelect<T extends boolean = true> {
 export interface InvitationsSelect<T extends boolean = true> {
   email?: T;
   token?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers_select".
+ */
+export interface SubscribersSelect<T extends boolean = true> {
+  email?: T;
+  token?: T;
+  lastSent?: T;
+  lastSent_tz?: T;
+  confirmed?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters_select".
+ */
+export interface NewslettersSelect<T extends boolean = true> {
+  generated?: T;
+  generated_tz?: T;
+  subject?: T;
+  introduction?: T;
+  posts?:
+    | T
+    | {
+        postText?: T;
+        post?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -11,6 +11,7 @@ import {MagazineBlock} from '@/blocks/MagazineBlock/Component'
 import {VerticalCategoryStackBlock} from '@/blocks/VerticalCategoryStackBlock/Component'
 import {CodeBlock} from '@/blocks/Code/Component'
 import {RichTextBlock} from '@/blocks/RichTextBlock/Component'
+import {NewsletterSignupBlock} from '@/blocks/NewsletterSignupBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -22,6 +23,7 @@ const blockComponents = {
   verticalcategorystackblock: VerticalCategoryStackBlock,
   code: CodeBlock,
   richText: RichTextBlock,
+  newsletterSignup: NewsletterSignupBlock,
 }
 
 type BlockType = Page['layout'][0] | Post['layout'][0]
