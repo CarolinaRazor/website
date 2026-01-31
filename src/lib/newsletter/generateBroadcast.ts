@@ -78,6 +78,14 @@ export async function generateBroadcast(): Promise<{
       name: Date()
     })
 
+    // send broadcast
+    if (result.data?.id) {
+      await resend.broadcasts.send(
+        result.data?.id,
+      );
+      console.log("broadcast sent")
+    }
+
     if (result.error) {
       return {
         success: false,

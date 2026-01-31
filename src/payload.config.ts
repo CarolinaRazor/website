@@ -30,7 +30,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  ...(process.env.NODE_ENV === 'development' && process.env.NEXT_PUBLIC_PREVIEW !== "false" && {
+  ...(process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== "true" && {
     email: resendAdapter({
       defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? '',
       defaultFromName: process.env.SMTP_FROM_NAME ?? '',
