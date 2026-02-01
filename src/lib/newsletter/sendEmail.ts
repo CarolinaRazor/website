@@ -4,6 +4,8 @@ import {getConfirmationEmailHtml, getConfirmationEmailText} from './emailTemplat
 import {isEmail} from 'validator'
 import crypto from 'crypto'
 import {getServerSideURL} from '@/utilities/getURL'
+import {Resend} from 'resend'
+
 
 /**
  * Validates and normalizes an email address
@@ -45,7 +47,25 @@ export async function sendConfirmationEmail(email: string): Promise<{
 
   const existingConfirmation = docs[0]
 
-  if (existingConfirmation?.confirmed) {
+  // sync local entry with resend if resend id exists
+  if (existingConfirmation?.resend_id) {
+    const resend = new Resend(process.env.RESEND_API_KEY!);
+    const { data, error } = await resend.contacts.get({
+      id: existingConfirmation.resend_id,
+    });
+    if (!error && data) {
+      await payload.update({
+        collection: 'subscribers',
+        id: existingConfirmation.id,
+        data: {
+          subscribed: !data.unsubscribed,
+        },
+      })
+      existingConfirmation.subscribed = !data.unsubscribed
+    }
+  }
+
+  if (existingConfirmation?.subscribed) {
     return {
       success: false,
       message: 'This email is already confirmed and subscribed to our newsletter.',
@@ -76,7 +96,7 @@ export async function sendConfirmationEmail(email: string): Promise<{
       data: {
         email: normalizedEmail,
         token: crypto.randomBytes(32).toString('hex'),
-        confirmed: false,
+        subscribed: false,
         lastSent: new Date().toISOString(),
       },
     })

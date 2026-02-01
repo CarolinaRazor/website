@@ -962,7 +962,8 @@ export interface Subscriber {
   token?: string | null;
   lastSent?: string | null;
   lastSent_tz?: SupportedTimezones;
-  confirmed?: boolean | null;
+  subscribed?: boolean | null;
+  resend_id?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1806,7 +1807,8 @@ export interface SubscribersSelect<T extends boolean = true> {
   token?: T;
   lastSent?: T;
   lastSent_tz?: T;
-  confirmed?: T;
+  subscribed?: T;
+  resend_id?: T;
   updatedAt?: T;
   createdAt?: T;
 }

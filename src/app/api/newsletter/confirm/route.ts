@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (confirmation.confirmed) {
+    if (confirmation.subscribed) {
       return NextResponse.json(
         {success: false, message: 'This email has already been confirmed'},
         {status: 400}
@@ -54,23 +54,46 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    await payload.update({
-      collection: 'subscribers',
-      id: confirmation.id,
-      data: {
-        token: '',
-        confirmed: true,
-      },
-    })
-
     // add contact to resend
     const resend = new Resend(process.env.RESEND_API_KEY!);
 
-    await resend.contacts.create({
-      email: confirmation.email,
-      unsubscribed: false,
-      segments: [{id: process.env.NEWSLETTER_SEGMENT_1!}]
-    });
+    if (confirmation.resend_id) {
+      const {error} = await resend.contacts.update({
+        id: confirmation.resend_id,
+        unsubscribed: false,
+      });
+
+      if (!error) {
+        await payload.update({
+          collection: 'subscribers',
+          id: confirmation.id,
+          data: {
+            token: '',
+            subscribed: true,
+          },
+        })
+      }
+    } else {
+      const {data, error} = await resend.contacts.create({
+        email: confirmation.email,
+        unsubscribed: false,
+        segments: [{id: process.env.NEWSLETTER_SEGMENT_1!}]
+      });
+
+      if (!error) {
+        await payload.update({
+          collection: 'subscribers',
+          id: confirmation.id,
+          data: {
+            token: '',
+            subscribed: true,
+            resend_id: data.id
+          },
+        })
+      }
+    }
+
+
 
     return NextResponse.json({
       success: true,

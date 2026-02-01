@@ -23,9 +23,9 @@
     "test:int": "cross-ensvv NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
     "ci": "payload migrate && pnpm build && pnpm start",
     "generate:migration": "payload migrate:create",
-    "generate:newsletter": "tsx ./scripts/generate-newsletter.ts",
-    "generate:broadcast": "tsx ./scripts/generate-broadcast.ts",
-    "generate:clearratelimiter": "tsx ./scripts/clear-ratelimit-entries.ts"
+    "job:newsletter": "tsx ./scripts/generate-newsletter.ts",
+    "job:broadcast": "tsx ./scripts/generate-broadcast.ts",
+    "job:clearratelimiter": "tsx ./scripts/clear-ratelimit-entries.ts"
   },
   "dependencies": {
     "@heroui/navbar": "^2.2.27",

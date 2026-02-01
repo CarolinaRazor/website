@@ -43,7 +43,7 @@ export const Subscribers: CollectionConfig = {
       },
     },
     {
-      name: 'confirmed',
+      name: 'subscribed',
       type: 'checkbox',
       required: false,
       defaultValue: false,
@@ -51,5 +51,10 @@ export const Subscribers: CollectionConfig = {
         readOnly: true,
       },
     },
+    {
+      name: 'resend_id',
+      type: 'text',
+      required: false,
+    }
   ],
 }

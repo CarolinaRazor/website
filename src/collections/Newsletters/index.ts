@@ -1,7 +1,15 @@
 import type {CollectionConfig} from 'payload'
+import {nobody} from "@/collections/Users/access/nobody";
+import {authenticated} from "@/access/authenticated";
 
 export const Newsletters: CollectionConfig = {
   slug: 'newsletters',
+  access: {
+    create: nobody,
+    delete: nobody,
+    read: authenticated,
+    update: authenticated
+  },
   admin: {
     group: 'Newsletters',
     useAsTitle: 'generated'
