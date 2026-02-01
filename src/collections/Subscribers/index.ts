@@ -5,10 +5,10 @@ import admin from "@/collections/Users/access/admin";
 export const Subscribers: CollectionConfig = {
   slug: 'subscribers',
   access: {
-    create: admin,
+    create: nobody,
     delete: admin,
     read: admin,
-    update: nobody
+    update: admin
   },
   labels: {
     singular: 'Subscriber',
