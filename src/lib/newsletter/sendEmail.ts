@@ -101,11 +101,15 @@ export async function sendConfirmationEmail(email: string): Promise<{
       },
     })
   } else {
+    if (confirmationRecord.token == null || confirmationRecord.token === '') {
+      confirmationRecord.token = crypto.randomBytes(32).toString('hex')
+    }
     confirmationRecord = await payload.update({
       collection: 'subscribers',
       id: confirmationRecord.id,
       data: {
         lastSent: new Date().toISOString(),
+        token: confirmationRecord.token,
       },
     })
   }

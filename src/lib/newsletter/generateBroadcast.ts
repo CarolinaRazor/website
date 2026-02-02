@@ -28,6 +28,18 @@ export async function generateBroadcast(): Promise<{
 
     const newsletter = newsletters[0] as Newsletter
 
+    // Check if latest newsletter is older than 2 days
+    const newsletterDate = new Date(newsletter.generated)
+    const twoDaysAgo = new Date()
+    twoDaysAgo.setDate(twoDaysAgo.getDate() - 2)
+
+    if (newsletterDate < twoDaysAgo) {
+      return {
+        success: false,
+        message: `No new newsletter.`,
+      }
+    }
+
     if (!newsletter.posts || newsletter.posts.length === 0) {
       return {
         success: false,
