@@ -23,7 +23,10 @@ export const Subscribers: CollectionConfig = {
       name: 'email',
       type: 'email',
       required: true,
-      unique: true
+      unique: true,
+      admin: {
+        readOnly: true
+      }
     },
     {
       name: 'token',
@@ -55,6 +58,9 @@ export const Subscribers: CollectionConfig = {
       name: 'resend_id',
       type: 'text',
       required: false,
+      admin: {
+        readOnly: true
+      }
     }
   ],
 }
