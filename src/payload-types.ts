@@ -224,7 +224,7 @@ export interface Post {
   layout: (BannerBlock | CodeBlock | MediaBlock | CallToActionBlock | ContentBlock | FormBlock | RichTextBlock)[];
   featuredtext?: string | null;
   relatedPosts?: (number | Post)[] | null;
-  categories?: (number | Category)[] | null;
+  categories: (number | Category)[];
   meta?: {
     title?: string | null;
     /**
