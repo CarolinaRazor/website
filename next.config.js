@@ -10,6 +10,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 const nextConfig = {
   output: 'standalone',
   images: {
+    // dangerouslyAllowLocalIP: true,
     qualities: [25, 50, 75, 100],
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://www.liberatorch.com' */].map((item) => {

@@ -130,6 +130,7 @@ export const Posts: CollectionConfig<'posts'> = {
                 position: 'sidebar',
               },
               hasMany: true,
+              required: true,
               relationTo: 'categories',
             },
           ],
