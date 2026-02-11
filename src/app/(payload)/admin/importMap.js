@@ -32,6 +32,7 @@ import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from 
 import { RowLabel as RowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from '@/Footer/RowLabel'
 import { Icon as Icon_e93e9bd37dbcbcb6182f6bb2f2523bd9 } from '../../../components/Logo/Logo.tsx'
 import { Logo as Logo_e93e9bd37dbcbcb6182f6bb2f2523bd9 } from '../../../components/Logo/Logo.tsx'
+import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -67,5 +68,6 @@ export const importMap = {
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/Footer/RowLabel#RowLabel": RowLabel_1f6ff6ff633e3695d348f4f3c58f1466,
   "/components/Logo/Logo.tsx#Icon": Icon_e93e9bd37dbcbcb6182f6bb2f2523bd9,
-  "/components/Logo/Logo.tsx#Logo": Logo_e93e9bd37dbcbcb6182f6bb2f2523bd9
+  "/components/Logo/Logo.tsx#Logo": Logo_e93e9bd37dbcbcb6182f6bb2f2523bd9,
+  "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
