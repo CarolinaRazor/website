@@ -16,7 +16,7 @@ export const revalidateAuthor: CollectionAfterChangeHook<Post> = ({
       payload.logger.info(`Revalidating author at path: ${path}`)
 
       revalidatePath(path)
-      revalidateTag('authors-sitemap')
+      revalidateTag('authors-sitemap','max')
     }
 
     // If the post was previously published, we need to revalidate the old path
@@ -26,7 +26,7 @@ export const revalidateAuthor: CollectionAfterChangeHook<Post> = ({
       payload.logger.info(`Revalidating old post at path: ${oldPath}`)
 
       revalidatePath(oldPath)
-      revalidateTag('authors-sitemap')
+      revalidateTag('authors-sitemap','max')
     }
   }
   return doc
@@ -37,7 +37,7 @@ export const revalidateDelete: CollectionAfterDeleteHook<Post> = ({doc, req: {co
     const path = `/authors/${doc?.slug}`
 
     revalidatePath(path)
-    revalidateTag('authors-sitemap')
+    revalidateTag('authors-sitemap','max')
   }
 
   return doc
