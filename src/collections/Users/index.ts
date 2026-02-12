@@ -1,6 +1,5 @@
 import {CollectionConfig} from 'payload'
 
-import {authenticated} from '@/access/authenticated'
 import {createAuthor} from "@/collections/Users/hooks/createAuthor";
 import {protectRoles} from "@/collections/Users/hooks/protectRoles"
 import user from "@/collections/Users/access/user";
@@ -11,13 +10,6 @@ import {User} from '@/payload-types'
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  // access: {
-  //   admin: authenticated,
-  //   create: authenticated,
-  //   delete: authenticated,
-  //   read: authenticated,
-  //   update: authenticated,
-  // },
   access: {
     create: admin,
     read: user,

@@ -181,6 +181,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'newsletterSignup';
       }
+    | PersonnelCollection
   )[];
   meta?: {
     title?: string | null;
@@ -924,6 +925,19 @@ export interface MagazineBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PersonnelCollection".
+ */
+export interface PersonnelCollection {
+  /**
+   * Select users to display in this personnel collection
+   */
+  personnel: (number | User)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'personnelCollection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "authors".
  */
 export interface Author {
@@ -1345,6 +1359,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        personnelCollection?: T | PersonnelCollectionSelect<T>;
       };
   meta?:
     | T
@@ -1462,6 +1477,15 @@ export interface MagazineBlockSelect<T extends boolean = true> {
  */
 export interface RichTextBlockSelect<T extends boolean = true> {
   richText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PersonnelCollection_select".
+ */
+export interface PersonnelCollectionSelect<T extends boolean = true> {
+  personnel?: T;
   id?: T;
   blockName?: T;
 }

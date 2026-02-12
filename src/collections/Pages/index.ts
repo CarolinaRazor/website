@@ -10,6 +10,7 @@ import {MediaBlock} from '../../blocks/MediaBlock/config'
 import {MagazineBlock} from "@/blocks/MagazineBlock/config";
 import {VerticalCategoryStackBlock} from "@/blocks/VerticalCategoryStackBlock/config";
 import {NewsletterSignupBlock} from "@/blocks/NewsletterSignupBlock/config";
+import {PersonnelCollection} from "@/blocks/PersonnelCollection/config";
 import {hero} from '@/heros/config'
 import {slugField} from '@/fields/slug'
 import {populatePublishedAt} from '../../hooks/populatePublishedAt'
@@ -82,7 +83,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, MagazineBlock, VerticalCategoryStackBlock, RichTextBlock, NewsletterSignupBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, MagazineBlock, VerticalCategoryStackBlock, RichTextBlock, NewsletterSignupBlock, PersonnelCollection],
               required: true,
               admin: {
                 initCollapsed: true,
