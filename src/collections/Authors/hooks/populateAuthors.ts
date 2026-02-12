@@ -23,6 +23,7 @@ export const populateAuthors: CollectionAfterReadHook = async ({doc, req: {paylo
           name: userDoc.name,
           avatar: userDoc.avatar || null,
           jobTitle: userDoc.jobTitle || null,
+          links: doc.links || [],
         },
       ]
     }

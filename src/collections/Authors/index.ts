@@ -87,6 +87,44 @@ export const Authors: CollectionConfig<'authors'> = {
       }
     },
     {
+      name: 'links',
+      label: 'Social Links',
+      type: 'array',
+      admin: {
+        position: 'sidebar',
+      },
+      fields: [
+        {
+          name: 'label',
+          label: 'Label',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'url',
+          label: 'URL',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'icon',
+          label: 'Icon',
+          type: 'select',
+          required: true,
+          options: [
+            { label: 'Twitter/X', value: 'twitter' },
+            { label: 'LinkedIn', value: 'linkedin' },
+            { label: 'GitHub', value: 'github' },
+            { label: 'Email', value: 'mail' },
+            { label: 'Website', value: 'globe' },
+            { label: 'Instagram', value: 'instagram' },
+            { label: 'Facebook', value: 'facebook' },
+            { label: 'YouTube', value: 'youtube' },
+          ],
+        },
+      ],
+    },
+    {
       type: 'tabs',
       tabs: [
         {
@@ -138,6 +176,24 @@ export const Authors: CollectionConfig<'authors'> = {
                   admin: {
                     description: 'Job Title',
                   },
+                },
+                {
+                  name: 'links',
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'label',
+                      type: 'text',
+                    },
+                    {
+                      name: 'url',
+                      type: 'text',
+                    },
+                    {
+                      name: 'icon',
+                      type: 'text',
+                    },
+                  ],
                 },
               ],
             },

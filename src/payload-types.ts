@@ -944,6 +944,14 @@ export interface Author {
   id: number;
   name: string;
   author_id: string;
+  links?:
+    | {
+        label: string;
+        url: string;
+        icon: 'twitter' | 'linkedin' | 'github' | 'mail' | 'globe' | 'instagram' | 'facebook' | 'youtube';
+        id?: string | null;
+      }[]
+    | null;
   layout?: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | RichTextBlock)[] | null;
   populatedAuthors?:
     | {
@@ -954,6 +962,14 @@ export interface Author {
          * Job Title
          */
         jobTitle?: string | null;
+        links?:
+          | {
+              label?: string | null;
+              url?: string | null;
+              icon?: string | null;
+              id?: string | null;
+            }[]
+          | null;
       }[]
     | null;
   meta?: {
@@ -1564,6 +1580,14 @@ export interface CodeBlockSelect<T extends boolean = true> {
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
   author_id?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
   layout?:
     | T
     | {
@@ -1581,6 +1605,14 @@ export interface AuthorsSelect<T extends boolean = true> {
         name?: T;
         avatar?: T;
         jobTitle?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              icon?: T;
+              id?: T;
+            };
       };
   meta?:
     | T
