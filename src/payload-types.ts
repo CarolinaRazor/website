@@ -70,11 +70,13 @@ export interface Config {
     footer: Footer;
     'featured-article': FeaturedArticle;
     'breaking-header': BreakingHeader;
+    'navigation-header': NavigationHeader;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     'featured-article': FeaturedArticleSelect<false> | FeaturedArticleSelect<true>;
     'breaking-header': BreakingHeaderSelect<false> | BreakingHeaderSelect<true>;
+    'navigation-header': NavigationHeaderSelect<false> | NavigationHeaderSelect<true>;
   };
   locale: null;
   user: User;
@@ -2255,6 +2257,22 @@ export interface BreakingHeader {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation-header".
+ */
+export interface NavigationHeader {
+  id: number;
+  Links?:
+    | {
+        label?: string | null;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -2293,6 +2311,22 @@ export interface FeaturedArticleSelect<T extends boolean = true> {
 export interface BreakingHeaderSelect<T extends boolean = true> {
   visible?: T;
   text?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation-header_select".
+ */
+export interface NavigationHeaderSelect<T extends boolean = true> {
+  Links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

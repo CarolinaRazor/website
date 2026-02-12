@@ -24,6 +24,7 @@ import {Invitations} from "@/collections/Invitations";
 import {resendAdapter} from '@payloadcms/email-resend'
 import {Subscribers} from "@/collections/Subscribers";
 import {Newsletters} from "@/collections/Newsletters";
+import {SiteHeader} from "@/globals/SiteHeader/config";
 
 
 const filename = fileURLToPath(import.meta.url)
@@ -93,7 +94,7 @@ export default buildConfig({
   collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations, Subscribers, Newsletters],
   cors: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   csrf: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
-  globals: [Footer, FeaturedArticle, BreakingHeader],
+  globals: [Footer, FeaturedArticle, BreakingHeader, SiteHeader],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
