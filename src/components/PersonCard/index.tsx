@@ -3,13 +3,28 @@ import Link from 'next/link'
 import {User} from '@/payload-types'
 import {Media} from '@/components/Media'
 import {cn} from '@/utilities/ui'
+import {getPayload} from 'payload'
+import configPromise from '@payload-config'
 
 type PersonCardProps = {
-  user: User
+  userId: number | User
   className?: string
 }
 
-export const PersonCard: React.FC<PersonCardProps> = ({ user, className }) => {
+export const PersonCard = async ({ userId, className }: PersonCardProps) => {
+  let user: User
+
+  if (typeof userId === 'number') {
+    const payload = await getPayload({ config: configPromise })
+    user = await payload.findByID({
+      collection: 'users',
+      id: userId,
+      depth: 1,
+    })
+  } else {
+    user = userId
+  }
+
   const { id, name, avatar, jobTitle } = user
 
   return (
@@ -20,7 +35,7 @@ export const PersonCard: React.FC<PersonCardProps> = ({ user, className }) => {
         className
       )}
     >
-      <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-border">
+      <div className="relative w-32 h-32 sm:w-36 sm:h-36 md:w-32 md:h-32 rounded-full overflow-hidden ">
         {avatar && typeof avatar === 'object' ? (
           <Media
             // @ts-ignore
@@ -39,7 +54,7 @@ export const PersonCard: React.FC<PersonCardProps> = ({ user, className }) => {
           {name}
         </p>
         {jobTitle && (
-          <p className="text-sm sm:text-base md:text-sm text-muted-foreground text-center">
+          <p className="text-sm sm:text-base md:text-sm text-muted-foreground text-center -mt-3">
             {jobTitle}
           </p>
         )}
