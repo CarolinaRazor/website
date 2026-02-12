@@ -1,5 +1,5 @@
 // import {payloadCloudPlugin} from '@payloadcms/payload-cloud'
-import {formBuilderPlugin} from '@payloadcms/plugin-form-builder'
+import {fields, formBuilderPlugin} from '@payloadcms/plugin-form-builder'
 import {nestedDocsPlugin} from '@payloadcms/plugin-nested-docs'
 import {redirectsPlugin} from '@payloadcms/plugin-redirects'
 import {seoPlugin} from '@payloadcms/plugin-seo'
@@ -62,6 +62,27 @@ export const plugins: Plugin[] = [
   formBuilderPlugin({
     fields: {
       payment: false,
+      radio: {
+        ...fields.radio,
+        fields: [
+          ...(fields.radio && 'fields' in fields.radio
+            ? fields.radio.fields.map((field) => {
+              if ('name' in field && field.name === 'radio') {
+                return {
+                  ...field,
+                }
+              }
+              return field
+            })
+            : []),
+          {
+            name: 'otherOption',
+            type: 'checkbox',
+            label: 'Allow a custom response',
+            defaultValue: false,
+          },
+        ],
+      },
     },
     formSubmissionOverrides: {
       admin: {
