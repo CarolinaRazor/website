@@ -160,9 +160,9 @@ export default async function Page({searchParams: searchParamsPromise}: Args) {
   const totalPages = posts.totalPages
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="pt-4 md:pt-12 pb-24">
       <PageClient/>
-      <div className="container mb-16">
+      <div className="container mb-8">
         <div className="prose dark:prose-invert max-w-none text-center">
           <h1 className="mb-8 lg:mb-6">Search</h1>
 
