@@ -1,4 +1,4 @@
-import { Field } from 'payload'
+import {Field} from 'payload'
 
 export const searchFields: Field[] = [
   {
@@ -7,6 +7,17 @@ export const searchFields: Field[] = [
     index: true,
     admin: {
       readOnly: true,
+    },
+  },
+  {
+    name: 'publishedAt',
+    type: 'date',
+    index: true,
+    admin: {
+      readOnly: true,
+      date: {
+        pickerAppearance: 'dayAndTime',
+      },
     },
   },
   {
@@ -54,6 +65,28 @@ export const searchFields: Field[] = [
       },
       {
         name: 'title',
+        type: 'text',
+      },
+    ],
+  },
+  {
+    label: 'Authors',
+    name: 'authors',
+    type: 'array',
+    admin: {
+      readOnly: true,
+    },
+    fields: [
+      {
+        name: 'relationTo',
+        type: 'text',
+      },
+      {
+        name: 'authorID',
+        type: 'text',
+      },
+      {
+        name: 'name',
         type: 'text',
       },
     ],

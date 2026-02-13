@@ -4,6 +4,7 @@ import {getPayload} from 'payload'
 import configPromise from '@payload-config'
 import React, {cache} from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import {PayloadRedirects} from '@/components/PayloadRedirects'
 import {LivePreviewListener} from '@/components/LivePreviewListener'
 import {RenderBlocks} from '@/blocks/RenderBlocks'
@@ -12,6 +13,7 @@ import PageClient from './page.client'
 import {FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaTwitter, FaYoutube} from 'react-icons/fa'
 import {MdEmail} from 'react-icons/md'
 import {HiGlobeAlt} from 'react-icons/hi'
+import {Card} from '@/components/Card'
 
 const iconMap = {
   twitter: FaTwitter,
@@ -53,6 +55,20 @@ export default async function AuthorPage({params: paramsPromise}: Args) {
   const {layout, populatedAuthors} = author
   const firstAuthor = populatedAuthors?.[0]
   // console.log(populatedAuthors)
+
+  // Fetch latest 6 posts by this author
+  const payload = await getPayload({config: configPromise})
+  const authorPosts = firstAuthor?.id ? await payload.find({
+    collection: 'posts',
+    where: {
+      authors: {
+        contains: firstAuthor.id,
+      },
+    },
+    limit: 6,
+    sort: '-publishedAt',
+    depth: 1,
+  }) : null
 
   return (
     <article className="pb-24 -mt-3">
@@ -122,6 +138,50 @@ export default async function AuthorPage({params: paramsPromise}: Args) {
       <div className="max-w-4xl mx-auto px-4 md:px-0">
         <RenderBlocks blocks={layout || []} constraint="page"/>
       </div>
+
+      {/* Latest Articles Section */}
+      {authorPosts && authorPosts.docs.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 md:px-8 mt-16">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+            Latest Articles
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {authorPosts.docs.map((post) => (
+              <Card
+                key={post.id}
+                doc={post}
+                relationTo="posts"
+                showCategories
+              />
+            ))}
+          </div>
+          {firstAuthor?.id && (
+            <div className="flex justify-center mt-10">
+              <Link
+                href={`/search?author=${firstAuthor.id}`}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium shadow-sm hover:shadow-md"
+              >
+                View All Articles
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+
     </article>
   )
 }

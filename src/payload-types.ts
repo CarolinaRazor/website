@@ -1094,6 +1094,7 @@ export interface Search {
     value: number | Post;
   };
   slug?: string | null;
+  publishedAt?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1104,6 +1105,14 @@ export interface Search {
         relationTo?: string | null;
         categoryID?: string | null;
         title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  authors?:
+    | {
+        relationTo?: string | null;
+        authorID?: string | null;
+        name?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -2099,6 +2108,7 @@ export interface SearchSelect<T extends boolean = true> {
   priority?: T;
   doc?: T;
   slug?: T;
+  publishedAt?: T;
   meta?:
     | T
     | {
@@ -2112,6 +2122,14 @@ export interface SearchSelect<T extends boolean = true> {
         relationTo?: T;
         categoryID?: T;
         title?: T;
+        id?: T;
+      };
+  authors?:
+    | T
+    | {
+        relationTo?: T;
+        authorID?: T;
+        name?: T;
         id?: T;
       };
   updatedAt?: T;
