@@ -47,7 +47,7 @@ export const Card: React.FC<{
       href={href}
       ref={link.ref}
       className={cn(
-        'group block rounded-xl overflow-hidden transition-all duration-200 border border-border/60 hover:shadow-md hover:-translate-y-0.5',
+        'group block overflow-hidden border border-border/60',
         metaImage
           ? 'bg-card'
           : 'bg-muted/70 dark:bg-muted/40 backdrop-blur-sm',
