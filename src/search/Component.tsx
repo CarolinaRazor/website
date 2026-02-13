@@ -21,6 +21,9 @@ export const Search: React.FC = () => {
       params.delete('q')
     }
 
+    // Reset to page 1 when search query changes
+    params.delete('page')
+
     const newUrl = `/search${params.toString() ? `?${params.toString()}` : ''}`
     const currentPath = window.location.pathname + window.location.search
 

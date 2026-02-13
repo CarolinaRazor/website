@@ -6,8 +6,11 @@ import {getPayload} from 'payload'
 import React from 'react'
 import {Search} from '@/search/Component'
 import {SearchFilters} from '@/search/SearchFilters'
+import {Pagination} from '@/search/Pagination'
 import PageClient from './page.client'
 import {CardPostData} from '@/components/Card'
+
+const RESULTS_PER_PAGE = 12
 
 type Args = {
   searchParams: Promise<{
@@ -16,11 +19,13 @@ type Args = {
     author?: string
     dateRange?: string
     sort?: string
+    page?: string
   }>
 }
 
 export default async function Page({searchParams: searchParamsPromise}: Args) {
-  const {q: query, category, author, dateRange, sort} = await searchParamsPromise
+  const {q: query, category, author, dateRange, sort, page: pageParam} = await searchParamsPromise
+  const currentPage = Math.max(1, parseInt(pageParam || '1', 10))
   const payload = await getPayload({config: configPromise})
 
   const [categoriesResult, authorsResult] = await Promise.all([
@@ -108,10 +113,37 @@ export default async function Page({searchParams: searchParamsPromise}: Args) {
     whereConditions.and = andConditions
   }
 
+  // Determine sort field for database query
+  let sortField: string = '-publishedAt' // default: newest first
+
+  if (sort) {
+    switch (sort) {
+      case 'newest':
+        sortField = '-publishedAt'
+        break
+      case 'oldest':
+        sortField = 'publishedAt'
+        break
+      case 'title-asc':
+        sortField = 'title'
+        break
+      case 'title-desc':
+        sortField = '-title'
+        break
+      case 'relevance':
+        // For relevance, we'll use default and let Payload handle it
+        sortField = '-publishedAt'
+        break
+    }
+  }
+
+  // Fetch paginated results directly from database
   const posts = await payload.find({
     collection: 'search',
     depth: 1,
-    limit: 100,
+    limit: RESULTS_PER_PAGE,
+    page: currentPage,
+    sort: sortField,
     select: {
       title: true,
       slug: true,
@@ -120,32 +152,12 @@ export default async function Page({searchParams: searchParamsPromise}: Args) {
       meta: true,
       publishedAt: true,
     },
-    pagination: false,
     ...(Object.keys(whereConditions).length > 0 ? { where: whereConditions } : {}),
   })
 
-  let filteredPosts: any[] = posts.docs as any
-
-  if (sort && sort !== 'relevance') {
-    filteredPosts = [...filteredPosts].sort((a: any, b: any) => {
-      switch (sort) {
-        case 'newest':
-          return new Date((b as any)['publishedAt'] || 0).getTime() - new Date((a as any)['publishedAt'] || 0).getTime()
-        case 'oldest':
-          return new Date((a as any)['publishedAt'] || 0).getTime() - new Date((b as any)['publishedAt'] || 0).getTime()
-        case 'title-asc':
-          return (a.title || '').localeCompare(b.title || '')
-        case 'title-desc':
-          return (b.title || '').localeCompare(a.title || '')
-        default:
-          return 0
-      }
-    })
-  } else if (!sort || sort === 'newest') {
-    filteredPosts = [...filteredPosts].sort((a: any, b: any) => {
-      return new Date((b as any)['publishedAt'] || 0).getTime() - new Date((a as any)['publishedAt'] || 0).getTime()
-    })
-  }
+  const paginatedPosts = posts.docs
+  const totalResults = posts.totalDocs
+  const totalPages = posts.totalPages
 
   return (
     <div className="pt-24 pb-24">
@@ -174,14 +186,22 @@ export default async function Page({searchParams: searchParamsPromise}: Args) {
         />
       </div>
 
-      {filteredPosts.length > 0 ? (
+      {totalResults > 0 ? (
         <>
           <div className="container mb-4">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Found {filteredPosts.length} result{filteredPosts.length !== 1 ? 's' : ''}
+              Found {totalResults} result{totalResults !== 1 ? 's' : ''}
             </p>
           </div>
-          <CollectionArchive posts={filteredPosts as unknown as CardPostData[]} />
+          <CollectionArchive posts={paginatedPosts as unknown as CardPostData[]} />
+          <div className="container">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              totalResults={totalResults}
+              resultsPerPage={RESULTS_PER_PAGE}
+            />
+          </div>
         </>
       ) : (
         <div className="container">No results found.</div>
