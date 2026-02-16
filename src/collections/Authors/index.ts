@@ -23,17 +23,20 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import {RichTextBlock} from "@/blocks/RichTextBlock/config";
-import admin from "@/collections/Users/access/admin";
 import {User} from "@/payload-types";
 import {checkRole} from "@/collections/Users/access/checkRole";
+import {nobody} from "../Users/access/nobody"
 
 
 export const Authors: CollectionConfig<'authors'> = {
   slug: 'authors',
-
+  labels: {
+    singular: 'Author Bio Page',
+    plural: 'Author Bio Pages',
+  },
   access: {
-    create: admin,
-    delete: admin,
+    create: nobody,
+    delete: nobody,
     read: authenticatedOrPublished,
     update: ({ req: { user } }) => {
       if (checkRole(['admin'], user as User)) {
@@ -44,7 +47,6 @@ export const Authors: CollectionConfig<'authors'> = {
       };
     },
   },
-
   admin: {
     group: "Users",
     defaultColumns: ['name', 'slug', 'updatedAt'],
