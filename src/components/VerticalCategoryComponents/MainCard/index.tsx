@@ -6,6 +6,26 @@ import {Media} from '@/components/Media'
 export function MainCard({ post }: { post: Post }) {
   const titleSize = 'text-2xl'
 
+  const authors = post.authors
+
+  const regularAuthorNames = authors
+    ?.map((author) => {
+      if (typeof author === 'object' && author !== null && 'name' in author) {
+        return author.name
+      }
+      return null
+    })
+    .filter((name): name is string => name !== null)
+
+  const guestAuthorNames = post.guestAuthors?.filter((name): name is string => !!name)
+
+  const authorNames =
+    regularAuthorNames && regularAuthorNames.length > 0
+      ? regularAuthorNames.join(' & ')
+      : guestAuthorNames && guestAuthorNames.length > 0
+        ? guestAuthorNames.join(' & ')
+        : 'Anonymous'
+
   const original = post.heroImage
   const preferredImage =
     typeof original === "object" && original !== null
@@ -39,6 +59,9 @@ export function MainCard({ post }: { post: Post }) {
         >
           {post.title}
         </h2>
+        {authorNames && (
+          <p className="text-sm text-sky-500 mt-0 mb-1">{authorNames}</p>
+        )}
       </Link>
     </article>
   )

@@ -3,23 +3,6 @@ import Link from 'next/link'
 import {Post} from '@/payload-types'
 import {Media} from '@/components/Media'
 
-// required for grabbing extra featured article text
-function getTextFromContent(content: any): string {
-  if (!content?.root?.children) return ''
-
-  let text = ''
-
-  function traverse(nodes: any[]) {
-    for (const node of nodes) {
-      if (node.text) text += node.text + ' '
-      if (node.children) traverse(node.children)
-    }
-  }
-
-  traverse(content.root.children)
-  return text.trim()
-}
-
 export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium' }) {
   const titleSize = size === 'medium' ? 'text-3xl' : 'text-xl'
   const excerptSize = size === 'medium' ? 'text-lg' : 'text-sm'
@@ -35,13 +18,25 @@ export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium
   const category =
     (post.categories?.[0] as any)?.title ?? 'Uncategorized'
 
-  const formattedDate = post.createdAt
-    ? new Date(post.createdAt).toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+  const authors = post.authors
+
+  const regularAuthorNames = authors
+    ?.map((author) => {
+      if (typeof author === 'object' && author !== null && 'name' in author) {
+        return author.name
+      }
+      return null
     })
-    : null
+    .filter((name): name is string => name !== null)
+
+  const guestAuthorNames = post.guestAuthors?.filter((name): name is string => !!name)
+
+  const authorNames =
+    regularAuthorNames && regularAuthorNames.length > 0
+      ? regularAuthorNames.join(' & ')
+      : guestAuthorNames && guestAuthorNames.length > 0
+        ? guestAuthorNames.join(' & ')
+        : 'Anonymous'
 
   const original = post.heroImage;
 
@@ -85,11 +80,13 @@ export function MagazineCard({post, size}: { post: Post; size: 'small' | 'medium
           {post.title}
         </h2>
 
-        {formattedDate && (
-          <p className="text-xs text-muted-foreground mt-1">{formattedDate}</p>
+        {authorNames && (
+          <p className="text-sm text-sky-500 mt-1">{authorNames}</p>
         )}
 
-        <p className={`${excerptSize} text-muted-foreground mt-1`}>{excerpt}</p>
+        {size=='medium' && excerpt && (
+          <p className={`${excerptSize} text-muted-foreground -mt-2`}>{excerpt}</p>
+        )}
       </Link>
     </article>
   )

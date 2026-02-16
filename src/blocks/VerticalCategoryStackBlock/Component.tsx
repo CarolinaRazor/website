@@ -116,7 +116,7 @@ export const VerticalCategoryStackBlock = async ({
 
             {/* Sub articles */}
             {subPosts.length > 0 &&
-              <div className="mt-6 space-y-4">
+              <div className="mt-2 space-y-4 mb-2">
                 {subPosts.map((p) => (
                   <HorizontalCard key={p.id} post={p}/>
                 ))}
@@ -124,12 +124,12 @@ export const VerticalCategoryStackBlock = async ({
             }
 
             {/* Read more button */}
-            <div className="mt-6">
+            <div className="mt-0">
               <Link
                 href={`/posts/category/${categoryDoc.slug}`}
                 className="text-primary font-semibold hover:underline"
               >
-                Read more →
+                View more →
               </Link>
             </div>
           </div>

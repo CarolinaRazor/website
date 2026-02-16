@@ -7,6 +7,26 @@ export function HorizontalCard({ post }: { post: Post }) {
   const titleSize = 'text-xl'
   const squareSize = 112 // 28 * 4 = 112px
 
+  const authors = post.authors
+
+  const regularAuthorNames = authors
+    ?.map((author) => {
+      if (typeof author === 'object' && author !== null && 'name' in author) {
+        return author.name
+      }
+      return null
+    })
+    .filter((name): name is string => name !== null)
+
+  const guestAuthorNames = post.guestAuthors?.filter((name): name is string => !!name)
+
+  const authorNames =
+    regularAuthorNames && regularAuthorNames.length > 0
+      ? regularAuthorNames.join(' & ')
+      : guestAuthorNames && guestAuthorNames.length > 0
+        ? guestAuthorNames.join(' & ')
+        : 'Anonymous'
+
   const original = post.heroImage
   const preferredImage =
     typeof original === "object" && original !== null
@@ -24,7 +44,7 @@ export function HorizontalCard({ post }: { post: Post }) {
 
   return (
     <Link href={`/posts/${post.slug}`} className="block group">
-      <article className="flex gap-3 items-start">
+      <article className="flex gap-3 items-start ">
         {preferredImage && (
           <div
             className="relative flex-shrink-0 overflow-hidden rounded-md"
@@ -38,11 +58,16 @@ export function HorizontalCard({ post }: { post: Post }) {
             />
           </div>
         )}
-        <h2
-          className={`${titleSize} leading-snug group-hover:text-primary transition-colors flex-1`}
-        >
-          {post.title}
-        </h2>
+        <div className="flex-1">
+          <h2
+            className={`${titleSize} leading-snug group-hover:text-primary transition-colors`}
+          >
+            {post.title}
+          </h2>
+          {authorNames && (
+            <p className="text-sm text-sky-400 mt-0 mb-0">{authorNames}</p>
+          )}
+        </div>
       </article>
     </Link>
   )
