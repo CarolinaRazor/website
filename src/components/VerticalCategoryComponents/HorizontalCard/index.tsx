@@ -12,11 +12,11 @@ export function HorizontalCard({ post }: { post: Post }) {
     typeof original === "object" && original !== null
       ? {
         ...original,
-        ...(original.sizes?.small
+        ...(original.sizes?.square
           ? {
-            url: original.sizes.small.url,
-            width: original.sizes.small.width,
-            height: original.sizes.small.height,
+            url: original.sizes.square.url,
+            width: original.sizes.square.width,
+            height: original.sizes.square.height,
           }
           : {}),
       }
