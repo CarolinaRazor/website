@@ -48,6 +48,11 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
+    components: {
+      edit: {
+        PublishButton: '@/components/CustomPublishButton/index.tsx',
+      },
+    },
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) =>
