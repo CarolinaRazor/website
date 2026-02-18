@@ -28,7 +28,7 @@ import {FixedToolbarFeature, InlineToolbarFeature, lexicalEditor,} from '@payloa
 import author from '@/collections/Users/access/author'
 import seditor from '@/collections/Users/access/seditor'
 import sauthor from '@/collections/Users/access/sauthor'
-import editor from '../Users/access/editor'
+import updatePost from './access/updatePost'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -36,7 +36,7 @@ export const Posts: CollectionConfig<'posts'> = {
     create: author,
     delete: seditor || sauthor,
     read: authenticatedOrPublished,
-    update: author || editor,
+    update: updatePost, // disallows regular users from updating published posts
   },
   defaultPopulate: {
     title: true,
