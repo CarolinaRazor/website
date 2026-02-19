@@ -48,6 +48,20 @@ const DashboardWidget: React.FC = () => {
 
   const canCreatePost = user && checkRole(['author', 'editor', 'sauthor', 'seditor', 'admin'], user as User)
 
+  const canMoveItem = (item: WorkflowItemWithPopulated): boolean => {
+    if (!user) return false
+
+    if (checkRole(['admin', 'sauthor', 'seditor', 'editor'], user as User)) {
+      return true
+    }
+
+    if (item.createdBy.id === user.id) {
+      return true
+    }
+
+    return item.assignedTo?.some(assignee => assignee.id === user.id) ?? false
+  }
+
   const fetchWorkflowItems = useCallback(async () => {
     try {
       setLoading(true)
@@ -102,6 +116,9 @@ const DashboardWidget: React.FC = () => {
   }
 
   const handleDragStart = (item: WorkflowItemWithPopulated) => {
+    if (!canMoveItem(item)) {
+      return // Don't allow dragging if user doesn't have permission
+    }
     setDraggedItem(item)
   }
 
@@ -123,6 +140,14 @@ const DashboardWidget: React.FC = () => {
       setDraggedItem(null)
       return
     }
+
+    // Double-check permission before moving
+    if (!canMoveItem(draggedItem)) {
+      setDraggedItem(null)
+      alert('You do not have permission to move this item.')
+      return
+    }
+
     const previousStatus = draggedItem.status
 
     // assumes the update works on the server's end for speed
@@ -358,6 +383,7 @@ const DashboardWidget: React.FC = () => {
                       onDragStart={handleDragStart}
                       onDragEnd={handleDragEnd}
                       onClick={handleItemClick}
+                      canMove={canMoveItem(item)}
                     />
                   ))}
                 </div>

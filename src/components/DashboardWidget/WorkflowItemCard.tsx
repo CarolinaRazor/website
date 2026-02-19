@@ -16,6 +16,7 @@ interface WorkflowItemCardProps {
   onDragStart: (item: WorkflowItemWithPopulated) => void
   onDragEnd: () => void
   onClick: (item: WorkflowItemWithPopulated) => void
+  canMove: boolean
 }
 
 export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
@@ -26,8 +27,13 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
   onDragStart,
   onDragEnd,
   onClick,
+  canMove,
 }) => {
   const handleDragStart = (e: React.DragEvent) => {
+    if (!canMove) {
+      e.preventDefault()
+      return
+    }
     e.dataTransfer.effectAllowed = 'move'
     onDragStart(item)
   }
@@ -39,12 +45,13 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
 
   return (
     <div
-      className="workflow-widget__kanban-card"
-      draggable
+      className={`workflow-widget__kanban-card ${!canMove ? 'workflow-widget__kanban-card--no-move' : ''}`}
+      draggable={canMove}
       onDragStart={handleDragStart}
       onDragEnd={onDragEnd}
       onClick={handleClick}
       style={{ borderLeftColor: color, cursor: 'pointer' }}
+      title={!canMove ? 'You cannot move this item' : undefined}
     >
       <div className="workflow-widget__kanban-card-header">
         <div className="workflow-widget__kanban-card-avatar">
