@@ -29,7 +29,6 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { SlugComponent as SlugComponent_92cc057d0a2abb4f6cf0307edf59f986 } from '@/fields/slug/SlugComponent'
 import { default as default_8aa39ec0fb26519a6c074385273f0353 } from '@/components/CustomPublishButton/index.tsx'
 import { default as default_b9012c9e77bf00600ecdbd101a5580f1 } from '@/components/BackToDashboard'
-import { default as default_c3b22a1abf3375b75399cfed03238805 } from '@/components/LinkedPostButton'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { RowLabel as RowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from '@/Footer/RowLabel'
@@ -70,7 +69,6 @@ export const importMap = {
   "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_92cc057d0a2abb4f6cf0307edf59f986,
   "@/components/CustomPublishButton/index.tsx#default": default_8aa39ec0fb26519a6c074385273f0353,
   "@/components/BackToDashboard#default": default_b9012c9e77bf00600ecdbd101a5580f1,
-  "@/components/LinkedPostButton#default": default_c3b22a1abf3375b75399cfed03238805,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/Footer/RowLabel#RowLabel": RowLabel_1f6ff6ff633e3695d348f4f3c58f1466,

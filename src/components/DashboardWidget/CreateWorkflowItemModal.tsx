@@ -23,6 +23,7 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
   const [priority, setPriority] = useState('medium')
   const [createdBy, setCreatedBy] = useState<string | number>(user.id)
   const [assignedTo, setAssignedTo] = useState<(string | number)[]>([])
+  const [links, setLinks] = useState<Array<{ label: string; url: string }>>([])
   const [users, setUsers] = useState<User[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const [creatorSearchQuery, setCreatorSearchQuery] = useState('')
@@ -73,6 +74,9 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
           priority,
           assignedTo: assignedTo.length > 0 ? assignedTo : undefined,
           createdBy: createdBy,
+          links: links.filter(link => link.label.trim() && link.url.trim()).length > 0
+            ? links.filter(link => link.label.trim() && link.url.trim())
+            : undefined,
         }),
       })
 
@@ -96,6 +100,20 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
         ? prev.filter(id => id !== userId)
         : [...prev, userId]
     )
+  }
+
+  const addLink = () => {
+    setLinks(prev => [...prev, { label: '', url: '' }])
+  }
+
+  const removeLink = (index: number) => {
+    setLinks(prev => prev.filter((_, i) => i !== index))
+  }
+
+  const updateLink = (index: number, field: 'label' | 'url', value: string) => {
+    setLinks(prev => prev.map((link, i) =>
+      i === index ? { ...link, [field]: value } : link
+    ))
   }
 
   const filteredUsers = users.filter(u => {
@@ -243,6 +261,52 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
                 Only admins, super editors, and super authors can change the creator.
               </p>
             )}
+          </div>
+
+          <div className="workflow-modal__field">
+            <label>Links</label>
+            <div className="workflow-modal__links-container">
+              {links.map((link, index) => (
+                <div key={index} className="workflow-modal__link-row">
+                  <input
+                    type="text"
+                    placeholder="Label (e.g., Google Doc)"
+                    value={link.label}
+                    onChange={(e) => updateLink(index, 'label', e.target.value)}
+                    className="workflow-modal__link-input"
+                  />
+                  <input
+                    type="url"
+                    placeholder="URL"
+                    value={link.url}
+                    onChange={(e) => updateLink(index, 'url', e.target.value)}
+                    className="workflow-modal__link-input"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeLink(index)}
+                    className="workflow-modal__link-remove"
+                    aria-label="Remove link"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={addLink}
+                className="workflow-modal__link-add"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add Link</span>
+              </button>
+            </div>
           </div>
 
           <div className="workflow-modal__field">

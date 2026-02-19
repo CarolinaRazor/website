@@ -15,6 +15,7 @@ interface WorkflowItemCardProps {
   formatDate: (date: string) => string
   onDragStart: (item: WorkflowItemWithPopulated) => void
   onDragEnd: () => void
+  onClick: (item: WorkflowItemWithPopulated) => void
 }
 
 export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
@@ -24,20 +25,26 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
   formatDate,
   onDragStart,
   onDragEnd,
+  onClick,
 }) => {
   const handleDragStart = (e: React.DragEvent) => {
     e.dataTransfer.effectAllowed = 'move'
     onDragStart(item)
   }
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    onClick(item)
+  }
+
   return (
-    <a
-      href={`${adminURL}/collections/workflow-items/${item.id}`}
+    <div
       className="workflow-widget__kanban-card"
       draggable
       onDragStart={handleDragStart}
       onDragEnd={onDragEnd}
-      style={{ borderLeftColor: color }}
+      onClick={handleClick}
+      style={{ borderLeftColor: color, cursor: 'pointer' }}
     >
       <div className="workflow-widget__kanban-card-header">
         <div className="workflow-widget__kanban-card-avatar">
@@ -131,6 +138,6 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
           <span>Due {new Date(item.dueDate).toLocaleDateString()}</span>
         </div>
       )}
-    </a>
+    </div>
   )
 }

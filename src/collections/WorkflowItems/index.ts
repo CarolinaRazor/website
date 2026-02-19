@@ -21,7 +21,7 @@ export const WorkflowItems: CollectionConfig = {
     group: 'Workflow',
     components: {
       edit: {
-        beforeDocumentControls: ['@/components/BackToDashboard','@/components/LinkedPostButton'],
+        beforeDocumentControls: ['@/components/BackToDashboard'],
       },
     },
   },
@@ -121,6 +121,32 @@ export const WorkflowItems: CollectionConfig = {
           pickerAppearance: 'dayOnly',
         },
       },
+    },
+    {
+      name: 'links',
+      type: 'array',
+      label: 'Links',
+      admin: {
+        description: 'Add relevant links for this workflow item',
+      },
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+          admin: {
+            description: 'Label for the link (e.g., "Google Doc", "Research")',
+          },
+        },
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+          admin: {
+            description: 'URL of the link',
+          },
+        },
+      ],
     },
   ],
   hooks: {

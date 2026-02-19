@@ -7,6 +7,7 @@ import {getClientSideURL} from '@/utilities/getURL'
 import {checkRole} from '@/collections/Users/access/checkRole'
 import {CreateWorkflowItemModal} from './CreateWorkflowItemModal'
 import {WorkflowItemCard} from './WorkflowItemCard'
+import {WorkflowItemModal} from './WorkflowItemModal'
 import {notifyWorkflowMove} from '@/utilities/notifications/workflowNotifications'
 import './styles.scss'
 
@@ -37,6 +38,7 @@ const DashboardWidget: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showCreateModal, setShowCreateModal] = useState(false)
+  const [selectedItem, setSelectedItem] = useState<WorkflowItemWithPopulated | null>(null)
   const [draggedItem, setDraggedItem] = useState<WorkflowItemWithPopulated | null>(null)
   const [dragOverColumn, setDragOverColumn] = useState<string | null>(null)
 
@@ -165,6 +167,24 @@ const DashboardWidget: React.FC = () => {
   const handleItemCreated = () => {
     setShowCreateModal(false)
     fetchWorkflowItems()
+  }
+
+  const handleItemClick = (item: WorkflowItemWithPopulated) => {
+    setSelectedItem(item)
+  }
+
+  const handleDeleteItem = async (itemId: number | string) => {
+    try {
+      await fetch(`${serverURL}/workflow-items/${itemId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      })
+
+      await fetchWorkflowItems()
+    } catch (err) {
+      console.error('Error deleting workflow item:', err)
+      alert('Failed to delete item. Please try again.')
+    }
   }
 
   const formatDate = (dateString: string) => {
@@ -337,6 +357,7 @@ const DashboardWidget: React.FC = () => {
                       formatDate={formatDate}
                       onDragStart={handleDragStart}
                       onDragEnd={handleDragEnd}
+                      onClick={handleItemClick}
                     />
                   ))}
                 </div>
@@ -405,6 +426,15 @@ const DashboardWidget: React.FC = () => {
           onCreated={handleItemCreated}
           serverURL={serverURL}
           user={user as User}
+        />
+      )}
+
+      {selectedItem && (
+        <WorkflowItemModal
+          item={selectedItem}
+          onClose={() => setSelectedItem(null)}
+          adminURL={adminURL}
+          onDelete={handleDeleteItem}
         />
       )}
     </div>

@@ -1064,6 +1064,22 @@ export interface WorkflowItem {
   assignedTo?: (number | User)[] | null;
   priority?: ('low' | 'medium' | 'high' | 'urgent') | null;
   dueDate?: string | null;
+  /**
+   * Add relevant links for this workflow item
+   */
+  links?:
+    | {
+        /**
+         * Label for the link (e.g., "Google Doc", "Research")
+         */
+        label: string;
+        /**
+         * URL of the link
+         */
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1963,6 +1979,13 @@ export interface WorkflowItemsSelect<T extends boolean = true> {
   assignedTo?: T;
   priority?: T;
   dueDate?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
