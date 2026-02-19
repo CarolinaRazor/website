@@ -53,10 +53,6 @@ const DashboardWidget: React.FC = () => {
         credentials: 'include',
       })
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch workflow items')
-      }
-
       const data = await response.json()
       setWorkflowItems(data.docs || [])
       setError(null)
@@ -143,10 +139,6 @@ const DashboardWidget: React.FC = () => {
         credentials: 'include',
         body: JSON.stringify({ status: newStatus }),
       })
-
-      if (!response.ok) {
-        throw new Error('Failed to update workflow item')
-      }
 
       await notifyWorkflowMove({
         workflowItem: { ...draggedItem, status: newStatus as any },

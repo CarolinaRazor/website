@@ -76,10 +76,6 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
         }),
       })
 
-      if (!response.ok) {
-        throw new Error('Failed to create workflow item')
-      }
-
       onCreated()
     } catch (err) {
       console.error('Error creating workflow item:', err)
