@@ -25,6 +25,7 @@ import {resendAdapter} from '@payloadcms/email-resend'
 import {Subscribers} from "@/collections/Subscribers";
 import {Newsletters} from "@/collections/Newsletters";
 import {SiteHeader} from "@/globals/SiteHeader/config";
+import {WorkflowItems} from "@/collections/WorkflowItems";
 
 
 const filename = fileURLToPath(import.meta.url)
@@ -39,6 +40,21 @@ export default buildConfig({
     }),
   }),
   admin: {
+    dashboard: {
+      widgets: [
+        {
+          slug: 'main-widget',
+          ComponentPath: '@/components/DashboardWidget',
+          maxWidth: 'full',
+          minWidth: 'full'
+        }
+      ],
+      defaultLayout: () => {
+        return [
+          { widgetSlug: 'main-widget', width: 'full' },
+        ]
+      },
+    },
     timezones: {
       supportedTimezones: [
         { label: 'New York', value: 'America/New_York' },
@@ -51,10 +67,10 @@ export default buildConfig({
       // beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
-      // beforeDashboard: ['@/components/BeforeDashboard'],
+      // beforeDashboard: ['@/components/DashboardWidget'],
       graphics: {
-        Logo: '/components/Logo/Logo.tsx#Logo',
-        Icon: '/components/Logo/Logo.tsx#Icon',
+        Logo: '/components/Logo/AdminLogo.tsx#Logo',
+        Icon: '/components/Logo/AdminLogo.tsx#Icon',
       },
     },
     importMap: {
@@ -91,7 +107,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations, Subscribers, Newsletters],
+  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations, Subscribers, Newsletters, WorkflowItems],
   cors: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   csrf: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
   globals: [Footer, FeaturedArticle, BreakingHeader, SiteHeader],

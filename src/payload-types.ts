@@ -30,6 +30,7 @@ export interface Config {
     invitations: Invitation;
     subscribers: Subscriber;
     newsletters: Newsletter;
+    'workflow-items': WorkflowItem;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -52,6 +53,7 @@ export interface Config {
     invitations: InvitationsSelect<false> | InvitationsSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
+    'workflow-items': WorkflowItemsSelect<false> | WorkflowItemsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1038,6 +1040,35 @@ export interface Newsletter {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "workflow-items".
+ */
+export interface WorkflowItem {
+  id: number;
+  /**
+   * Brief title or description of the workflow item
+   */
+  title: string;
+  /**
+   * Additional details about this item
+   */
+  description?: string | null;
+  status: 'idea' | 'writing' | 'ready-edit' | 'editing' | 'uploading' | 'ready-publish' | 'published';
+  /**
+   * Optional: Link to a post if one has been created
+   */
+  linkedPost?: (number | null) | Post;
+  createdBy: number | User;
+  /**
+   * Assign users to work on this item
+   */
+  assignedTo?: (number | User)[] | null;
+  priority?: ('low' | 'medium' | 'high' | 'urgent') | null;
+  dueDate?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1274,6 +1305,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'newsletters';
         value: number | Newsletter;
+      } | null)
+    | ({
+        relationTo: 'workflow-items';
+        value: number | WorkflowItem;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1912,6 +1947,22 @@ export interface NewslettersSelect<T extends boolean = true> {
         post?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "workflow-items_select".
+ */
+export interface WorkflowItemsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  status?: T;
+  linkedPost?: T;
+  createdBy?: T;
+  assignedTo?: T;
+  priority?: T;
+  dueDate?: T;
   updatedAt?: T;
   createdAt?: T;
 }
