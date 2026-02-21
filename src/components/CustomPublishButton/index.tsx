@@ -5,7 +5,7 @@ import {checkRole} from "@/collections/Users/access/checkRole";
 import {User} from "@/payload-types";
 
 export default function CustomPublishButton(props: PublishButtonServerProps) {
-  if (checkRole(['admin','sauthor','seditor'], props.user as User)) {
+  if (checkRole(['admin','sauthor','seditor', 'editor'], props.user as User)) {
     return <PublishButton label="Publish Article" />
   }
   else {
