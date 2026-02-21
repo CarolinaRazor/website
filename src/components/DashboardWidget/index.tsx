@@ -8,7 +8,7 @@ import {checkRole} from '@/collections/Users/access/checkRole'
 import {CreateWorkflowItemModal} from './CreateWorkflowItemModal'
 import {WorkflowItemCard} from './WorkflowItemCard'
 import {WorkflowItemModal} from './WorkflowItemModal'
-import {notifyWorkflowMove} from '@/utilities/notifications/workflowNotifications'
+import {notifyWorkflowMove} from '@/utilities/notifications/workflowNotificationsClient'
 import {FiEdit, FiFileText, FiFolder, FiGrid, FiPlus, FiUser} from 'react-icons/fi'
 import './styles.scss'
 
