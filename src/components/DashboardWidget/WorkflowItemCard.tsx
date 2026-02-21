@@ -2,6 +2,7 @@
 
 import React from 'react'
 import type {User, WorkflowItem} from '@/payload-types'
+import {FiCalendar, FiLink} from 'react-icons/fi'
 
 interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy' | 'assignedTo'> {
   createdBy: User
@@ -87,10 +88,7 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
 
       {item.linkedPost && (
         <div className="workflow-widget__kanban-card-linked">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-          </svg>
+          <FiLink size={12} />
           <span>Linked to post</span>
         </div>
       )}
@@ -136,12 +134,7 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
 
       {item.dueDate && (
         <div className="workflow-widget__kanban-card-due">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
+          <FiCalendar size={12} />
           <span>Due {new Date(item.dueDate).toLocaleDateString()}</span>
         </div>
       )}

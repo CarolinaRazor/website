@@ -2,6 +2,7 @@
 
 import React from 'react'
 import type {User, WorkflowItem} from '@/payload-types'
+import {FiEdit2, FiExternalLink, FiFileText, FiTrash2, FiX} from 'react-icons/fi'
 
 interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy' | 'assignedTo'> {
   createdBy: User
@@ -46,10 +47,7 @@ export const WorkflowItemModal: React.FC<WorkflowItemModalProps> = ({
             onClick={onClose}
             aria-label="Close"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+            <FiX size={20} />
           </button>
         </div>
 
@@ -68,10 +66,7 @@ export const WorkflowItemModal: React.FC<WorkflowItemModalProps> = ({
                 e.stopPropagation()
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-              </svg>
+              <FiFileText size={20} />
               <span>Open Linked Post</span>
             </a>
           )}
@@ -91,11 +86,7 @@ export const WorkflowItemModal: React.FC<WorkflowItemModalProps> = ({
                       e.stopPropagation()
                     }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
+                    <FiExternalLink size={20} />
                     <span>{link.label || link.url}</span>
                   </a>
                 )
@@ -110,10 +101,7 @@ export const WorkflowItemModal: React.FC<WorkflowItemModalProps> = ({
               e.stopPropagation()
             }}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-            </svg>
+            <FiEdit2 size={20} />
             <span>Edit Task</span>
           </a>
 
@@ -121,12 +109,7 @@ export const WorkflowItemModal: React.FC<WorkflowItemModalProps> = ({
             className="workflow-modal__action workflow-modal__action--danger"
             onClick={handleDelete}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="3 6 5 6 21 6"></polyline>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-              <line x1="10" y1="11" x2="10" y2="17"></line>
-              <line x1="14" y1="11" x2="14" y2="17"></line>
-            </svg>
+            <FiTrash2 size={20} />
             <span>Delete Task</span>
           </button>
         </div>

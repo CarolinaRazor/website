@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from 'react'
 import type {User} from '@/payload-types'
 import {checkRole} from '@/collections/Users/access/checkRole'
+import {FiPlus, FiX} from 'react-icons/fi'
 
 interface CreateWorkflowItemModalProps {
   onClose: () => void
@@ -143,10 +144,7 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
             className="workflow-modal__close"
             aria-label="Close"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+            <FiX size={20} />
           </button>
         </div>
 
@@ -288,10 +286,7 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
                     className="workflow-modal__link-remove"
                     aria-label="Remove link"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
+                    <FiX size={16} />
                   </button>
                 </div>
               ))}
@@ -300,10 +295,7 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
                 onClick={addLink}
                 className="workflow-modal__link-add"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                <FiPlus size={16} />
                 <span>Add Link</span>
               </button>
             </div>

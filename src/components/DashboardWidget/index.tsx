@@ -9,6 +9,7 @@ import {CreateWorkflowItemModal} from './CreateWorkflowItemModal'
 import {WorkflowItemCard} from './WorkflowItemCard'
 import {WorkflowItemModal} from './WorkflowItemModal'
 import {notifyWorkflowMove} from '@/utilities/notifications/workflowNotifications'
+import {FiEdit, FiFileText, FiFolder, FiGrid, FiPlus, FiUser} from 'react-icons/fi'
 import './styles.scss'
 
 interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy' | 'assignedTo'> {
@@ -117,7 +118,7 @@ const DashboardWidget: React.FC = () => {
 
   const handleDragStart = (item: WorkflowItemWithPopulated) => {
     if (!canMoveItem(item)) {
-      return // Don't allow dragging if user doesn't have permission
+      return
     }
     setDraggedItem(item)
   }
@@ -141,7 +142,6 @@ const DashboardWidget: React.FC = () => {
       return
     }
 
-    // Double-check permission before moving
     if (!canMoveItem(draggedItem)) {
       setDraggedItem(null)
       alert('You do not have permission to move this item.')
@@ -258,49 +258,41 @@ const DashboardWidget: React.FC = () => {
               href={`${adminURL}/collections/posts/create`}
               className="workflow-widget__link workflow-widget__link--primary"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
+              <FiFileText size={20} />
               <span>Create New Article</span>
             </a>
           )}
           <a
-            href={`${adminURL}/collections/users/${user.id}`}
-            className="workflow-widget__link"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span>Edit Your Profile</span>
-          </a>
-          <a
-            href={process.env.DRIVE_URL}
+            href={process.env.NEXT_PUBLIC_DRIVE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="workflow-widget__link"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-              <polyline points="13 2 13 9 20 9"></polyline>
-            </svg>
+            <FiFolder size={20} />
             <span>Shared Drive</span>
           </a>
           <a
             href={`${adminURL}/collections/workflow-items`}
             className="workflow-widget__link"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="3" width="7" height="7"></rect>
-              <rect x="14" y="3" width="7" height="7"></rect>
-              <rect x="14" y="14" width="7" height="7"></rect>
-              <rect x="3" y="14" width="7" height="7"></rect>
-            </svg>
+            <FiGrid size={20} />
             <span>All Workflow Items</span>
+          </a>
+          {(user as User).page && (
+            <a
+              href={`${adminURL}/collections/authors/${(user as User).page}`}
+              className="workflow-widget__link"
+            >
+              <FiEdit size={20} />
+              <span>Edit Bio</span>
+            </a>
+          )}
+          <a
+            href={`${adminURL}/collections/users/${user.id}`}
+            className="workflow-widget__link"
+          >
+            <FiUser size={20} />
+            <span>User Settings</span>
           </a>
         </div>
       </div>
@@ -334,10 +326,7 @@ const DashboardWidget: React.FC = () => {
             className="workflow-widget__add-button"
             title="Add new workflow item"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
+            <FiPlus size={20} />
             <span>Add Item</span>
           </button>
         </div>
