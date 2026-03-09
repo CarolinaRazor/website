@@ -31,6 +31,10 @@ import admin from "@/collections/Users/access/admin";
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
+  labels: {
+    singular: 'Main Page',
+    plural: 'Main Pages',
+  },
   access: {
     create: sauthor || seditor,
     delete: admin,

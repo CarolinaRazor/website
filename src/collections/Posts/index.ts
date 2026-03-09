@@ -32,6 +32,10 @@ import updatePost from './access/updatePost'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
+  labels: {
+    singular: 'Article',
+    plural: 'Articles',
+  },
   access: {
     create: author,
     delete: seditor || sauthor,
