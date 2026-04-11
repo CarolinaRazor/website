@@ -22,7 +22,9 @@ const nextConfig = {
         }
       }),
       { protocol: 'http', hostname: 'localhost', port: '3000' },
-      { protocol: 'https', hostname: '*.vikramk.dev' },
+      { protocol: 'https', hostname: '*.liberatorch.com' },
+      { protocol: 'https', hostname: 'liberatorch.com' },
+      { protocol: 'https', hostname: '*.cloudflarestorage.com' },
     ],
   },
   webpack: (webpackConfig) => {
