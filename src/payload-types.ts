@@ -81,6 +81,10 @@ export interface Config {
     'navigation-header': NavigationHeaderSelect<false> | NavigationHeaderSelect<true>;
   };
   locale: null;
+  widgets: {
+    'main-widget': MainWidgetWidget;
+    collections: CollectionsWidget;
+  };
   user: User;
   jobs: {
     tasks: {
@@ -2422,6 +2426,26 @@ export interface NavigationHeaderSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-widget_widget".
+ */
+export interface MainWidgetWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "collections_widget".
+ */
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
