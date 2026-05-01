@@ -44,7 +44,7 @@ export default buildConfig({
       widgets: [
         {
           slug: 'main-widget',
-          ComponentPath: '@/components/DashboardWidget',
+          Component: '@/components/DashboardWidget',
           maxWidth: 'full',
           minWidth: 'full'
         }
