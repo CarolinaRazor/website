@@ -129,7 +129,7 @@ export const plugins: Plugin[] = [
     },
   }),
   s3Storage({
-    enabled: process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== 'true',
+    enabled: (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== 'true') || process.env.FORCEPLUGINS === 'true',
     // enabled: true,
     collections: {
       media: true,

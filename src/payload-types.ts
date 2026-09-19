@@ -286,6 +286,7 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -798,6 +799,7 @@ export interface User {
 export interface Avatar {
   id: number;
   alt?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1694,6 +1696,7 @@ export interface AuthorsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1786,6 +1789,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface AvatarsSelect<T extends boolean = true> {
   alt?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
