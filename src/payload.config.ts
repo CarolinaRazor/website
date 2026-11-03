@@ -108,8 +108,8 @@ export default buildConfig({
     },
   }),
   collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations, Subscribers, Newsletters, WorkflowItems],
-  cors: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
-  csrf: [getServerSideURL(), "https://www.liberatorch.com"].filter(Boolean),
+  cors: [getServerSideURL(), "https://www.liberatorch.com", "http://localhost:3000"].filter(Boolean),
+  csrf: [getServerSideURL(), "https://www.liberatorch.com", "http://localhost:3000"].filter(Boolean),
   globals: [Footer, FeaturedArticle, BreakingHeader, SiteHeader],
   plugins: [
     ...plugins,

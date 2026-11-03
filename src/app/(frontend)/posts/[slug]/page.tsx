@@ -51,29 +51,29 @@ export default async function Post({params: paramsPromise}: Args) {
 
   return (
     <article className="pb-16">
-      <PageClient/>
+      <PageClient />
 
-      <PayloadRedirects disableNotFound url={url}/>
-      {draft && <LivePreviewListener/>}
+      <PayloadRedirects disableNotFound url={url} />
+      {draft && <LivePreviewListener />}
 
-      <PostHero post={post as Post}/>
+      <PostHero post={post as Post} />
 
       <div className="">
-
-        <RenderBlocks blocks={layout} constraint="post"/>
+        <RenderBlocks blocks={layout} constraint="post" />
 
         {relatedPosts && relatedPosts.length > 0 && (
-          <section className="mx-auto mt-12 w-full max-w-4xl px-4">
-            <h2 className="mb-6 text-2xl font-semibold">Related Posts</h2>
-            <RelatedPosts
-              className="w-full"
-              docs={relatedPosts.filter((p) => typeof p === 'object')}
-            />
+          <section className="mx-auto mt-12 w-full max-w-[48rem]">
+            <div className={'px-4 sm:px-6 lg:px-0'}>
+              <h2 className="mb-6 text-2xl font-semibold">Related Articles</h2>
+              <RelatedPosts
+                className="w-full"
+                docs={relatedPosts.filter((p) => typeof p === 'object')}
+              />
+            </div>
           </section>
         )}
       </div>
     </article>
-
   )
 }
 
