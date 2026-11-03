@@ -32,10 +32,10 @@ export const plugins: Plugin[] = [
     collections: ['pages', 'posts'],
     overrides: {
       admin: {
-        group: 'Meta'
+        group: 'Meta',
       },
       // @ts-expect-error - This is a valid override, mapped fields don't resolve to the same type
-      fields: ({defaultFields}) => {
+      fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
           if ('name' in field && field.name === 'from') {
             return {
@@ -60,6 +60,7 @@ export const plugins: Plugin[] = [
   seoPlugin({
     generateTitle,
     generateURL,
+    generateImage: ({ doc }) => doc?.heroImage,
   }),
   formBuilderPlugin({
     fields: {
@@ -69,13 +70,13 @@ export const plugins: Plugin[] = [
         fields: [
           ...(fields.radio && 'fields' in fields.radio
             ? fields.radio.fields.map((field) => {
-              if ('name' in field && field.name === 'radio') {
-                return {
-                  ...field,
+                if ('name' in field && field.name === 'radio') {
+                  return {
+                    ...field,
+                  }
                 }
-              }
-              return field
-            })
+                return field
+              })
             : []),
           {
             name: 'otherOption',
@@ -93,19 +94,19 @@ export const plugins: Plugin[] = [
     },
     formOverrides: {
       admin: {
-        group: 'Forms'
+        group: 'Forms',
       },
-      fields: ({defaultFields}) => {
+      fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
           if ('name' in field && field.name === 'confirmationMessage') {
             return {
               ...field,
               editor: lexicalEditor({
-                features: ({rootFeatures}) => {
+                features: ({ rootFeatures }) => {
                   return [
                     ...rootFeatures,
                     FixedToolbarFeature(),
-                    HeadingFeature({enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4']}),
+                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
                   ]
                 },
               }),
@@ -121,15 +122,17 @@ export const plugins: Plugin[] = [
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
       admin: {
-        group: 'Meta'
+        group: 'Meta',
       },
-      fields: ({defaultFields}) => {
+      fields: ({ defaultFields }) => {
         return [...defaultFields, ...searchFields]
       },
     },
   }),
   s3Storage({
-    enabled: (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== 'true') || process.env.FORCEPLUGINS === 'true',
+    enabled:
+      (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== 'true') ||
+      process.env.FORCEPLUGINS === 'true',
     collections: {
       media: true,
       avatars: true,
