@@ -4,6 +4,16 @@ import {revalidatePath, revalidateTag} from 'next/cache'
 
 import type {Post} from '../../../payload-types'
 
+const revalidateAuthors = (authors: Post['authors']) => {
+  for (const author of authors ?? []) {
+    const authorId = typeof author === 'object' ? author?.id : author
+
+    if (authorId) {
+      revalidatePath(`/authors/${authorId}`)
+    }
+  }
+}
+
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
                                                                   doc,
                                                                   previousDoc,
@@ -21,6 +31,8 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
       payload.logger.info(`Revalidating main page for changed post.`)
       revalidatePath('/')
       revalidateTag('pages-sitemap','max')
+
+      revalidateAuthors([...(doc.authors ?? []), ...(previousDoc.authors ?? [])])
     }
 
     // If the post was previously published, we need to revalidate the old path
@@ -35,6 +47,8 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
       payload.logger.info(`Revalidating main page for changed post.`)
       revalidatePath('/')
       revalidateTag('pages-sitemap','max')
+
+      revalidateAuthors([...(doc.authors ?? []), ...(previousDoc.authors ?? [])])
     }
   }
   return doc
@@ -49,6 +63,8 @@ export const revalidateDelete: CollectionAfterDeleteHook<Post> = ({doc, req: {co
 
     revalidatePath('/')
     revalidateTag('pages-sitemap','max')
+
+    revalidateAuthors(doc?.authors)
   }
 
   return doc
