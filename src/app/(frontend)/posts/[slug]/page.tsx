@@ -63,10 +63,13 @@ export default async function Post({params: paramsPromise}: Args) {
         <RenderBlocks blocks={layout} constraint="post"/>
 
         {relatedPosts && relatedPosts.length > 0 && (
-          <RelatedPosts
-            className="mt-12 w-full"
-            docs={relatedPosts.filter((p) => typeof p === 'object')}
-          />
+          <section className="mx-auto mt-12 w-full max-w-4xl px-4">
+            <h2 className="mb-6 text-2xl font-semibold">Related Posts</h2>
+            <RelatedPosts
+              className="w-full"
+              docs={relatedPosts.filter((p) => typeof p === 'object')}
+            />
+          </section>
         )}
       </div>
     </article>
