@@ -1,22 +1,27 @@
-import {MediaBlock} from '@/blocks/MediaBlock/Component'
+import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import {
+  defaultColors,
   DefaultNodeTypes,
-  type DefaultTypedEditorState,
   SerializedBlockNode,
   SerializedLinkNode,
+  type DefaultTypedEditorState,
 } from '@payloadcms/richtext-lexical'
-import {JSXConvertersFunction, LinkJSXConverter, RichText as ConvertRichText,} from '@payloadcms/richtext-lexical/react'
+import {
+  JSXConvertersFunction,
+  LinkJSXConverter,
+  RichText as ConvertRichText,
+} from '@payloadcms/richtext-lexical/react'
 
-import {CodeBlock, CodeBlockProps} from '@/blocks/Code/Component'
+import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
 import type {
   BannerBlock as BannerBlockProps,
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
 } from '@/payload-types'
-import {BannerBlock} from '@/blocks/Banner/Component'
-import {CallToActionBlock} from '@/blocks/CallToAction/Component'
-import {cn} from '@/utilities/ui'
+import { BannerBlock } from '@/blocks/Banner/Component'
+import { CallToActionBlock } from '@/blocks/CallToAction/Component'
+import { cn } from '@/utilities/ui'
 
 type NodeTypes =
   | DefaultNodeTypes
@@ -31,9 +36,32 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   return relationTo === 'posts' ? `/posts/${slug}` : `/${slug}`
 }
 
+const richTextColors = {
+  ...defaultColors.text,
+  'text-gray': {
+    label: 'Muted',
+    css: { color: 'hsl(var(--muted-foreground))' },
+  },
+}
+
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  text: (args) => {
+    const textNode = args.node as typeof args.node & {
+      $?: { color?: unknown }
+      color?: unknown
+    }
+    const colorState = textNode.$?.color ?? textNode.color
+    const color =
+      typeof colorState === 'string' && colorState in richTextColors
+        ? richTextColors[colorState as keyof typeof richTextColors].css.color
+        : undefined
+    const textConverter = defaultConverters.text
+    const text = typeof textConverter === 'function' ? textConverter(args) : textNode.text
+
+    return color ? <span style={{ color }}>{text}</span> : text
+  },
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (
@@ -51,14 +79,18 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
   },
 })
 
+type TextSize =
+  'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl'
+
 type Props = {
   data: DefaultTypedEditorState
   enableGutter?: boolean
   enableProse?: boolean
+  textSize?: TextSize
 } & React.HTMLAttributes<HTMLDivElement>
 
 export default function RichText(props: Props) {
-  const { className, enableProse = true, enableGutter = true, ...rest } = props
+  const { className, enableProse = true, enableGutter = true, textSize = 'xl', ...rest } = props
   return (
     <ConvertRichText
       converters={jsxConverters}
@@ -67,7 +99,8 @@ export default function RichText(props: Props) {
         {
           container: enableGutter,
           'max-w-none': !enableGutter,
-          'mx-auto prose md:prose-md dark:prose-invert text-xl': enableProse,
+          'mx-auto prose md:prose-md dark:prose-invert': enableProse,
+          [`text-${textSize}`]: textSize,
         },
         className,
       )}

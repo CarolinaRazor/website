@@ -1,48 +1,72 @@
-import type {TextFieldSingleValidation} from 'payload'
+import type { TextFieldSingleValidation } from 'payload'
 import {
-  AlignFeature,
-  BlockquoteFeature,
+  BlocksFeature,
   BoldFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  IndentFeature,
-  InlineToolbarFeature,
   ItalicFeature,
-  lexicalEditor,
   LinkFeature,
-  type LinkFields,
-  OrderedListFeature,
   ParagraphFeature,
+  lexicalEditor,
+  UnderlineFeature,
+  type LinkFields,
+  IndentFeature,
+  HorizontalRuleFeature,
+  HeadingFeature,
+  FixedToolbarFeature,
+  InlineToolbarFeature,
   StrikethroughFeature,
   SubscriptFeature,
   SuperscriptFeature,
-  TextStateFeature,
-  UnderlineFeature,
+  OrderedListFeature,
   UnorderedListFeature,
+  TextStateFeature,
+  AlignFeature,
+  BlockquoteFeature,
+  ChecklistFeature,
+  InlineCodeFeature,
+  RelationshipFeature,
+  // UploadFeature,
+  defaultColors,
 } from '@payloadcms/richtext-lexical'
+
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
 
 export const defaultLexical = lexicalEditor({
   features: [
-    HeadingFeature({enabledHeadingSizes: ['h2', 'h3', 'h4']}),
+    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }),
+    ParagraphFeature(),
     FixedToolbarFeature(),
     InlineToolbarFeature(),
-    ParagraphFeature(),
-    UnderlineFeature(),
+    BlocksFeature({ blocks: [Code, MediaBlock] }),
     BoldFeature(),
     ItalicFeature(),
-    HorizontalRuleFeature(),
-    IndentFeature(),
+    UnderlineFeature(),
     StrikethroughFeature(),
     SubscriptFeature(),
     SuperscriptFeature(),
+    InlineCodeFeature(),
+    HorizontalRuleFeature(),
+    IndentFeature(),
     OrderedListFeature(),
     UnorderedListFeature(),
-    TextStateFeature(),
+    ChecklistFeature(),
+    TextStateFeature({
+      state: {
+        color: {
+          ...defaultColors.text,
+          'text-gray': {
+            label: 'Muted',
+            css: { color: 'hsl(var(--muted-foreground))' },
+          },
+        },
+      },
+    }),
     AlignFeature(),
     BlockquoteFeature(),
+    RelationshipFeature({ enabledCollections: ['pages', 'posts'] }),
+    // UploadFeature({ enabledCollections: ['media'] }),
     LinkFeature({
-      enabledCollections: ['pages', 'posts', 'authors'],
+      enabledCollections: ['pages', 'posts'],
       fields: ({ defaultFields }) => {
         const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
           if ('name' in field && field.name === 'url') return false
