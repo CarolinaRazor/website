@@ -32,13 +32,14 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  ...(process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== "true" && {
-    email: resendAdapter({
-      defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? '',
-      defaultFromName: process.env.SMTP_FROM_NAME ?? '',
-      apiKey: process.env.RESEND_API_KEY || '',
+  ...(process.env.NODE_ENV === 'production' &&
+    process.env.NEXT_PUBLIC_PREVIEW !== 'true' && {
+      email: resendAdapter({
+        defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? '',
+        defaultFromName: process.env.SMTP_FROM_NAME ?? '',
+        apiKey: process.env.RESEND_API_KEY || '',
+      }),
     }),
-  }),
   admin: {
     dashboard: {
       widgets: [
@@ -46,22 +47,22 @@ export default buildConfig({
           slug: 'main-widget',
           Component: '@/components/DashboardWidget',
           maxWidth: 'full',
-          minWidth: 'full'
-        }
+          minWidth: 'full',
+        },
       ],
       defaultLayout: () => {
-        return [
-          { widgetSlug: 'main-widget', width: 'full' },
-        ]
+        return [{ widgetSlug: 'main-widget', width: 'full' }]
       },
     },
     timezones: {
-      supportedTimezones: [
-        { label: 'New York', value: 'America/New_York' },
-      ],
+      supportedTimezones: [{ label: 'New York', value: 'America/New_York' }],
       defaultTimezone: 'America/New_York',
     },
     components: {
+      beforeNavLinks: [
+        '@/components/AdminDashButton#BackToDash',
+        '@/components/AdminDashButton#BackToHome',
+      ],
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
       // beforeLogin: ['@/components/BeforeLogin'],
@@ -107,9 +108,25 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Authors, Media, Avatars, Categories, Users, Invitations, Subscribers, Newsletters, WorkflowItems],
-  cors: [getServerSideURL(), "https://www.liberatorch.com", "http://localhost:3000"].filter(Boolean),
-  csrf: [getServerSideURL(), "https://www.liberatorch.com", "http://localhost:3000"].filter(Boolean),
+  collections: [
+    Pages,
+    Posts,
+    Authors,
+    Media,
+    Avatars,
+    Categories,
+    Users,
+    Invitations,
+    Subscribers,
+    Newsletters,
+    WorkflowItems,
+  ],
+  cors: [getServerSideURL(), 'https://www.liberatorch.com', 'http://localhost:3000'].filter(
+    Boolean,
+  ),
+  csrf: [getServerSideURL(), 'https://www.liberatorch.com', 'http://localhost:3000'].filter(
+    Boolean,
+  ),
   globals: [Footer, FeaturedArticle, BreakingHeader, SiteHeader],
   plugins: [
     ...plugins,
@@ -122,7 +139,7 @@ export default buildConfig({
   },
   jobs: {
     access: {
-      run: ({req}: { req: PayloadRequest }): boolean => {
+      run: ({ req }: { req: PayloadRequest }): boolean => {
         // Allow logged in users to execute this endpoint (default)
         if (req.user) return true
 
