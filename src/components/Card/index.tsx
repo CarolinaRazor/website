@@ -49,7 +49,7 @@ export const Card: React.FC<{
       className={cn(
         'group block overflow-hidden border border-border/60',
         metaImage
-          ? 'bg-card'
+          ? ''
           : 'bg-muted/70 dark:bg-muted/40 backdrop-blur-sm',
         'hover:cursor-pointer focus-visible:ring-2 focus-visible:ring-primary',
         className,

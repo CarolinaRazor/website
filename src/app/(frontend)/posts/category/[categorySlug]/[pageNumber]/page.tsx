@@ -31,7 +31,12 @@ export default async function CategoryPage({ params: paramsPromise }: Args) {
   // Get the category by slug
   const categoryResult = await payload.find({
     collection: 'categories',
-    where: { slug: { equals: categorySlug } },
+    where: {
+      slug: { equals: categorySlug },
+      _status: {
+        equals: 'published',
+      },
+    },
     limit: 1,
   })
   const categoryDoc = categoryResult.docs[0]
@@ -43,7 +48,7 @@ export default async function CategoryPage({ params: paramsPromise }: Args) {
     depth: 1,
     limit: POSTS_PER_PAGE,
     page: sanitizedPageNumber,
-    where: { categories: { in: [categoryDoc.id] } },
+    where: { categories: { in: [categoryDoc.id] }, _status: { equals: 'published' } },
   })
 
   if (!postsResult.docs.length && sanitizedPageNumber > 1) notFound()
@@ -101,7 +106,7 @@ export async function generateStaticParams() {
 
     const posts = await payload.find({
       collection: 'posts',
-      where: { categories: { in: [category.id] } },
+      where: { categories: { in: [category.id] }, _status: { equals: 'published' } },
       limit: POSTS_PER_PAGE,
     })
 
