@@ -130,6 +130,7 @@ export const plugins: Plugin[] = [
     },
   }),
   s3Storage({
+    alwaysInsertFields: true,
     enabled:
       (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PREVIEW !== 'true') ||
       process.env.FORCEPLUGINS === 'true',
