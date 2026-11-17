@@ -2,6 +2,7 @@ import type {CollectionConfig} from 'payload'
 import {authenticated} from '@/access/authenticated'
 import author from '@/collections/Users/access/author'
 import {notifyWorkflowChange} from './hooks/notifyWorkflowChange'
+import {syncAssignedAuthorsToPost} from './hooks/syncAssignedAuthorsToPost'
 
 export const WorkflowItems: CollectionConfig = {
   slug: 'workflow-items',
@@ -90,13 +91,33 @@ export const WorkflowItems: CollectionConfig = {
     },
     {
       name: 'assignedTo',
-      type: 'relationship',
-      relationTo: 'users',
-      hasMany: true,
+      type: 'array',
       admin: {
         position: 'sidebar',
         description: 'Assign users to work on this item',
       },
+      fields: [
+        {
+          name: 'user',
+          type: 'relationship',
+          relationTo: 'users',
+          required: true,
+        },
+        {
+          name: 'role',
+          type: 'radio',
+          defaultValue: 'other',
+          required: true,
+          options: [
+            { label: 'Author', value: 'author' },
+            { label: 'Editor', value: 'editor' },
+            { label: 'Other', value: 'other' },
+          ],
+          admin: {
+            layout: 'horizontal',
+          },
+        },
+      ],
     },
     {
       name: 'priority',
@@ -150,7 +171,7 @@ export const WorkflowItems: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [notifyWorkflowChange],
+    afterChange: [syncAssignedAuthorsToPost, notifyWorkflowChange],
   },
   timestamps: true,
 }

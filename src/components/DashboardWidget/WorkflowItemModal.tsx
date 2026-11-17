@@ -4,9 +4,8 @@ import React from 'react'
 import type {User, WorkflowItem} from '@/payload-types'
 import {FiEdit2, FiExternalLink, FiFileText, FiTrash2, FiX} from 'react-icons/fi'
 
-interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy' | 'assignedTo'> {
+interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy'> {
   createdBy: User
-  assignedTo?: User[]
 }
 
 interface WorkflowItemModalProps {
@@ -126,7 +125,10 @@ export const WorkflowItemModal: React.FC<WorkflowItemModalProps> = ({
             <div className="workflow-modal__meta-item">
               <span className="workflow-modal__meta-label">Assigned to:</span>
               <span className="workflow-modal__meta-value">
-                {item.assignedTo.map(u => u.name || u.email).join(', ')}
+                {item.assignedTo
+                  .map(({ user }) => typeof user === 'object' ? user.name || user.email : null)
+                  .filter(Boolean)
+                  .join(', ')}
               </span>
             </div>
           )}

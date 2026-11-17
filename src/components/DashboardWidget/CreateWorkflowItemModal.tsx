@@ -5,6 +5,8 @@ import type {User} from '@/payload-types'
 import {checkRole} from '@/collections/Users/access/checkRole'
 import {FiPlus, FiX} from 'react-icons/fi'
 
+type AssigneeRole = 'author' | 'editor' | 'other'
+
 interface CreateWorkflowItemModalProps {
   onClose: () => void
   onCreated: () => void
@@ -19,11 +21,12 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
   user,
 }) => {
   const [title, setTitle] = useState('')
+  const [createArticle, setCreateArticle] = useState(false)
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('idea')
   const [priority, setPriority] = useState('medium')
   const [createdBy, setCreatedBy] = useState<string | number>(user.id)
-  const [assignedTo, setAssignedTo] = useState<(string | number)[]>([])
+  const [assignedTo, setAssignedTo] = useState<Array<{ user: string | number; role: AssigneeRole }>>([])
   const [links, setLinks] = useState<Array<{ label: string; url: string }>>([])
   const [users, setUsers] = useState<User[]>([])
   const [searchQuery, setSearchQuery] = useState('')
@@ -62,6 +65,34 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
     setError(null)
 
     try {
+      let linkedPost: number | undefined
+      if (createArticle) {
+        const authors = assignedTo
+          .filter(assignee => assignee.role === 'author')
+          .map(assignee => assignee.user)
+        const articleResponse = await fetch(`${serverURL}/posts?draft=true`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            title: title.trim(),
+            ...(authors.length > 0 ? { authors } : {}),
+          }),
+        })
+
+        if (!articleResponse.ok) {
+          throw new Error(`Failed to create article: ${articleResponse.status}`)
+        }
+
+        const articleData = await articleResponse.json()
+        if (!articleData.doc?.id) {
+          throw new Error('Article creation response did not include an article ID')
+        }
+        linkedPost = articleData.doc.id
+      }
+
       const response = await fetch(`${serverURL}/workflow-items`, {
         method: 'POST',
         headers: {
@@ -73,6 +104,7 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
           description: description.trim() || undefined,
           status,
           priority,
+          linkedPost,
           assignedTo: assignedTo.length > 0 ? assignedTo : undefined,
           createdBy: createdBy,
           links: links.filter(link => link.label.trim() && link.url.trim()).length > 0
@@ -80,6 +112,10 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
             : undefined,
         }),
       })
+
+      if (!response.ok) {
+        throw new Error(`Failed to create workflow item: ${response.status}`)
+      }
 
       onCreated()
     } catch (err) {
@@ -96,11 +132,16 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
   }
 
   const toggleAssignee = (userId: string | number) => {
-    setAssignedTo(prev =>
-      prev.includes(userId)
-        ? prev.filter(id => id !== userId)
-        : [...prev, userId]
+    setAssignedTo(prev => prev.some(assignee => String(assignee.user) === String(userId))
+      ? prev.filter(assignee => String(assignee.user) !== String(userId))
+      : [...prev, { user: userId, role: 'other' }]
     )
+  }
+
+  const setAssigneeRole = (userId: string | number, role: AssigneeRole) => {
+    setAssignedTo(prev => prev.map(assignee =>
+      String(assignee.user) === String(userId) ? { ...assignee, role } : assignee
+    ))
   }
 
   const addLink = () => {
@@ -164,6 +205,14 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
               required
               autoFocus
             />
+            <label className="workflow-modal__create-article">
+              <input
+                type="checkbox"
+                checked={createArticle}
+                onChange={(e) => setCreateArticle(e.target.checked)}
+              />
+              Create and link a new article
+            </label>
           </div>
 
           <div className="workflow-modal__field">
@@ -323,12 +372,29 @@ export const CreateWorkflowItemModal: React.FC<CreateWorkflowItemModalProps> = (
                   <input
                     type="checkbox"
                     id={`assignee-${u.id}`}
-                    checked={assignedTo.includes(u.id)}
+                    checked={assignedTo.some(assignee => String(assignee.user) === String(u.id))}
                     onChange={() => toggleAssignee(u.id)}
                   />
                   <label htmlFor={`assignee-${u.id}`} className="workflow-modal__assignee-label">
                     <span className="workflow-modal__assignee-name">{u.name || u.email}</span>
                   </label>
+                  {assignedTo.some(assignee => String(assignee.user) === String(u.id)) && (
+                    <fieldset className="workflow-modal__assignee-roles">
+                      <legend className="sr-only">Role for {u.name || u.email}</legend>
+                      {(['author', 'editor', 'other'] as const).map(role => (
+                        <label key={role}>
+                          <input
+                            type="radio"
+                            name={`assignee-role-${u.id}`}
+                            value={role}
+                            checked={assignedTo.find(assignee => String(assignee.user) === String(u.id))?.role === role}
+                            onChange={() => setAssigneeRole(u.id, role)}
+                          />
+                          {role.charAt(0).toUpperCase() + role.slice(1)}
+                        </label>
+                      ))}
+                    </fieldset>
+                  )}
                 </div>
               ))}
             </div>

@@ -12,9 +12,8 @@ import {notifyWorkflowMove} from '@/utilities/notifications/workflowNotification
 import {FiEdit, FiFileText, FiFolder, FiGrid, FiPlus, FiUser} from 'react-icons/fi'
 import './styles.scss'
 
-interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy' | 'assignedTo'> {
+interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy'> {
   createdBy: User
-  assignedTo?: User[]
 }
 
 interface KanbanColumn {
@@ -60,7 +59,9 @@ const DashboardWidget: React.FC = () => {
       return true
     }
 
-    return item.assignedTo?.some(assignee => assignee.id === user.id) ?? false
+    return item.assignedTo?.some(assignee =>
+      typeof assignee.user === 'object' && assignee.user.id === user.id
+    ) ?? false
   }
 
   const fetchWorkflowItems = useCallback(async () => {
@@ -305,7 +306,9 @@ const DashboardWidget: React.FC = () => {
         <div className="workflow-widget__stat">
           <div className="workflow-widget__stat-value">
             {workflowItems.filter(item =>
-              item.assignedTo?.some(u => u.id === user.id)
+              item.assignedTo?.some(assignee =>
+                typeof assignee.user === 'object' && assignee.user.id === user.id
+              )
             ).length}
           </div>
           <div className="workflow-widget__stat-label">Assigned to You</div>
@@ -425,7 +428,10 @@ const DashboardWidget: React.FC = () => {
                   </div>
                   {item.assignedTo && item.assignedTo.length > 0 && (
                     <div className="workflow-widget__activity-assigned">
-                      Assigned to: {item.assignedTo.map(u => u.name || u.email).join(', ')}
+                      Assigned to: {item.assignedTo
+                        .map(({ user: assignee }) => typeof assignee === 'object' ? assignee.name || assignee.email : null)
+                        .filter(Boolean)
+                        .join(', ')}
                     </div>
                   )}
                 </div>

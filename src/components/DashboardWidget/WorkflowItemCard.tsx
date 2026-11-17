@@ -4,9 +4,8 @@ import React from 'react'
 import type {User, WorkflowItem} from '@/payload-types'
 import {FiCalendar, FiLink} from 'react-icons/fi'
 
-interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy' | 'assignedTo'> {
+interface WorkflowItemWithPopulated extends Omit<WorkflowItem, 'createdBy'> {
   createdBy: User
-  assignedTo?: User[]
 }
 
 interface WorkflowItemCardProps {
@@ -30,6 +29,10 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
   onClick,
   canMove,
 }) => {
+  const assignedUsers = item.assignedTo?.flatMap(({ user }) =>
+    typeof user === 'object' ? [user] : []
+  ) ?? []
+
   const handleDragStart = (e: React.DragEvent) => {
     if (!canMove) {
       e.preventDefault()
@@ -94,10 +97,10 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
       )}
 
       <div className="workflow-widget__kanban-card-footer">
-        {item.assignedTo && item.assignedTo.length > 0 && (
+        {assignedUsers.length > 0 && (
           <div className="workflow-widget__kanban-card-assigned">
             <div className="workflow-widget__kanban-card-assigned-avatars">
-              {item.assignedTo.slice(0, 3).map((assignee, index) => (
+              {assignedUsers.slice(0, 3).map((assignee, index) => (
                 <div
                   key={assignee.id}
                   className="workflow-widget__kanban-card-assigned-avatar"
@@ -116,13 +119,13 @@ export const WorkflowItemCard: React.FC<WorkflowItemCardProps> = ({
                   )}
                 </div>
               ))}
-              {item.assignedTo.length > 3 && (
+              {assignedUsers.length > 3 && (
                 <div
                   className="workflow-widget__kanban-card-assigned-avatar workflow-widget__kanban-card-assigned-more"
-                  title={`+${item.assignedTo.length - 3} more`}
+                  title={`+${assignedUsers.length - 3} more`}
                 >
                   <div className="workflow-widget__kanban-card-assigned-avatar-placeholder">
-                    +{item.assignedTo.length - 3}
+                    +{assignedUsers.length - 3}
                   </div>
                 </div>
               )}

@@ -1057,7 +1057,13 @@ export interface WorkflowItem {
   /**
    * Assign users to work on this item
    */
-  assignedTo?: (number | User)[] | null;
+  assignedTo?:
+    | {
+        user: number | User;
+        role: 'author' | 'editor' | 'other';
+        id?: string | null;
+      }[]
+    | null;
   priority?: ('low' | 'medium' | 'high' | 'urgent') | null;
   dueDate?: string | null;
   /**
@@ -1973,7 +1979,13 @@ export interface WorkflowItemsSelect<T extends boolean = true> {
   status?: T;
   linkedPost?: T;
   createdBy?: T;
-  assignedTo?: T;
+  assignedTo?:
+    | T
+    | {
+        user?: T;
+        role?: T;
+        id?: T;
+      };
   priority?: T;
   dueDate?: T;
   links?:

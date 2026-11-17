@@ -19,7 +19,7 @@ export async function notifyWorkflowMove(params: {
   // Notify all assigned users
   if (workflowItem.assignedTo && Array.isArray(workflowItem.assignedTo)) {
     const assignedUsers = workflowItem.assignedTo
-      .map(user => typeof user === 'object' ? user : null)
+      .map(({ user }) => typeof user === 'object' ? user : null)
       .filter(Boolean) as User[]
 
     for (const assignedUser of assignedUsers) {
@@ -54,7 +54,7 @@ export async function notifyWorkflowCreated(params: {
 
   if (workflowItem.assignedTo && Array.isArray(workflowItem.assignedTo)) {
     const assignedUsers = workflowItem.assignedTo
-      .map(user => typeof user === 'object' ? user : null)
+      .map(({ user }) => typeof user === 'object' ? user : null)
       .filter(Boolean) as User[]
 
     console.log('Assigned To:', assignedUsers.map(u => u.email).join(', '))

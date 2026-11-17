@@ -2,6 +2,11 @@ import type {CollectionAfterChangeHook} from 'payload'
 import type {User, WorkflowItem} from '@/payload-types'
 import {sendWorkflowNotification} from '@/utilities/notifications/workflowNotifications'
 
+const getAssignedUserIds = (assignedTo: WorkflowItem['assignedTo']): number[] =>
+  (assignedTo || [])
+    .map(({ user }) => typeof user === 'object' ? user.id : user)
+    .filter((id): id is number => typeof id === 'number')
+
 export const notifyWorkflowChange: CollectionAfterChangeHook<WorkflowItem> = async ({
   doc,
   previousDoc,
@@ -19,9 +24,7 @@ export const notifyWorkflowChange: CollectionAfterChangeHook<WorkflowItem> = asy
       if (doc.assignedTo && Array.isArray(doc.assignedTo) && doc.assignedTo.length > 0) {
         console.log('✅ Has assigned users, count:', doc.assignedTo.length)
 
-        const assignedUserIds = doc.assignedTo.map(user =>
-          typeof user === 'object' ? user.id : user
-        ).filter(Boolean)
+        const assignedUserIds = getAssignedUserIds(doc.assignedTo)
 
         console.log('Assigned user IDs:', assignedUserIds)
 
@@ -58,11 +61,17 @@ export const notifyWorkflowChange: CollectionAfterChangeHook<WorkflowItem> = asy
       if (doc.status !== previousDoc.status) {
         // Notify all assigned users about status change
         if (doc.assignedTo && Array.isArray(doc.assignedTo) && doc.assignedTo.length > 0) {
-          const assignedUsers = doc.assignedTo.map(user =>
-            typeof user === 'object' ? user : null
-          ).filter(Boolean) as User[]
+          const assignedUserIds = getAssignedUserIds(doc.assignedTo)
+          const usersResult = await req.payload.find({
+            collection: 'users',
+            where: {
+              id: {
+                in: assignedUserIds,
+              },
+            },
+          })
 
-          for (const assignedUser of assignedUsers) {
+          for (const assignedUser of usersResult.docs as User[]) {
             await sendWorkflowNotification({
               type: 'status_changed',
               workflowItem: doc,
@@ -89,12 +98,8 @@ export const notifyWorkflowChange: CollectionAfterChangeHook<WorkflowItem> = asy
       }
 
       // Assignment changes
-      const previousAssignedIds = Array.isArray(previousDoc.assignedTo)
-        ? previousDoc.assignedTo.map(u => typeof u === 'object' ? u.id : u)
-        : []
-      const currentAssignedIds = Array.isArray(doc.assignedTo)
-        ? doc.assignedTo.map(u => typeof u === 'object' ? u.id : u)
-        : []
+      const previousAssignedIds = getAssignedUserIds(previousDoc.assignedTo)
+      const currentAssignedIds = getAssignedUserIds(doc.assignedTo)
 
       // Find newly assigned users
       const newlyAssigned = currentAssignedIds.filter(id => !previousAssignedIds.includes(id))
