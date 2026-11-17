@@ -33,9 +33,6 @@ export default async function CategoryPage({ params: paramsPromise }: Args) {
     collection: 'categories',
     where: {
       slug: { equals: categorySlug },
-      _status: {
-        equals: 'published',
-      },
     },
     limit: 1,
   })
